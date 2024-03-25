@@ -1,0 +1,4 @@
+back/src/main/java/com/openclassrooms/mddapi/controller/UserController.java
+back/src/main/java/com/openclassrooms/mddapi/repository/UserRepository.java
+back/src/main/java/com/openclassrooms/mddapi/service/IUserService.java
+back/src/main/java/com/openclassrooms/mddapi/service/UserService.java

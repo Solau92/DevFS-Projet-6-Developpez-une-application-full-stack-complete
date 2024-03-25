@@ -19,6 +19,9 @@ public class Topic {
 	@Column(nullable = false)
 	private String name;
 
+	@Column
+	private String description;
+
 	public Long getId() {
 		return id;
 	}
@@ -35,4 +38,12 @@ public class Topic {
 		this.name = name;
 	}
 	
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }
