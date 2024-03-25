@@ -5,12 +5,12 @@ INSERT INTO users (user_id, username, email, password, created_at, updated_at) V
 (3, 'user3', 'user3@email.com', 'password', '2024-03-24', '2024-03-24'),
 (4, 'user4', 'user4@email.com', 'password', '2024-03-24', '2024-03-24');
 
-INSERT INTO topics VALUES 
-(1, 'topic 1'),
-(2, 'topic 2'),
-(3, 'topic 3'),
-(4, 'topic 4'),
-(5, 'topic 5');
+INSERT INTO topics (topic_id, name, description) VALUES 
+(1, 'topic 1', 'this is the 1st topic'),
+(2, 'topic 2', 'this is the 2nd topic'),
+(3, 'topic 3', 'this is the 3rd topic'),
+(4, 'topic 4', 'this is the 4th topic'),
+(5, 'topic 5', 'this is the 5th topic');
 
 INSERT INTO subscriptions (subscription_id, user_id, topic_id) VALUES 
 (1, 1, 1),
