@@ -1,6 +1,15 @@
 package com.openclassrooms.mddapi.mapper;
 
-// TODO : remove if not used
-public class TopicMapper {
+import org.springframework.stereotype.Component;
+
+import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.model.Topic;
+
+import org.mapstruct.Mapper;
+
+@Component
+@Mapper(componentModel = "spring")
+public interface TopicMapper extends EntityMapper<TopicDto, Topic> {
+
     
 }

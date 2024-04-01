@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { TopicsService } from "./topics.service";
 import { TopicsResponse } from "./topicsResponse.interface";
 import { Observable } from "rxjs";
-import { Topic } from "./topic.interface";
 
 @Component({
   selector: 'app-topic',
