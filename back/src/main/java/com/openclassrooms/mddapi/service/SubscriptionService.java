@@ -2,12 +2,14 @@ package com.openclassrooms.mddapi.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.mapper.SubscriptionMapper;
 import com.openclassrooms.mddapi.model.Subscription;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
 
+@Service
 public class SubscriptionService implements ISubscriptionService {
 
     private SubscriptionRepository subscriptionRepository;
