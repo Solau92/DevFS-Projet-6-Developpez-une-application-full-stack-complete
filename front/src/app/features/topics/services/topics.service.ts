@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { TopicsResponse } from "../interfaces/topicsResponse.interface";
 
 @Injectable({
@@ -17,4 +17,10 @@ export class TopicsService {
     return this.httpClient.get<TopicsResponse>(this.pathService);
   }
 
+  // TODO : finish when User implemented 
+  // public createSubscription(subscription: SubscriptionToTopic): Observable<SubscriptionToTopic> {
+  //   return this.httpClient.post<SubscriptionToTopic>(this.pathService + "/subscription", subscription)
+  // }
+
 }
+ 

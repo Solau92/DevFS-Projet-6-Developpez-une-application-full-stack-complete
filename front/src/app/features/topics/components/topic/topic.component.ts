@@ -16,4 +16,12 @@ export class TopicComponent {
     private topicsService: TopicsService
   ) { }
 
+  // TODO : finish 
+  public subscribeToTopic(): void {
+
+    // appeler méthode createSubscription de topics.service.ts
+    // Mais il faut récupérer le topic + le user (que je n'ai pas encore)
+
+  }
+
 }

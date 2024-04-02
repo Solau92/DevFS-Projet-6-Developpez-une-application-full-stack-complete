@@ -28,8 +28,9 @@ public class TopicController {
 		this.topicService = topicService;		
 	}
 
+	// TODO : voir si je laisse TopicsResponse ou si je renvoie directement la liste ?
 	/**
-	 * Getting all topics. 
+	 * Getting all topics. //TODO : à compléter 
 	 * 
 	 * @return
 	 */

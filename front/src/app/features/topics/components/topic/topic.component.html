@@ -1,6 +1,11 @@
-<p>topic works!</p>
+<p>Thèmes</p>
 
 <div *ngFor="let topic of (topics$ | async)?.topics">
     <p>{{ topic.name }}</p>
     <p>{{ topic.description }}</p>
+    <button (click)="subscribeToTopic()">
+        <span>S'abonner</span>
+    </button>
 </div>
+
+
