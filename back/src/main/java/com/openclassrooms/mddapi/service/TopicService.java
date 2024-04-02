@@ -2,6 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.TopicDto;
@@ -15,6 +17,9 @@ public class TopicService implements ITopicService {
 	private TopicRepository topicRepository;
 
 	private TopicMapper topicMapper;
+
+	    private static final Logger log = LoggerFactory.getLogger(TopicService.class);
+
 	
 	public TopicService(TopicRepository topicRepository, TopicMapper topicMapper) {
 		this.topicRepository = topicRepository;
@@ -28,6 +33,8 @@ public class TopicService implements ITopicService {
 	 */
 	@Override
 	public List<TopicDto> getAllTopics() {
+
+		log.debug("Searching all topics");
 
 		List<Topic> topics = topicRepository.findAll();
 		
