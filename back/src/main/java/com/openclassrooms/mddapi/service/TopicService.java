@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 
@@ -11,14 +13,25 @@ import com.openclassrooms.mddapi.repository.TopicRepository;
 public class TopicService implements ITopicService {
 
 	private TopicRepository topicRepository;
+
+	private TopicMapper topicMapper;
 	
-	public TopicService(TopicRepository topicRepository) {
+	public TopicService(TopicRepository topicRepository, TopicMapper topicMapper) {
 		this.topicRepository = topicRepository;
+		this.topicMapper = topicMapper;
 	}
 
+	/**
+	 * Returns a list of all topics from database.
+	 * 
+	 * @return List<TopicDto>
+	 */
 	@Override
-	public List<Topic> getTopics() {
-		return topicRepository.findAll();
+	public List<TopicDto> getAllTopics() {
+
+		List<Topic> topics = topicRepository.findAll();
+		
+		return topicMapper.toDto(topics);
 	}
 	
 }

@@ -2,15 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { TopicComponent } from './topic/topic.component';
+import { TopicComponent } from './features/topics/components/topic/topic.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopicComponent
+    // DONE : supprimé d'ici : TopicComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    // DONE : added : 
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
