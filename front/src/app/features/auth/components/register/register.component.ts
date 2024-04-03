@@ -52,7 +52,7 @@ export class RegisterComponent {
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;
     this.authService.register(registerRequest).subscribe({
-      next: (_: void) => this.router.navigate(['/login']),
+      next: (_: void) => this.router.navigate(['/auth/login']), // TODO : marche pas 
       error: _ => this.onError = true,
     }
     );
