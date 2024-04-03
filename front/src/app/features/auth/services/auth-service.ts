@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { RegisterRequest } from "../interfaces/registerRequest.interface";
 import { Observable } from "rxjs";
+import { LoginRequest } from "../interfaces/loginRequest.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,10 @@ import { Observable } from "rxjs";
   
     public register(registerRequest: RegisterRequest): Observable<void> {
       return this.httpClient.post<void>(this.pathService + "/register", registerRequest);
+    }
+
+    public login(loginRequest: LoginRequest): Observable<void> {
+      return this.httpClient.post<void>(this.pathService + "/login", loginRequest);
     }
   
   }
