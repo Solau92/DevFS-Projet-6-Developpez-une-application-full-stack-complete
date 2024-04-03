@@ -5,7 +5,11 @@ const routes: Routes = [
     {
         path: 'topics',
         loadChildren: () => import('./features/topics/topics.module').then(m => m.TopicsModule)
-    }
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+    },
 
 ];
 

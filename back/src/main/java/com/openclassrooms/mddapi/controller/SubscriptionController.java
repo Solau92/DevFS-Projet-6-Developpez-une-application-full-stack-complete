@@ -34,7 +34,7 @@ public class SubscriptionController {
      * @return
      */
     @PostMapping("/subscription")
-    public ResponseEntity<?> create(@Valid @RequestBody SubscriptionDto subscriptionDto) {
+    public ResponseEntity<?> save(@Valid @RequestBody SubscriptionDto subscriptionDto) {
 		log.info("/topic/subscription, post : Saving a new subscription");
         return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.create(subscriptionDto));
     }
