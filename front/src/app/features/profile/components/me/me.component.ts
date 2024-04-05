@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/features/auth/services/auth-service';
 import { User } from 'src/app/interfaces/user.interface';
@@ -16,6 +16,8 @@ export class MeComponent implements OnInit {
   public onError = false;
 
   private passwordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=.*[@$!%*#?&^_-])(?=\D*\d).{8,}$/;
+
+  public formMod: FormGroup | undefined;
 
   public user: User | undefined;
 
@@ -82,31 +84,60 @@ export class MeComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       username: [user ? user.username : '',
-        [
-          Validators.required,
-          Validators.min(6),
-          Validators.max(20)
-        ]
+      [
+        Validators.required,
+        Validators.min(6),
+        Validators.max(20)
+      ]
       ]
       ,
       email: [user ? user.email : '',
-        [
-          Validators.required,
-          Validators.email
-        ]
+      [
+        Validators.required,
+        Validators.email
+      ]
       ],
       password: [user ? user.password : '',
-        [
-          Validators.required,
-          Validators.min(8),
-          Validators.pattern(this.passwordRegx)
-        ]
+      [
+        Validators.required,
+        Validators.min(8),
+        Validators.pattern(this.passwordRegx)
+      ]
       ]
     });
   }
 
   public submit(): void {
 
+    const formData = new FormData();
+
+    this.formMod = this.form;
+
+    console.log(this.formMod);
+    
+    formData.append('username', this.formMod!.get('username')?.value);
+    formData.append('email', this.formMod!.get('email')?.value);
+    formData.append('password', this.formMod!.get('password')?.value);
+    console.log(formData);
+
+    this.user = {
+      id: this.user!.id,
+      username: this.formMod!.get('username')?.value,
+      email: this.formMod!.get('email')?.value,
+      password: this.formMod!.get('password')?.value   
+    };
+
+    // if (!this.user === undefined) {
+      console.log("user : ");
+      console.log(this.user);
+      this.userService
+        .update(this.user!.id, formData)
+        .subscribe((_: void) => this.exitPage());
+    // }
+  }
+
+  private exitPage(): void {
+    this.router.navigate(['/topics']);
   }
 
 }

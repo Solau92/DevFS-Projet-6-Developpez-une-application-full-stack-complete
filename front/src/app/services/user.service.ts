@@ -18,6 +18,11 @@ export class UserService {
     return this.httpClient.get<User>(`${this.pathService}/${id}`);
     //TODO modifiy : 
     // return this.httpClient.get<User>("api/user/1");
+  }
 
+  //TODO 
+  public update(id: number, form: FormData): Observable<void> {
+    console.log("id : " + id + " - formData : " + form.get("username"));
+    return this.httpClient.put<void>(`${this.pathService}/${id}`, form);
   }
 }

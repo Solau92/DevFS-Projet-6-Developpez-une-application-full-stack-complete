@@ -18,7 +18,6 @@ import com.openclassrooms.mddapi.dto.UserRegisterDto;
 import com.openclassrooms.mddapi.exception.BadCredentialsCustomException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.IUserService;
 
 @RestController
