@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../interfaces/loginRequest.interface';
+import { SessionInformation } from 'src/app/interfaces/session-information.interface';
+import { SessionService } from 'src/app/services/session.service';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,8 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private sessionService: SessionService) {
   }
 
   public form = this.formBuilder.group({
@@ -35,13 +39,55 @@ export class LoginComponent {
     ]
   })
 
+  // public submit(): void {
+  //   const loginRequest = this.form.value as LoginRequest;
+  //   this.authService.login(loginRequest).subscribe({
+  //     next: (_: void) => this.router.navigate(['/topics']),
+  //     error: _ => this.onError = true,
+  //   }
+  //   );
+  // }
+
+  // public submit(): void {
+  //   const loginRequest = this.form.value as LoginRequest;
+  //   this.authService.login(loginRequest).subscribe({
+  //     next: (sessionInformation: SessionInformation) => {
+  //       this.sessionService.logIn(sessionInformation);
+  //       this.router.navigate(['/topics']);
+  //     },
+  //     error: error => this.onError = true,
+  //   });
+  // }
+
+  // Version * 
+  // public submit(): void {
+  //   const loginRequest = this.form.value as LoginRequest;
+
+  //   this.authService.login(loginRequest).subscribe({
+  //     next: (sessionInformation: SessionInformation) => {
+  //       this.sessionService.logIn(sessionInformation);
+  //       this.router.navigate(['/topics']);
+  //     },
+  //     error: error => this.onError = true,
+  //   });
+  // }
+
+  // Version ***
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
+
     this.authService.login(loginRequest).subscribe({
-      next: (_: void) => this.router.navigate(['/topics']),
-      error: _ => this.onError = true,
-    }
-    );
+      next: (_: void) => {
+        this.authService.me().subscribe((user: User) => {
+          this.sessionService.logIn(user);
+          this.router.navigate(['/topics']);
+        })
+        
+      },
+      error: error => this.onError = true,
+    });
   }
 
 }
+
+

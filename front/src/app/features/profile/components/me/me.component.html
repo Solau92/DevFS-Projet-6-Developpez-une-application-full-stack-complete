@@ -1,0 +1,24 @@
+<p>Profil utilisateur</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <input formControlName="username">
+
+    <input formControlName="email">
+
+    <input formControlName="password">
+
+    <p *ngIf="user">Created at : {{ user.createdAt }}</p>
+    <p *ngIf="user">Updated at : {{ user.updatedAt }}</p>
+
+    <button type="submit" [disabled]="form.invalid">Sauvegarder</button>
+    <span *ngIf="onError">Erreur</span>
+
+</form>
+
+<button>Se déconnecter</button>
+
+<br>
+_________________________
+
+<p>Abonnements</p>

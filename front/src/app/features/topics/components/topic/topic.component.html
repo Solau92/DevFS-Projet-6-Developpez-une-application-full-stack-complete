@@ -1,5 +1,11 @@
 <p>Thèmes</p>
 
+<a href="./profile"> To profile </a>
+
+<!-- <div *ngIf="user">
+    <p>User name : {{ user.username }}</p>
+</div> -->
+
 <div *ngFor="let topic of (topics$ | async)?.topics">
     <p>{{ topic.name }}</p>
     <p>{{ topic.description }}</p>
