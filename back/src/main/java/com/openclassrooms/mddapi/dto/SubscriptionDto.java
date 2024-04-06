@@ -8,7 +8,7 @@ public class SubscriptionDto {
     //TODO : voir si je dois mettre des Dto ou des Entities ?
     private Long id;
 
-    private User auteur;
+    private User user;
 
     private Topic topic;
 
@@ -21,12 +21,12 @@ public class SubscriptionDto {
         this.id = id;
     }
 
-    public User getAuteur() {
-        return this.auteur;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setAuteur(User auteur) {
-        this.auteur = auteur;
+    public void setUser(User auteur) {
+        this.user = auteur;
     }
 
     public Topic getTopic() {

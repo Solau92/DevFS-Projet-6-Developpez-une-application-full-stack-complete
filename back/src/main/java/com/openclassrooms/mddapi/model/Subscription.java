@@ -23,7 +23,7 @@ public class Subscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User auteur;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
@@ -37,12 +37,12 @@ public class Subscription {
         this.id = id;
     }
 
-    public User getAuteur() {
-        return this.auteur;
+    public User getUser() {
+        return this.user;
     }
 
-    public void setAuteur(User auteur) {
-        this.auteur = auteur;
+    public void setUser(User auteur) {
+        this.user = auteur;
     }
 
     public Topic getTopic() {

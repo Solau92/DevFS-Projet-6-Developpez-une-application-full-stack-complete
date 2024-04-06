@@ -10,7 +10,9 @@ export class TopicsService {
 
   private pathService = 'api/topic';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+    
+  }
 
   public all(): Observable<TopicsResponse> {
     console.log(this.httpClient.get<TopicsResponse>(this.pathService));

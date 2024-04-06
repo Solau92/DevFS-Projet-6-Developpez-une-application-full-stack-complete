@@ -1,9 +1,13 @@
 import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/features/auth/services/auth-service';
+import { Subscription } from 'src/app/interfaces/subscription.interface';
+import { SubscriptionsResponse } from 'src/app/interfaces/subscriptionsResponse.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { SessionService } from 'src/app/services/session.service';
+import { SubscriptionService } from 'src/app/services/subscription.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -21,11 +25,16 @@ export class MeComponent implements OnInit {
 
   public user: User | undefined;
 
+  // TODO : Subscriptions : mais faut l'identifiant de l'utilisateur... 
+  // public subscriptions$: Observable<SubscriptionsResponse> = this.subscriptionService.all("2");
+  public subscriptions$?: Observable<SubscriptionsResponse>;
+
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
     private sessionService: SessionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private subscriptionService: SubscriptionService
   ) {
   }
 
@@ -70,13 +79,21 @@ export class MeComponent implements OnInit {
 
   // Version ***
   public ngOnInit(): void {
+    
+    //TODO : mettre l'user id correct 
+    // this.subscriptions$ = this.subscriptionService.all("2");
+
     this.authService.me().subscribe(
       (user: User) => {
         this.user = user;
         this.initForm(user);
+        console.log(this.user.id); //TODO : remove 
+
+        this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+        console.log(this.subscriptions$); 
       }
+
     )
-    console.log(this.user);
   }
 
 
@@ -105,6 +122,10 @@ export class MeComponent implements OnInit {
       ]
       ]
     });
+
+    //TODO : voir 
+    this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+    console.log(this.subscriptions$);   
   }
 
   public submit(): void {
@@ -124,7 +145,8 @@ export class MeComponent implements OnInit {
       id: this.user!.id,
       username: this.formMod!.get('username')?.value,
       email: this.formMod!.get('email')?.value,
-      password: this.formMod!.get('password')?.value   
+      password: this.formMod!.get('password')?.value,
+      subscriptions: [] // Version SS
     };
 
     // if (!this.user === undefined) {
@@ -138,6 +160,11 @@ export class MeComponent implements OnInit {
 
   private exitPage(): void {
     this.router.navigate(['/topics']);
+  }
+
+  // TODO : finish 
+  public unSubscribeToTopic(): void {
+
   }
 
 }
