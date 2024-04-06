@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { RegisterRequest } from "../interfaces/registerRequest.interface";
 import { Observable } from "rxjs";
 import { LoginRequest } from "../interfaces/loginRequest.interface";
+import { SessionInformation } from "src/app/interfaces/session-information.interface";
+import { User } from "src/app/interfaces/user.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +19,20 @@ import { LoginRequest } from "../interfaces/loginRequest.interface";
       return this.httpClient.post<void>(this.pathService + "/register", registerRequest);
     }
 
+    // Version *
+    // public login(loginRequest: LoginRequest): Observable<SessionInformation> {
+    //   return this.httpClient.post<SessionInformation>(this.pathService + "/login", loginRequest);
+    // }
+
+    // Version ***
     public login(loginRequest: LoginRequest): Observable<void> {
       return this.httpClient.post<void>(this.pathService + "/login", loginRequest);
+    }
+
+    // Version ***
+    public me(): Observable<User> {
+      return this.httpClient.get<User>(`${this.pathService}/me`);
+      // return this.httpClient.get<User>("/api/user/1");
     }
   
   }

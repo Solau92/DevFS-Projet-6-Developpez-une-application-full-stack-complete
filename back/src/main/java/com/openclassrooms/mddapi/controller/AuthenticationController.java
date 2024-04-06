@@ -6,15 +6,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.LoginRegisterDto;
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.UserRegisterDto;
 import com.openclassrooms.mddapi.exception.BadCredentialsCustomException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
+import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.IUserService;
 
 @RestController
@@ -44,6 +47,18 @@ public class AuthenticationController {
 
         log.info("/auth/login : Trying to login user with email {}", loginRegisterDto.getEmail());
         return ResponseEntity.status(HttpStatus.OK).body(userService.validateCredentials(loginRegisterDto));
+
+    }
+
+    // Version ***
+    // A modifier avec Spring Security : 
+    @GetMapping("me")
+    public ResponseEntity<UserDto> me() throws UserNotFoundException {
+
+        // TODO !!! : récupérer utilisateur authenticated 
+        UserDto userDto = userService.findById(Long.valueOf(2));
+
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
 
     }
      

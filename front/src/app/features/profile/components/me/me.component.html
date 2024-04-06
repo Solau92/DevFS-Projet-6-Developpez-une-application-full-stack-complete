@@ -1,0 +1,42 @@
+<p>Profil utilisateur</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <input formControlName="username">
+
+    <input formControlName="email">
+
+    <input formControlName="password">
+
+    <p *ngIf="user">Created at : {{ user.createdAt }}</p>
+    <p *ngIf="user">Updated at : {{ user.updatedAt }}</p>
+
+    <button type="submit" [disabled]="form.invalid">Sauvegarder</button>
+    <span *ngIf="onError">Erreur</span>
+
+</form>
+
+<button>Se déconnecter</button>
+
+<br>
+_________________________
+
+<p>Abonnements</p>
+
+<div *ngIf="user!.subscriptions">
+<div *ngFor="let subscription of (user!.subscriptions)">
+    <p>{{ subscription.topic.name }}</p>
+    <p>{{ subscription.topic.description }}</p>
+    <button (click)="unSubscribeToTopic()">
+        <span>Se désabonner</span>
+    </button>
+    </div>
+</div>
+
+<!-- <div *ngFor="let subscription of (subscriptions$ | async)?.subscriptions">
+    <p>{{ subscription.topic.name }}</p>
+    <p>{{ subscription.topic.description }}</p>
+    <button (click)="unSubscribeToTopic()">
+        <span>Se désabonner</span>
+    </button>
+</div> -->

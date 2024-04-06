@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserDto {
 
@@ -15,6 +16,9 @@ public class UserDto {
     private LocalDate createdAt;
     
     private LocalDate updatedAt;
+
+    // Version SS
+    private List<SubscriptionDto> subscriptions;
     
 
     public Long getId() {
@@ -63,6 +67,14 @@ public class UserDto {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<SubscriptionDto> getSubscriptions() {
+        return this.subscriptions;
+    }
+
+    public void setSubscriptions(List<SubscriptionDto> subscriptions) {
+        this.subscriptions = subscriptions;
     }
 
 }

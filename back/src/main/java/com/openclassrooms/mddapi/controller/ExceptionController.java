@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.openclassrooms.mddapi.exception.BadCredentialsCustomException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
+import com.openclassrooms.mddapi.exception.UserNotFoundException;
 
 /**
  * Exception handling class
@@ -32,6 +33,13 @@ public class ExceptionController {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(MESSAGE, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> exceptionHandler(UserNotFoundException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(MESSAGE, ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
 }
