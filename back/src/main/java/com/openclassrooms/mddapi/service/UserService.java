@@ -32,6 +32,8 @@ public class UserService implements IUserService {
 
     private UserMapper userMapper;
 
+    private JWTService jwtService;
+
     // Version SS
     // private ISubscriptionService subscriptionService;
 
@@ -43,15 +45,16 @@ public class UserService implements IUserService {
 
     public UserService(UserRepository userRepository, UserRegisterMapper userRegisterMapper, UserMapper userMapper
     // , ISubscriptionService subscriptionService
-            , SubscriptionRepository subscriptionRepository, 
-            SubscriptionMapper subscriptionMapper
-            ) {
+            , SubscriptionRepository subscriptionRepository,
+            SubscriptionMapper subscriptionMapper,
+            JWTService jwtService) {
         this.userRepository = userRepository;
         this.userRegisterMapper = userRegisterMapper;
         this.userMapper = userMapper;
         // this.subscriptionService = subscriptionService;
         this.subscriptionRepository = subscriptionRepository;
         this.subscriptionMapper = subscriptionMapper;
+        this.jwtService = jwtService;
     }
 
     // TODO : compléter pour vérifier que user pas déjà renseigné en bdd ??
@@ -82,7 +85,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public LoginRegisterDto validateCredentials(LoginRegisterDto loginRegisterDto)
+    public String validateCredentials(LoginRegisterDto loginRegisterDto)
             throws BadCredentialsCustomException {
 
         log.info("Trying to validate credential of user with email {}", loginRegisterDto.getEmail());
@@ -96,7 +99,11 @@ public class UserService implements IUserService {
 
         log.info("User with email {} successfully identified", loginRegisterDto.getEmail());
 
-        return loginRegisterDto;
+        String token = jwtService.generateToken(loginRegisterDto);
+
+        log.info("token : " + token);
+
+        return token;
     }
 
     // @Override
@@ -177,24 +184,23 @@ public class UserService implements IUserService {
         return userSaved;
     }
 
-    // @Override
-    // public UserRegisterDto findByEmail(String email) throws UserNotFoundException
-    // {
+    @Override
+    public UserDto findByEmail(String email) throws UserNotFoundException {
 
-    // log.info("Searching user with email {}", email);
+        log.info("Searching user with email {}", email);
 
-    // Optional<User> optionalUser = userRepository.findByEmail(email);
+        Optional<User> optionalUser = userRepository.findByEmail(email);
 
-    // if (!optionalUser.isPresent()) {
-    // log.error("User with email {} not found", email);
-    // throw new UserNotFoundException("User with email " + email + " not found");
-    // }
+        if (!optionalUser.isPresent()) {
+            log.error("User with email {} not found", email);
+            throw new UserNotFoundException("User with email " + email + " not found");
+        }
 
-    // User user = optionalUser.get();
+        User user = optionalUser.get();
 
-    // log.info("User with email {} found", email);
+        log.info("User with email {} found", email);
 
-    // return userMapper.toDto(user);
-    // }
+        return userMapper.toDto(user);
+    }
 
 }
