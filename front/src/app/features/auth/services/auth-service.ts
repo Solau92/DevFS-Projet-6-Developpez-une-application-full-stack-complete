@@ -33,7 +33,6 @@ import { AuthSuccess } from "../interfaces/authSuccess.interface";
     // Version ***
     public me(): Observable<User> {
       return this.httpClient.get<User>(`${this.pathService}/me`);
-      // return this.httpClient.get<User>("/api/user/1");
     }
   
   }

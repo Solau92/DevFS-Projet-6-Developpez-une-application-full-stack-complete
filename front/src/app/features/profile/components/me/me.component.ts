@@ -96,7 +96,6 @@ export class MeComponent implements OnInit {
     )
   }
 
-
   private initForm(user: User): void {
 
     this.form = this.formBuilder.group({
@@ -165,6 +164,11 @@ export class MeComponent implements OnInit {
   // TODO : finish 
   public unSubscribeToTopic(): void {
 
+  }
+
+  public logout(): void {
+    this.sessionService.logOut();
+    this.router.navigate(['/auth/login'])
   }
 
 }

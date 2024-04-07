@@ -17,12 +17,6 @@ export class LoginComponent {
 
   public onError = false;
 
-  constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private sessionService: SessionService) {
-  }
-
   public form = this.formBuilder.group({
     email: [
       '',
@@ -38,7 +32,13 @@ export class LoginComponent {
         Validators.min(8)
       ]
     ]
-  })
+  });
+
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private sessionService: SessionService) {
+  }
 
   // public submit(): void {
   //   const loginRequest = this.form.value as LoginRequest;
@@ -89,7 +89,6 @@ export class LoginComponent {
       error => this.onError = true,
     );
   }
-
 }
 
 

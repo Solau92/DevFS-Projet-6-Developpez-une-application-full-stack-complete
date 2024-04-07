@@ -200,7 +200,18 @@ public class UserService implements IUserService {
 
         log.info("User with email {} found", email);
 
-        return userMapper.toDto(user);
+        // return userMapper.toDto(user);
+
+        log.info("User with email {} successfully identified", email);
+
+        UserDto userFound = userMapper.toDto(optionalUser.get());
+
+        List<SubscriptionDto> subscriptions = this.getAll(optionalUser.get());
+
+        userFound.setSubscriptions(subscriptions);
+
+        return userFound;
+
     }
 
 }

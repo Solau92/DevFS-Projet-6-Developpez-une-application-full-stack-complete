@@ -75,9 +75,7 @@ public class AuthenticationController {
         String email = authentication.getName();
 
         // Authentication authentication2 = SecurityContextHolder.getContext().getAuthentication();
-
         // log.info("authentication : " + authentication2);
-
         // String email = authentication2.getName();
 
         log.info("api/auth/me : getting information from user with email {}", email);
