@@ -89,8 +89,8 @@ export class MeComponent implements OnInit {
         this.initForm(user);
         console.log(this.user.id); //TODO : remove 
 
-        this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-        console.log(this.subscriptions$); 
+        // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+        // console.log(this.subscriptions$); 
       }
 
     )
@@ -124,8 +124,8 @@ export class MeComponent implements OnInit {
     });
 
     //TODO : voir 
-    this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-    console.log(this.subscriptions$);   
+    // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+    // console.log(this.subscriptions$);   
   }
 
   public submit(): void {

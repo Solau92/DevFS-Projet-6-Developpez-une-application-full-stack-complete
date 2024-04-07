@@ -7,18 +7,18 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 const routes: Routes = [
     {
         path: 'topics',
-        canActivate:  [AuthGuard],
+        // canActivate:  [AuthGuard],
         loadChildren: () => import('./features/topics/topics.module').then(m => m.TopicsModule)
     },
     {
         path: 'profile',
-        canActivate:  [AuthGuard],
+        // canActivate:  [AuthGuard],
         loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
     },
     {
         //TODO : voir /me ?
         path: 'auth',
-        canActivate:  [UnauthGuard],
+        // canActivate:  [UnauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
     { path: '404', component: NotFoundComponent },
