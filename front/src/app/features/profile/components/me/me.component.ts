@@ -89,13 +89,12 @@ export class MeComponent implements OnInit {
         this.initForm(user);
         console.log(this.user.id); //TODO : remove 
 
-        this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-        console.log(this.subscriptions$); 
+        // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+        // console.log(this.subscriptions$); 
       }
 
     )
   }
-
 
   private initForm(user: User): void {
 
@@ -124,8 +123,8 @@ export class MeComponent implements OnInit {
     });
 
     //TODO : voir 
-    this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-    console.log(this.subscriptions$);   
+    // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
+    // console.log(this.subscriptions$);   
   }
 
   public submit(): void {
@@ -165,6 +164,11 @@ export class MeComponent implements OnInit {
   // TODO : finish 
   public unSubscribeToTopic(): void {
 
+  }
+
+  public logout(): void {
+    this.sessionService.logOut();
+    this.router.navigate(['/auth/login'])
   }
 
 }

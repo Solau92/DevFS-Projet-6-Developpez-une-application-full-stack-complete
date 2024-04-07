@@ -6,6 +6,7 @@ import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { SessionInformation } from 'src/app/interfaces/session-information.interface';
 import { SessionService } from 'src/app/services/session.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { AuthSuccess } from '../../interfaces/authSuccess.interface';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,6 @@ import { User } from 'src/app/interfaces/user.interface';
 export class LoginComponent {
 
   public onError = false;
-
-  constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-    private sessionService: SessionService) {
-  }
 
   public form = this.formBuilder.group({
     email: [
@@ -37,7 +32,13 @@ export class LoginComponent {
         Validators.min(8)
       ]
     ]
-  })
+  });
+
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private sessionService: SessionService) {
+  }
 
   // public submit(): void {
   //   const loginRequest = this.form.value as LoginRequest;
@@ -76,18 +77,18 @@ export class LoginComponent {
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
 
-    this.authService.login(loginRequest).subscribe({
-      next: (_: void) => {
+    this.authService.login(loginRequest).subscribe(
+      (response: AuthSuccess) => {
+        localStorage.setItem('token', response.token);
         this.authService.me().subscribe((user: User) => {
           this.sessionService.logIn(user);
           this.router.navigate(['/topics']);
-        })
-        
+        });
+        this.router.navigate(['/topics']);
       },
-      error: error => this.onError = true,
-    });
+      error => this.onError = true,
+    );
   }
-
 }
 
 

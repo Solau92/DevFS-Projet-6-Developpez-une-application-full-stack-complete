@@ -16,20 +16,21 @@
 
 </form>
 
-<button>Se déconnecter</button>
+<button (click)="logout()">Se déconnecter</button>
 
 <br>
 _________________________
 
 <p>Abonnements</p>
-
-<div *ngIf="user!.subscriptions">
-<div *ngFor="let subscription of (user!.subscriptions)">
-    <p>{{ subscription.topic.name }}</p>
-    <p>{{ subscription.topic.description }}</p>
-    <button (click)="unSubscribeToTopic()">
-        <span>Se désabonner</span>
-    </button>
+<div *ngIf="user">
+    <div *ngIf="user!.subscriptions">
+        <div *ngFor="let subscription of (user!.subscriptions)">
+            <p>{{ subscription.topic.name }}</p>
+            <p>{{ subscription.topic.description }}</p>
+            <button (click)="unSubscribeToTopic()">
+                <span>Se désabonner</span>
+            </button>
+        </div>
     </div>
 </div>
 

@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { LoginRequest } from "../interfaces/loginRequest.interface";
 import { SessionInformation } from "src/app/interfaces/session-information.interface";
 import { User } from "src/app/interfaces/user.interface";
+import { AuthSuccess } from "../interfaces/authSuccess.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -25,14 +26,13 @@ import { User } from "src/app/interfaces/user.interface";
     // }
 
     // Version ***
-    public login(loginRequest: LoginRequest): Observable<void> {
-      return this.httpClient.post<void>(this.pathService + "/login", loginRequest);
+    public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
+      return this.httpClient.post<AuthSuccess>(this.pathService + "/login", loginRequest);
     }
 
     // Version ***
     public me(): Observable<User> {
       return this.httpClient.get<User>(`${this.pathService}/me`);
-      // return this.httpClient.get<User>("/api/user/1");
     }
   
   }

@@ -14,7 +14,8 @@ export class SessionService {
   // Version ***
   public user: User | undefined;
 
-  public sessionInformation: SessionInformation | undefined;
+  // 
+  // public sessionInformation: SessionInformation | undefined;
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
@@ -35,6 +36,13 @@ export class SessionService {
   public logIn(user: User): void {
     this.user = user;
     this.isLogged = true;
+    this.next();
+  }
+
+  public logOut(): void {
+    localStorage.removeItem('token');
+    this.user = undefined;
+    this.isLogged = false;
     this.next();
   }
 

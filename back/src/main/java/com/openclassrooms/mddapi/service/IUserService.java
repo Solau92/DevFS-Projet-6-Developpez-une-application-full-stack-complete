@@ -12,12 +12,12 @@ public interface IUserService {
 
         UserRegisterDto save(UserRegisterDto userRegisterDto) throws UserAlreadyExistsException;
 
-        LoginRegisterDto validateCredentials(LoginRegisterDto loginRegisterDto) throws BadCredentialsCustomException;
+        String validateCredentials(LoginRegisterDto loginRegisterDto) throws BadCredentialsCustomException;
 
         UserDto findById(Long id) throws UserNotFoundException;
 
         UserDto update(UserDto userDto) throws UserNotFoundException;
         
-        // UserRegisterDto findByEmail(String email) throws UserNotFoundException;
+        UserDto findByEmail(String email) throws UserNotFoundException;
     
 }
