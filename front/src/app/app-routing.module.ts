@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 import { UnauthGuard } from "./guards/unauth.guard";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
+import { HomePageComponent } from "./components/home-page/home-page.component";
 
 const routes: Routes = [
     {
@@ -18,16 +19,21 @@ const routes: Routes = [
     {
         //TODO : voir /me ?
         path: 'auth',
-        canActivate:  [UnauthGuard],
+        canActivate: [UnauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
+    {
+        path: '',
+        canActivate: [UnauthGuard],
+        component: HomePageComponent
+    },
     { path: '404', component: NotFoundComponent },
-    { path: '**', redirectTo: '404' }
+    { path: '**', redirectTo: '404' },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
-  })
-  export class AppRoutingModule {
-  }
+})
+export class AppRoutingModule {
+}
