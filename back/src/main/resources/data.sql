@@ -24,17 +24,17 @@ INSERT INTO subscriptions (subscription_id, user_id, topic_id) VALUES
 (9, 4, 4),
 (10, 4, 5);
 
-INSERT INTO posts (post_id, user_id, topic_id, content, created_at, updated_at) VALUES 
-(1, 1, 1, 'this is the post number 1', '2024-03-24', '2024-03-24'),
-(2, 2, 2, 'this is the post number 2', '2024-03-24', '2024-03-24'),
-(3, 4, 1, 'this is the post number 3', '2024-03-24', '2024-03-24'),
-(4, 1, 4, 'this is the post number 4', '2024-03-24', '2024-03-24'),
-(5, 2, 1, 'this is the post number 5', '2024-03-24', '2024-03-24'),
-(6, 3, 5, 'this is the post number 6', '2024-03-24', '2024-03-24'),
-(7, 4, 1, 'this is the post number 7', '2024-03-24', '2024-03-24'),
-(8, 2, 4, 'this is the post number 8', '2024-03-24', '2024-03-24'),
-(9, 1, 1, 'this is the post number 9', '2024-03-24', '2024-03-24'),
-(10, 1, 5, 'this is the post number 10', '2024-03-24', '2024-03-24')
+INSERT INTO posts (post_id, user_id, topic_id, title, content, created_at, updated_at) VALUES 
+(1, 1, 1, 'post 1', 'this is the post number 1', '2024-03-24', '2024-03-24'),
+(2, 2, 2, 'post 2', 'this is the post number 2', '2024-03-24', '2024-03-24'),
+(3, 4, 1, 'post 3', 'this is the post number 3', '2024-03-24', '2024-03-24'),
+(4, 1, 4, 'post 4', 'this is the post number 4', '2024-03-24', '2024-03-24'),
+(5, 2, 1, 'post 5', 'this is the post number 5', '2024-03-24', '2024-03-24'),
+(6, 3, 5, 'post 6', 'this is the post number 6', '2024-03-24', '2024-03-24'),
+(7, 4, 1, 'post 7', 'this is the post number 7', '2024-03-24', '2024-03-24'),
+(8, 2, 4, 'post 8', 'this is the post number 8', '2024-03-24', '2024-03-24'),
+(9, 1, 1, 'post 9', 'this is the post number 9', '2024-03-24', '2024-03-24'),
+(10, 1, 5, 'post 10', 'this is the post number 10', '2024-03-24', '2024-03-24')
 ;
 
 INSERT INTO comments (comment_id, user_id, post_id, content, created_at, updated_at) VALUES 

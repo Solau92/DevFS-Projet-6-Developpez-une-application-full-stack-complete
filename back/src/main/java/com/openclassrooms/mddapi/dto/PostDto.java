@@ -1,55 +1,42 @@
-package com.openclassrooms.mddapi.model;
+package com.openclassrooms.mddapi.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import com.openclassrooms.mddapi.model.Topic;
+import com.openclassrooms.mddapi.model.User;
 
-import org.springframework.format.annotation.DateTimeFormat;
+public class PostDto {
 
-@Entity
-@Table(name = "posts")
-public class Post {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "post_id")
 	private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "topic_id")
 	private Topic topic;
 
-	@ManyToOne /*(cascade = CascadeType.ALL)*/
-	@JoinColumn(name = "user_id")
 	private User auteur;
 
-	@Column
-	@NotBlank
-	private String title;
+	private String title; 
 
-	@Column
-	@NotBlank
 	private String content;
 
-	@Column(name = "created_at")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate createdAt;
 
-	@Column(name = "updated_at")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate updatedAt;
 
+
+	public PostDto() {
+	}
+
+	public PostDto(Long id, Topic topic, User auteur, String title, String content, LocalDate createdAt, LocalDate updatedAt) {
+		this.id = id;
+		this.topic = topic;
+		this.auteur = auteur;
+		this.title = title;
+		this.content = content;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Long id) {
@@ -57,7 +44,7 @@ public class Post {
 	}
 
 	public Topic getTopic() {
-		return topic;
+		return this.topic;
 	}
 
 	public void setTopic(Topic topic) {
@@ -104,5 +91,5 @@ public class Post {
 		this.title = title;
 	}
 
-
+    
 }
