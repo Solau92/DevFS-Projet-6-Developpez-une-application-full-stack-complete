@@ -27,8 +27,14 @@ const routes: Routes = [
         canActivate: [UnauthGuard],
         component: HomePageComponent
     },
+    {
+        path: 'posts',
+        // canActivate:  [AuthGuard],
+        loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule)
+    },
     { path: '404', component: NotFoundComponent },
     { path: '**', redirectTo: '404' },
+
 ];
 
 @NgModule({

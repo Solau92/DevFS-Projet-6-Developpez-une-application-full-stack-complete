@@ -18,7 +18,7 @@ public class TopicService implements ITopicService {
 
 	private TopicMapper topicMapper;
 
-	    private static final Logger log = LoggerFactory.getLogger(TopicService.class);
+	private static final Logger log = LoggerFactory.getLogger(TopicService.class);
 
 	
 	public TopicService(TopicRepository topicRepository, TopicMapper topicMapper) {
