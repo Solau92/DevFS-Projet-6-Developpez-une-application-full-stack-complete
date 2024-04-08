@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewPostRequest } from '../../interfaces/new-post-request';
 import { PostsService } from '../../services/posts.service';
-import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/features/auth/services/auth-service';
 import { TopicsService } from 'src/app/features/topics/services/topics.service';
 
@@ -27,8 +26,8 @@ export class NewComponent {
 
     //TODO : validators 
     
-    topic: [''/*, [Validators.required]*/],
-    title: [''/*,[Validators.required], Validators.min(5)*/],
+    topic: ['', /*, [Validators.required]*/],
+    title: [''/*, ,[Validators.required], Validators.min(5)*/],
     content: [''/*, [Validators.required, Validators.min(20)]*/]
   })
 

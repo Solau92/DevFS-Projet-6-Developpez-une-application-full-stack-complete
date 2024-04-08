@@ -1,6 +1,9 @@
 import { User } from "src/app/interfaces/user.interface";
+import { Topic } from "../../topics/interfaces/topic.interface";
 
 export interface NewPostRequest {
+    // TODO : voir si topic objet ou juste id ?
+    // topic: Topic;
     topic: string;
     title: string;
     content: string;
