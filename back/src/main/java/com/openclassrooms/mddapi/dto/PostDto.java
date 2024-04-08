@@ -9,9 +9,9 @@ public class PostDto {
 
 	private Long id;
 
-	private Topic topic;
+	private TopicDto topic;
 
-	private User auteur;
+	private UserDto auteur;
 
 	private String title; 
 
@@ -25,7 +25,7 @@ public class PostDto {
 	public PostDto() {
 	}
 
-	public PostDto(Long id, Topic topic, User auteur, String title, String content, LocalDate createdAt, LocalDate updatedAt) {
+	public PostDto(Long id, TopicDto topic, UserDto auteur, String title, String content, LocalDate createdAt, LocalDate updatedAt) {
 		this.id = id;
 		this.topic = topic;
 		this.auteur = auteur;
@@ -43,19 +43,19 @@ public class PostDto {
 		this.id = id;
 	}
 
-	public Topic getTopic() {
+	public TopicDto getTopic() {
 		return this.topic;
 	}
 
-	public void setTopic(Topic topic) {
+	public void setTopic(TopicDto topic) {
 		this.topic = topic;
 	}
 
-	public User getAuteur() {
+	public UserDto getAuteur() {
 		return this.auteur;
 	}
 
-	public void setAuteur(User auteur) {
+	public void setAuteur(UserDto auteur) {
 		this.auteur = auteur;
 	}
 

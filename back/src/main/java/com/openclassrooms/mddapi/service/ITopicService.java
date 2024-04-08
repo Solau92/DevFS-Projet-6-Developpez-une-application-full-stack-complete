@@ -13,4 +13,6 @@ public interface ITopicService {
 	 */
 	List<TopicDto> getAllTopics();
 
+	public TopicDto getTopicById(Long id);
+
 }
