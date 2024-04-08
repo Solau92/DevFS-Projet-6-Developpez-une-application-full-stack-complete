@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.jni.Local;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.TopicDto;
@@ -23,15 +25,18 @@ public class PostService implements IPostService {
 	private PostMapper postMapper;
 
 	private ITopicService topicService;
+
+	private ICommentsService commentsService;
  
 	private static final Logger log = LoggerFactory.getLogger(PostService.class);
 
 	
 	public PostService(PostRepository postRepository, PostMapper postMapper
-	,ITopicService topicService) {
+	,ITopicService topicService, ICommentsService commentsService) {
 		this.postRepository = postRepository;
 		this.postMapper = postMapper;
 		this.topicService = topicService;
+		this.commentsService = commentsService;
 	}
 
 	@Override
@@ -72,7 +77,15 @@ public class PostService implements IPostService {
 
 		log.debug("Searching post with id {}", id);
 
-		return postMapper.toDto(postRepository.findById(id).get());
+		PostDto postDtoFound = postMapper.toDto(postRepository.findById(id).get());
+
+		//TODO TODONOW : comments service.get (//User et subscriptions)
+
+		List<CommentDto> commentDtos = commentsService.getAll(postMapper.toEntity(postDtoFound));
+
+		postDtoFound.setComments(commentDtos);
+
+		return postDtoFound;
 	}
 	
 }

@@ -1,5 +1,6 @@
 import { User } from "src/app/interfaces/user.interface";
 import { Topic } from "../../topics/interfaces/topic.interface";
+import { Comment } from '../interfaces/comment.interface';
 
 export interface Post {
     id: number,
@@ -10,4 +11,5 @@ export interface Post {
     createdAt?: Date,
     updatedAt?: Date
     topic?: Topic;
+    comments: Comment[];
 }
