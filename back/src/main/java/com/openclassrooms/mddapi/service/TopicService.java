@@ -40,5 +40,13 @@ public class TopicService implements ITopicService {
 		
 		return topicMapper.toDto(topics);
 	}
+
+	@Override
+	public TopicDto getTopicById(Long id) {
+
+		log.debug("Searching topic with id  {}", id);
+
+		return topicMapper.toDto(topicRepository.findById(id).get());
+	}
 	
 }

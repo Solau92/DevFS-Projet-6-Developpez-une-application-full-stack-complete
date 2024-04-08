@@ -1,0 +1,19 @@
+<p>Créer un nouvel article</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <select ngDefaultControl formControlName="topic">
+        <option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
+            {{ topic.name}}
+        </option>
+    </select>
+
+    <!-- <input formControlName="topic" placeholder="Sélectionner un thème"> -->
+
+    <input formControlName="title" placeholder="Titre de l'article">
+
+    <textarea formControlName="content" cols="30" rows="10" placeholder="Contenu de l'article"></textarea>
+
+    <button type="submit" [disabled]="form.invalid">Créer</button>
+
+</form>

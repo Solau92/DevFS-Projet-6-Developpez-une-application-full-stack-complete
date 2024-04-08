@@ -1,15 +1,25 @@
 package com.openclassrooms.mddapi.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.dto.PostRegisterDto;
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.response.PostsResponse;
+import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.IPostService;
+import com.openclassrooms.mddapi.service.IUserService;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -19,8 +29,12 @@ public class PostController {
 
     private static final Logger log = LoggerFactory.getLogger(PostController.class);
 
-    public PostController(IPostService postService) {
+    private IUserService userService;
+
+    public PostController(IPostService postService,
+    IUserService userService) {
         this.postService = postService;
+        this.userService = userService;
     }
 
     @GetMapping("")
@@ -29,5 +43,22 @@ public class PostController {
 		return ResponseEntity.status(HttpStatus.OK).body(new PostsResponse(postService.getAll()));
 		
 	}
+
+    @PostMapping("")
+    public ResponseEntity<PostDto> create(@Valid @RequestBody PostRegisterDto postRegisterDto, Authentication authentication) throws UserNotFoundException {
+        log.info("/posts : Trying to register article with title {}", postRegisterDto.getTitle());
+
+        // TODO : revoir si Authentication ok ou dans front ?... 
+        // Ou plutôt dans service...
+
+        log.info("Post dans controller :" + postRegisterDto.toString());
+
+        String email = authentication.getName();
+        UserDto userDto = userService.findByEmail(email);
+        
+        postRegisterDto.setAuteur(userDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.save(postRegisterDto));
+    }
     
 }
