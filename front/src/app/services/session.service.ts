@@ -47,6 +47,7 @@ export class SessionService {
   }
 
   private next(): void {
+    console.log(this.isLogged);
     this.isLoggedSubject.next(this.isLogged);
   }
 

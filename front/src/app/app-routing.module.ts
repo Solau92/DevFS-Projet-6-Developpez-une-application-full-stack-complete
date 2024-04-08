@@ -8,12 +8,12 @@ import { HomePageComponent } from "./components/home-page/home-page.component";
 const routes: Routes = [
     {
         path: 'topics',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/topics/topics.module').then(m => m.TopicsModule)
     },
     {
         path: 'profile',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
     },
     {
@@ -24,12 +24,11 @@ const routes: Routes = [
     },
     {
         path: '',
-        canActivate: [UnauthGuard],
         component: HomePageComponent
     },
     {
         path: 'posts',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule)
     },
     { path: '404', component: NotFoundComponent },

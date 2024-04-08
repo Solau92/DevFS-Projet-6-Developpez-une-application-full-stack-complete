@@ -22,7 +22,7 @@ export class AppComponent {
 
     // DONE : ajout secu front 
     public ngOnInit(): void {
-      this.autoLog();
+     //this.autoLog();
     }
   
     public $isLogged(): Observable<boolean> {
