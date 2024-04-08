@@ -1,6 +1,6 @@
 <p>Articles</p>
 
-<a href="./posts/new"> Créer un article </a>
+<button [routerLink]="['new']"> Créer un article </button>
 
 <div *ngFor="let post of (posts$ | async)?.posts">
     ----- <br>
@@ -8,5 +8,7 @@
     <p>{{ post.content }}</p>
     <p>{{ post.createdAt }}</p>
     <p>{{ post.auteur.username }}</p>
+    <button [routerLink]="['detail',post.id]">Voir l'article</button>
+
 </div>
 

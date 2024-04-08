@@ -11,4 +11,6 @@ public interface IPostService {
 
     public PostDto save(PostRegisterDto postRegisterDto);
 
+    public PostDto findById(Long id);
+
 }

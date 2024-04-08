@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { PostsResponse } from '../interfaces/postsResponse.interface';
 import { Observable } from 'rxjs';
 import { NewPostRequest } from '../interfaces/new-post-request';
+import { Post } from '../interfaces/post.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,9 @@ export class PostsService {
   // public create(form: FormData): Observable<void> {
   //   return this.httpClient.post<void>(this.pathService, FormData);
   // }
+
+  public detail(id: string): Observable<Post> {
+    return this.httpClient.get<Post>(this.pathService + "/" + id);
+
+  }
 }

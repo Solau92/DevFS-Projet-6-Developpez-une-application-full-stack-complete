@@ -47,6 +47,9 @@ public class PostService implements IPostService {
 	@Override
 	public PostDto save(PostRegisterDto postRegisterDto) {
 
+		log.debug("Trying to save post with title {}", postRegisterDto.getTitle());
+
+		// TODO : tester si found / not 
 		TopicDto topicDto = topicService.getTopicById(Long.valueOf(postRegisterDto.getTopic()));
 
 		// TODO : créer mapping 
@@ -60,6 +63,16 @@ public class PostService implements IPostService {
 		postDto.setTopic(topicDto);
 
 		return postMapper.toDto(postRepository.save(postMapper.toEntity(postDto)));
+	}
+
+	@Override
+	public PostDto findById(Long id) {
+		
+		// TODO : tester si found / not 
+
+		log.debug("Searching post with id {}", id);
+
+		return postMapper.toDto(postRepository.findById(id).get());
 	}
 	
 }

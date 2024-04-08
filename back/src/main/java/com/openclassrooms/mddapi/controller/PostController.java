@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,16 @@ public class PostController {
         postRegisterDto.setAuteur(userDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.save(postRegisterDto));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostDto> get(@PathVariable Long id) {
+
+        log.info("Searching post with id {}", id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(postService.findById(id));
+
+
     }
     
 }

@@ -24,7 +24,6 @@ const routes: Routes = [
     },
     {
         path: '',
-        canActivate: [UnauthGuard],
         component: HomePageComponent
     },
     {
