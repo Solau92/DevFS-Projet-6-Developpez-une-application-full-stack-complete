@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.CommentDto;
+import com.openclassrooms.mddapi.dto.CommentRegisterDto;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.response.PostsResponse;
 import com.openclassrooms.mddapi.exception.PostNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
+import com.openclassrooms.mddapi.service.ICommentsService;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.IUserService;
 
@@ -33,10 +36,14 @@ public class PostController {
 
     private IUserService userService;
 
+    private ICommentsService commentsService;
+
     public PostController(IPostService postService,
-    IUserService userService) {
+    IUserService userService,
+    ICommentsService commentsService) {
         this.postService = postService;
         this.userService = userService;
+        this.commentsService = commentsService;
     }
 
     @GetMapping("")
@@ -66,10 +73,34 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> get(@PathVariable Long id) throws PostNotFoundException {
 
-        log.info("Searching post with id {}", id);
-
         return ResponseEntity.status(HttpStatus.OK).body(postService.findById(id));
-
     }
+
+    @PostMapping("/{postId}/comment")
+    public ResponseEntity<PostDto> createComment(@PathVariable Long postId, @RequestBody CommentRegisterDto commentRegisterDto, Authentication authentication) throws UserNotFoundException, PostNotFoundException {
+
+        log.info("/posts/{id}/comment : Trying to register comment to article with id {}", postId);
+
+        // TODO : trop de logique métier, à basculer dans service... 
+        // créer méthode create commment dans post service, qui appellera comment service ??
+
+        // Récupérer l'utilisateur auteur du commentaire
+        String email = authentication.getName();
+        UserDto userDto = userService.findByEmail(email);
+
+        // Récupérer le post 
+        PostDto postDto = postService.findById(postId);
+        
+        // Ajouter le commentaire en base de données
+        CommentDto newComment = commentsService.create(commentRegisterDto.getContent(), userDto, postDto);
+
+        // Puis recharger le post (un peu lourd...)
+        // PostDto updatedPost = postService.findById(postId);
+        // Ou ajouter juste le commentaire au post ? 
+        postDto.getComments().add(newComment);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(postDto);
+    }
+
     
 }

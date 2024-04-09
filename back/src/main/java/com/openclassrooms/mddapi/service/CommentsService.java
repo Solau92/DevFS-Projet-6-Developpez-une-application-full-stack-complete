@@ -1,15 +1,22 @@
 package com.openclassrooms.mddapi.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import org.apache.catalina.mbeans.UserMBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.model.Comment;
 import com.openclassrooms.mddapi.model.Post;
+import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.dto.CommentDto;
+import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.mapper.CommentMapper;
+import com.openclassrooms.mddapi.mapper.PostMapper;
+import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 
 @Service
@@ -21,10 +28,17 @@ public class CommentsService implements ICommentsService {
 
     private CommentMapper commentMapper;
 
+    private UserMapper userMapper;
+    private PostMapper postMapper;
+
     public CommentsService(CommentRepository commentRepository,
-            CommentMapper commentMapper) {
+            CommentMapper commentMapper,
+            UserMapper userMapper,
+            PostMapper postMapper) {
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
+        this.userMapper = userMapper;
+        this.postMapper = postMapper;
     }
 
     @Override
@@ -36,6 +50,19 @@ public class CommentsService implements ICommentsService {
 
         return commentMapper.toDto(comments);
 
+    }
+
+    @Override
+    public CommentDto create(String content, UserDto auteur, PostDto post) {
+
+        Comment commentToSave = new Comment();
+        commentToSave.setAuteur(userMapper.toEntity(auteur));
+        commentToSave.setContent(content);
+        commentToSave.setPost(postMapper.toEntity(post));
+        commentToSave.setCreatedAt(LocalDate.now());
+        commentToSave.setUpdatedAt(LocalDate.now());
+
+        return commentMapper.toDto(commentRepository.save(commentToSave));
     }
 
 }
