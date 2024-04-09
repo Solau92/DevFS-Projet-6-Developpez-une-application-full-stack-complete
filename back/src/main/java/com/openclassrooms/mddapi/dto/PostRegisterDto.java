@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.openclassrooms.mddapi.model.User;
-
 public class PostRegisterDto {
     
     private String topic;

@@ -37,33 +37,16 @@ export class DetailComponent implements OnInit {
     // postO.subscribe(post => this.post = post);
     this.id = this.route.snapshot.paramMap.get('id')!;
     this.post$ = this.postService.detail(this.id);
-    
+
   }
 
   public submit(): void {
 
-    // TODO 
-    // récupérer le formulaire 
     const newCommentRequest = this.form.value as NewCommentRequest;
 
-    // rajouter le commentaire au Post$
-    // Ou envoyer au back le Post + le nouveau commentaire ? 
-
-    // let post: Post | undefined;
-    // this.post$?.subscribe((value) => post = value);
-
-    // this.postService.createComment(newCommentRequest, post).subscribe({
-    //   next: (_: void) => this.router.navigate(['/posts']),
-
-    // })
-
-      this.postService.createComment(this.route.snapshot.paramMap.get('id')!, newCommentRequest).subscribe({
+    this.postService.createComment(this.route.snapshot.paramMap.get('id')!, newCommentRequest).subscribe({
       next: (_: void) => this.router.navigate(['/posts']),
-
     })
-
-
-    // Plutôt mettre l'id du post ! à récupérer dans l'url 
 
   }
 
