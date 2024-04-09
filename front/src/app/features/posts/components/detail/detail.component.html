@@ -1,0 +1,32 @@
+<!-- <div *ngIf="post">{{post.title}}</div>
+
+<p>{{post?.createdAt}}</p>
+<p>{{post?.auteur?.username}}</p>
+<p>{{post?.topic?.description}}</p>
+
+<div>{{post?.content}}</div> -->
+
+<div *ngIf="post$">{{(post$ | async)?.title}}</div>
+
+<p>{{(post$ | async)?.createdAt}}</p>
+<p>{{(post$ | async)?.auteur?.username}}</p>
+<p>{{(post$ | async)?.topic?.description}}</p>
+
+<div>{{(post$ | async)?.content}}</div>
+--------------------
+
+<div>Commentaires</div>
+
+<div *ngFor="let comment of ((post$ | async)?.comments)">
+    <p>{{comment.auteur.username}}</p>
+    <p>{{comment.content}}</p>
+
+</div>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <textarea formControlName="content" cols="30" rows="10" placeholder="Ecrivez ici votre commentaire"></textarea>
+
+    <button type="submit" [disabled]="form.invalid">Envoyer</button>
+
+</form>
