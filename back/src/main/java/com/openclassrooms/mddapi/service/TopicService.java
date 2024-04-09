@@ -44,6 +44,8 @@ public class TopicService implements ITopicService {
 	@Override
 	public TopicDto getTopicById(Long id) {
 
+		// TO DO : tester si found / not 
+
 		log.debug("Searching topic with id  {}", id);
 
 		return topicMapper.toDto(topicRepository.findById(id).get());

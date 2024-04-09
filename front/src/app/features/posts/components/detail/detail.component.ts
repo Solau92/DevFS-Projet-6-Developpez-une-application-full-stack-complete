@@ -11,8 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class DetailComponent implements OnInit {
 
-  //TO DO : revoir 
-  public post?: Post;
+  //TO DO : revoir (voir / TopicComponent) : a priori DONE 
+  // public post?: Post;
+  public post$?: Observable<Post>;
 
   private id: string | undefined;
 
@@ -23,10 +24,13 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //TODO : à revoir 
+    //TODO : à revoir : a priori DONE 
+    // this.id = this.route.snapshot.paramMap.get('id')!;
+    // let postO: Observable<Post> = this.postService.detail(this.id);
+    // postO.subscribe(post => this.post = post);
     this.id = this.route.snapshot.paramMap.get('id')!;
-    let postO: Observable<Post> = this.postService.detail(this.id);
-    postO.subscribe(post => this.post = post);
+    this.post$ = this.postService.detail(this.id);
+    
   }
 
 }

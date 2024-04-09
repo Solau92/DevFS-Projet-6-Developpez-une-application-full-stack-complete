@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.tomcat.jni.Local;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import com.openclassrooms.mddapi.dto.CommentDto;
 import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.exception.PostNotFoundException;
+import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.repository.PostRepository;
@@ -71,18 +74,22 @@ public class PostService implements IPostService {
 	}
 
 	@Override
-	public PostDto findById(Long id) {
+	public PostDto findById(Long id) throws PostNotFoundException {
 		
-		// TODO : tester si found / not 
-
 		log.debug("Searching post with id {}", id);
 
-		PostDto postDtoFound = postMapper.toDto(postRepository.findById(id).get());
+		Optional<Post> optionalPost = postRepository.findById(id);
 
-		//TODO TODONOW : comments service.get (//User et subscriptions)
+		    if (!optionalPost.isPresent()) {
+            log.error("Post with id {} not found", id);
+            throw new PostNotFoundException("Post with" + id + "not found");
+        }
+
+		PostDto postDtoFound = postMapper.toDto(optionalPost.get());
+
+		log.debug("Searching comments of post with id {}", id);
 
 		List<CommentDto> commentDtos = commentsService.getAll(postMapper.toEntity(postDtoFound));
-
 		postDtoFound.setComments(commentDtos);
 
 		return postDtoFound;

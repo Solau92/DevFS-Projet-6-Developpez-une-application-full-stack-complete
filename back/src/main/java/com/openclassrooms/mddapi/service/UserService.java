@@ -158,13 +158,12 @@ public class UserService implements IUserService {
         List<Subscription> subscriptions = subscriptionRepository.findByUser(user);
 
         return subscriptionMapper.toDto(subscriptions);
-
     }
 
     @Override
     public UserDto update(UserDto userDto) throws UserNotFoundException {
 
-        log.info("Searching user with id {}", userDto.getId());
+        log.debug("Searching user with id {}", userDto.getId());
 
         Optional<User> optionalUser = userRepository.findById(userDto.getId());
 
@@ -173,7 +172,7 @@ public class UserService implements IUserService {
             throw new UserNotFoundException("User with" + userDto.getId() + "not found");
         }
 
-        log.info("User with id {} successfully identified", userDto.getId());
+        log.debug("User with id {} successfully identified", userDto.getId());
 
         User userToSave = userMapper.toEntity(userDto);
         userToSave.setCreatedAt(optionalUser.get().getCreatedAt());

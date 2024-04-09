@@ -18,6 +18,7 @@ import com.openclassrooms.mddapi.dto.PostDto;
 import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.response.PostsResponse;
+import com.openclassrooms.mddapi.exception.PostNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.IPostService;
 import com.openclassrooms.mddapi.service.IUserService;
@@ -63,12 +64,11 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> get(@PathVariable Long id) {
+    public ResponseEntity<PostDto> get(@PathVariable Long id) throws PostNotFoundException {
 
         log.info("Searching post with id {}", id);
 
         return ResponseEntity.status(HttpStatus.OK).body(postService.findById(id));
-
 
     }
     

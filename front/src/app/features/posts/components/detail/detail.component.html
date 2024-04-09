@@ -1,17 +1,24 @@
 
-<div *ngIf="post">{{post.title}}</div>
+<!-- <div *ngIf="post">{{post.title}}</div>
 
 <p>{{post?.createdAt}}</p>
 <p>{{post?.auteur?.username}}</p>
 <p>{{post?.topic?.description}}</p>
 
-<div>{{post?.content}}</div>
+<div>{{post?.content}}</div> -->
 
+<div *ngIf="post$">{{(post$ | async)?.title}}</div>
+
+<p>{{(post$ | async)?.createdAt}}</p>
+<p>{{(post$ | async)?.auteur?.username}}</p>
+<p>{{(post$ | async)?.topic?.description}}</p>
+
+<div>{{(post$ | async)?.content}}</div>
 --------------------
 
 <div>Commentaires</div>
 
-<div *ngFor="let comment of (post?.comments)">
+<div *ngFor="let comment of ((post$ | async)?.comments)">
     <p>{{comment.auteur.username}}</p>
     <p>{{comment.content}}</p>
 
