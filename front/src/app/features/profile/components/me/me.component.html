@@ -27,7 +27,7 @@ _________________________
         <div *ngFor="let subscription of (user!.subscriptions)">
             <p>{{ subscription.topic.name }}</p>
             <p>{{ subscription.topic.description }}</p>
-            <button (click)="unSubscribeToTopic()">
+            <button (click)="unSubscribeToTopic(subscription.topic.id)">
                 <span>Se désabonner</span>
             </button>
         </div>

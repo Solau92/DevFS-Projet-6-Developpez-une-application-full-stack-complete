@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { User } from "src/app/interfaces/user.interface";
 import { UserService } from "src/app/services/user.service";
 import { SessionService } from "src/app/services/session.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-topic',
@@ -19,7 +20,8 @@ export class TopicComponent {
   // public user: User | undefined;
   
   constructor(
-    private topicsService: TopicsService
+    private topicsService: TopicsService,
+    private router: Router
     // TODOREMOVE (2 lines): 
     // , private userService: UserService,
     // private sessionService: SessionService
@@ -32,8 +34,11 @@ export class TopicComponent {
   //     .subscribe((user: User) => this.user = user);
   // }
 
-  // TODO : finish 
-  public subscribeToTopic(): void {
+  // TODO : finish : revoir url + possibilité plusieurs fois souscription...
+  public subscribeToTopic(topicId: number): void {
+
+    this.topicsService.createSubscription(topicId).subscribe({
+      next: (_: void) => this.router.navigate(['/topics']),})
 
     // appeler méthode createSubscription de topics.service.ts
     // Mais il faut récupérer le topic + le user (que je n'ai pas encore)

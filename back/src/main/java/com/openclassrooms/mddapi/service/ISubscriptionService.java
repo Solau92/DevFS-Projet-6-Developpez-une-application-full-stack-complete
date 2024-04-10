@@ -12,8 +12,13 @@ public interface ISubscriptionService {
      * 
      * @param SubscriptionDto the subscription that must be saved
      * @return SubscriptionDto the subscription saved
+     * @throws UserNotFoundException 
      */
-    SubscriptionDto create(SubscriptionDto subscriptionDto);
+    // SubscriptionDto create(SubscriptionDto subscriptionDto);
+
+    public SubscriptionDto create(Long topicId, String email) throws UserNotFoundException;
+
+    public void delete(Long topicId, String email) throws UserNotFoundException;
 
     List<SubscriptionDto> getAll(String id) throws NumberFormatException, UserNotFoundException;
 }

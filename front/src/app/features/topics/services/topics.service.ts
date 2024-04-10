@@ -20,9 +20,13 @@ export class TopicsService {
   }
 
   // TODO : finish when User implemented 
-  // public createSubscription(subscription: SubscriptionToTopic): Observable<SubscriptionToTopic> {
-  //   return this.httpClient.post<SubscriptionToTopic>(this.pathService + "/subscription", subscription)
-  // }
+  public createSubscription(topicId: number): Observable<void> {
+    return this.httpClient.post<void>(this.pathService + "/subscription", topicId);
+  }
+
+  public removeSubscription(topicId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.pathService + "/unsubscription/" + topicId);
+  }
 
 }
  

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/features/auth/services/auth-service';
+import { TopicsService } from 'src/app/features/topics/services/topics.service';
 import { Subscription } from 'src/app/interfaces/subscription.interface';
 import { SubscriptionsResponse } from 'src/app/interfaces/subscriptionsResponse.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -34,7 +35,7 @@ export class MeComponent implements OnInit {
     private userService: UserService,
     private sessionService: SessionService,
     private authService: AuthService,
-    private subscriptionService: SubscriptionService
+    private topicService: TopicsService
   ) {
   }
 
@@ -79,21 +80,9 @@ export class MeComponent implements OnInit {
 
   // Version ***
   public ngOnInit(): void {
-    
-    //TODO : mettre l'user id correct 
-    // this.subscriptions$ = this.subscriptionService.all("2");
 
-    this.authService.me().subscribe(
-      (user: User) => {
-        this.user = user;
-        this.initForm(user);
-        console.log(this.user.id); //TODO : remove 
+    this.fetchUser();
 
-        // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-        // console.log(this.subscriptions$); 
-      }
-
-    )
   }
 
   private initForm(user: User): void {
@@ -121,10 +110,6 @@ export class MeComponent implements OnInit {
       ]
       ]
     });
-
-    //TODO : voir 
-    // this.subscriptions$ = this.subscriptionService.all(user.id.toString());
-    // console.log(this.subscriptions$);   
   }
 
   public submit(): void {
@@ -134,7 +119,7 @@ export class MeComponent implements OnInit {
     this.formMod = this.form;
 
     console.log(this.formMod);
-    
+
     formData.append('username', this.formMod!.get('username')?.value);
     formData.append('email', this.formMod!.get('email')?.value);
     formData.append('password', this.formMod!.get('password')?.value);
@@ -148,27 +133,33 @@ export class MeComponent implements OnInit {
       subscriptions: [] // Version SS
     };
 
-    // if (!this.user === undefined) {
-      console.log("user : ");
-      console.log(this.user);
-      this.userService
-        .update(this.user!.id, formData)
-        .subscribe((_: void) => this.exitPage());
-    // }
+    this.userService
+      .update(this.user!.id, formData)
+      .subscribe((_: void) => this.exitPage());
   }
 
   private exitPage(): void {
     this.router.navigate(['/topics']);
   }
 
-  // TODO : finish 
-  public unSubscribeToTopic(): void {
+  public unSubscribeToTopic(topicId: number): void {
+
+    this.topicService.removeSubscription(topicId)
+      .subscribe((_: void) => this.fetchUser());
 
   }
 
   public logout(): void {
     this.sessionService.logOut();
     this.router.navigate(['/auth/login'])
+  }
+
+  private fetchUser(): void {
+    this.authService.me().subscribe(
+      (user: User) => {
+        this.user = user;
+        this.initForm(user);
+      })
   }
 
 }
