@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { TopicComponent } from './features/topics/components/topic/topic.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+const materialModule = [
+]
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     AppRoutingModule,
     // TODO : supprimer 2 lignes si suppression metwo
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [ //DONE : added
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
