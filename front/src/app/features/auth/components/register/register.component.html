@@ -1,4 +1,6 @@
-<p>Register</p>
+<button (click)="back()">back</button>
+
+<p>Inscription</p>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
 
@@ -11,7 +13,7 @@
     Mot de passe
     <input formControlName="password">
 
-    <button type="submit" [disabled]="form.invalid">Submit</button>
-    <span *ngIf="onError">An error occurred</span>
+    <button type="submit" [disabled]="form.invalid">S'inscrire</button>
+    <span *ngIf="onError">Erreur</span>
 
 </form>
