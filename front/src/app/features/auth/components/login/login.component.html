@@ -1,4 +1,6 @@
-<p>Login</p>
+<button (click)="back()">back</button>
+
+<p>Se connecter</p>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
 
@@ -8,7 +10,7 @@
     Mot de passe
     <input formControlName="password">
 
-    <button type="submit" [disabled]="form.invalid">Submit</button>
-    <span *ngIf="onError">An error occurred</span>
+    <button type="submit" [disabled]="form.invalid">Se connecter</button>
+    <span *ngIf="onError">Erreur</span>
 
 </form>

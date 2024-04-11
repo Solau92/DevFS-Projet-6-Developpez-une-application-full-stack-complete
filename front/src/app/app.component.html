@@ -1,7 +1,12 @@
 <!-- <app-topic></app-topic> -->
 <div>
     ____________
-       Nav bar 
+    <!-- TODO : voir comment faire mieux -->
+    <diV *ngIf="isNotLogged()"> 
+        <a href="./posts"> - Articles -</a>
+        <a href="./topics"> - Thèmes - </a>
+        <a href="./profile"> - Profil - </a>
+    </diV>
     ____________
 </div>
 <div>
