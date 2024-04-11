@@ -40,9 +40,6 @@ export class TopicComponent {
     this.topicsService.createSubscription(topicId).subscribe({
       next: (_: void) => this.router.navigate(['/topics']),})
 
-    // appeler méthode createSubscription de topics.service.ts
-    // Mais il faut récupérer le topic + le user (que je n'ai pas encore)
-
   }
 
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
+import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
+import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.ISubscriptionService;
 
@@ -38,6 +40,7 @@ public class SubscriptionController {
      * @param subscriptionDto
      * @return
      * @throws UserNotFoundException 
+     * @throws SubscriptionAlreadyExistsException 
      */
     // @PostMapping("/topic/subscription")
     // public ResponseEntity<?> save(@Valid @RequestBody SubscriptionDto subscriptionDto) {
@@ -46,7 +49,7 @@ public class SubscriptionController {
     // }
 
     @PostMapping("/topic/subscription")
-    public ResponseEntity<?> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException {
+    public ResponseEntity<?> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException {
 		log.info("/topic/subscription, post : Saving a new subscription on topic with id {}", topicId);
         String email = authentication.getName();
         return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.create(topicId, email));
@@ -60,7 +63,7 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/topic/unsubscription/{topicId}")
-    public ResponseEntity<?> delete(Authentication authentication, @PathVariable("topicId") String topicId) throws UserNotFoundException {
+    public ResponseEntity<?> delete(Authentication authentication, @PathVariable("topicId") String topicId) throws UserNotFoundException, NumberFormatException, SubscriptionNotFoundException {
         String email = authentication.getName();
         log.info("/topic/subscription, post : Removing a subscription on topic with id {} for user with email {}", topicId, email);
         subscriptionService.delete(Long.valueOf(topicId), email);
