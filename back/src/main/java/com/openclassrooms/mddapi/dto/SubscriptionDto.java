@@ -8,9 +8,9 @@ public class SubscriptionDto {
     //TODO : voir si je dois mettre des Dto ou des Entities ?
     private Long id;
 
-    private User user;
+    private UserDto user;
 
-    private Topic topic;
+    private TopicDto topic;
 
 
     public Long getId() {
@@ -21,20 +21,30 @@ public class SubscriptionDto {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDto getUser() {
         return this.user;
     }
 
-    public void setUser(User auteur) {
+    public void setUser(UserDto auteur) {
         this.user = auteur;
     }
 
-    public Topic getTopic() {
+    public TopicDto getTopic() {
         return this.topic;
     }
 
-    public void setTopic(Topic topic) {
+    public void setTopic(TopicDto topic) {
         this.topic = topic;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", user='" + getUser() + "'" +
+            ", topic='" + getTopic() + "'" +
+            "}";
     }
 
 }
