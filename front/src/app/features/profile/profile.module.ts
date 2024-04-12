@@ -3,9 +3,19 @@ import { MeComponent } from "./components/me/me.component";
 import { CommonModule } from "@angular/common";
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-const materialModules: never[] = [
-];
+const materialModule = [
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+]
 
 @NgModule({
   declarations: [
@@ -15,7 +25,8 @@ const materialModules: never[] = [
     CommonModule,
     ProfileRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ...materialModule
   ]
 })
 export class ProfileModule { }

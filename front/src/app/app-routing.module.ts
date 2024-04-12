@@ -19,7 +19,7 @@ const routes: Routes = [
     {
         //TODO : voir /me ?
         path: 'auth',
-        canActivate: [UnauthGuard],
+        // canActivate: [UnauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
     {

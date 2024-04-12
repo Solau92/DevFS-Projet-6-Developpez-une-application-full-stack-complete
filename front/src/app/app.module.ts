@@ -9,8 +9,18 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const materialModule = [
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatSnackBarModule,
+  MatToolbarModule,
 ]
 
 @NgModule({
@@ -29,6 +39,7 @@ const materialModule = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ...materialModule
   ],
   providers: [ //DONE : added
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
