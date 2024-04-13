@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 import { UnauthGuard } from "./guards/unauth.guard";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { HomePageComponent } from "./components/home-page/home-page.component";
+import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 
 const routes: Routes = [
     {
@@ -24,7 +24,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: HomePageComponent
+        component: LandingPageComponent
     },
     {
         path: 'posts',

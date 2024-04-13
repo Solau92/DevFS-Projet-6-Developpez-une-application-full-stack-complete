@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +27,7 @@ const materialModule = [
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HomePageComponent
+    LandingPageComponent
     // DONE : supprimé d'ici : TopicComponent
   ],
   imports: [
