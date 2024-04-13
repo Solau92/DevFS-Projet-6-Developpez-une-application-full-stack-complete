@@ -79,11 +79,17 @@ export class MeComponent implements OnInit {
   // }
 
   // Version ***
-  public ngOnInit(): void {
+  //**//
+  // public ngOnInit(): void {
+  //   this.fetchUser();
+  // }
 
-    this.fetchUser();
-
-  }
+    //**//
+    public ngOnInit(): void {
+      this.userService
+        .getById(this.sessionService.sessionInformation!.id)
+        .subscribe((user: User) => this.user = user);
+    }
 
   private initForm(user: User): void {
 
@@ -161,5 +167,6 @@ export class MeComponent implements OnInit {
         this.initForm(user);
       })
   }
+  
 
 }

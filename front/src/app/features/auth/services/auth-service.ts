@@ -26,10 +26,16 @@ import { AuthSuccess } from "../interfaces/authSuccess.interface";
     // }
 
     // Version ***
-    public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
-      return this.httpClient.post<AuthSuccess>(this.pathService + "/login", loginRequest);
-    }
+    //**//
+    // public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
+    //   return this.httpClient.post<AuthSuccess>(this.pathService + "/login", loginRequest);
+    // }
 
+    //**//
+    public login(loginRequest: LoginRequest): Observable<SessionInformation> {
+      return this.httpClient.post<SessionInformation>(`${this.pathService}/login`, loginRequest);
+    }
+    
     // Version ***
     public me(): Observable<User> {
       return this.httpClient.get<User>(`${this.pathService}/me`);

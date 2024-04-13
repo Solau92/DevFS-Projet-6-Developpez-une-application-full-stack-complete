@@ -8,5 +8,5 @@ export interface User {
     createdAt?: Date;
     updatedAt?: Date;
     // Version SS
-    subscriptions: Subscription[];
+    subscriptions?: Subscription[];
 }

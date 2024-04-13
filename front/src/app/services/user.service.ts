@@ -21,4 +21,5 @@ export class UserService {
   public update(id: number, form: FormData): Observable<void> {
     return this.httpClient.put<void>(`${this.pathService}/${id}`, form);
   }
+
 }

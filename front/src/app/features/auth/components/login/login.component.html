@@ -1,4 +1,4 @@
-<button mat-icon-button (click)="back()">
+<!-- <button mat-icon-button (click)="back()">
     <mat-icon>arrow_back</mat-icon>
 </button>
 
@@ -28,4 +28,19 @@
 
         </form>
     </mat-card>
-</div>
+</div> -->
+
+<p>Login</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    Email
+    <input formControlName="email">
+
+    Mot de passe
+    <input formControlName="password">
+
+    <button type="submit" [disabled]="form.invalid">Submit</button>
+    <span *ngIf="onError">An error occurred</span>
+
+</form>

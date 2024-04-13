@@ -12,7 +12,11 @@ export class SessionService {
   public isLogged = false;
 
   // Version ***
-  public user: User | undefined;
+  //**// 
+  //public user: User | undefined;
+
+  //**// 
+  public sessionInformation: SessionInformation | undefined;
 
   // 
   // public sessionInformation: SessionInformation | undefined;
@@ -33,15 +37,31 @@ export class SessionService {
   // }
 
   // Version ***
-  public logIn(user: User): void {
-    this.user = user;
+  //**// 
+  // public logIn(user: User): void {
+  //   this.user = user;
+  //   this.isLogged = true;
+  //   this.next();
+  // }
+
+  //**// 
+  public logIn(user: SessionInformation): void {
+    this.sessionInformation = user;
     this.isLogged = true;
     this.next();
   }
 
+  //**//
+  // public logOut(): void {
+  //   localStorage.removeItem('token');
+  //   this.user = undefined;
+  //   this.isLogged = false;
+  //   this.next();
+  // }
+
+  //**//
   public logOut(): void {
-    localStorage.removeItem('token');
-    this.user = undefined;
+    this.sessionInformation = undefined;
     this.isLogged = false;
     this.next();
   }

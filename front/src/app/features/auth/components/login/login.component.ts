@@ -74,20 +74,45 @@ export class LoginComponent {
   // }
 
   // Version ***
+  //**//
+  // public submit(): void {
+  //   const loginRequest = this.form.value as LoginRequest;
+
+  //   this.authService.login(loginRequest).subscribe(
+  //     (response: AuthSuccess) => {
+  //       localStorage.setItem('token', response.token);
+  //       this.authService.me().subscribe((user: User) => {
+  //         this.sessionService.logIn(user);
+  //         this.router.navigate(['/posts']);
+  //       });
+  //       this.router.navigate(['/posts']);
+  //     },
+  //     error => this.onError = true,
+  //   );
+  // }
+
+  //**//
+  // public submit(): void {
+  //   const loginRequest = this.form.value as LoginRequest;
+  //   this.authService.login(loginRequest).subscribe({
+  //     next: (response: SessionInformation) => {
+  //       this.sessionService.logIn(response);
+  //       this.router.navigate(['/posts']);
+  //     },
+  //     error: error => this.onError = true,
+  //   });
+  // }
+
+    //**//
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
-
-    this.authService.login(loginRequest).subscribe(
-      (response: AuthSuccess) => {
-        localStorage.setItem('token', response.token);
-        this.authService.me().subscribe((user: User) => {
-          this.sessionService.logIn(user);
-          this.router.navigate(['/posts']);
-        });
+    this.authService.login(loginRequest).subscribe({
+      next: (response: SessionInformation) => {
+        this.sessionService.logIn(response);
         this.router.navigate(['/posts']);
       },
-      error => this.onError = true,
-    );
+      error: error => this.onError = true,
+    });
   }
 
   public back() {

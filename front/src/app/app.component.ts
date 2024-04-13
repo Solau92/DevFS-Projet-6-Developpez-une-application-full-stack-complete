@@ -26,10 +26,7 @@ export class AppComponent {
     , private authService: AuthService,
   ) {  }
 
-  // DONE : ajout secu front 
-  public ngOnInit(): void {
-    this.autoLog();
-  }
+  //**// Suppression ngOnInit+=
 
   public $isLogged(): Observable<boolean> {
     return this.sessionService.$isLogged();
@@ -41,15 +38,16 @@ export class AppComponent {
     this.router.navigate([''])
   }
 
-  // DONE : ajout secu front 
-  public autoLog(): void {
-    this.authService.me().subscribe(
-      (user: User) => {
-        this.sessionService.logIn(user);
-      },
-      (_) => {
-        this.sessionService.logOut();
-      }
-    )
-  }
+  //**//
+  // // DONE : ajout secu front 
+  // public autoLog(): void {
+  //   this.authService.me().subscribe(
+  //     (user: User) => {
+  //       this.sessionService.logIn(user);
+  //     },
+  //     (_) => {
+  //       this.sessionService.logOut();
+  //     }
+  //   )
+  // }
 }
