@@ -6,6 +6,8 @@ import { User } from "src/app/interfaces/user.interface";
 import { UserService } from "src/app/services/user.service";
 import { SessionService } from "src/app/services/session.service";
 import { Router } from "@angular/router";
+import { AuthService } from "src/app/features/auth/services/auth-service";
+import { Subscription } from "src/app/interfaces/subscription.interface";
 
 @Component({
   selector: 'app-topic',
@@ -18,16 +20,25 @@ export class TopicComponent {
 
   // TODOREMOVE : 
   // public user: User | undefined;
-  
+
+  //** Sub **//
+  public user: User | undefined;
+
+  //** Sub **//
+  public ngOnInit(): void {
+    this.fetchUser();
+  }
+
   constructor(
     private topicsService: TopicsService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
     // TODOREMOVE (2 lines): 
     // , private userService: UserService,
     // private sessionService: SessionService
   ) { }
 
-// TODOREMOVE : all method
+  // TODOREMOVE : all method
   // public ngOnInit(): void {
   //   this.userService
   //     .getById(this.sessionService.sessionInformation!.id.toString())
@@ -38,8 +49,35 @@ export class TopicComponent {
   public subscribeToTopic(topicId: number): void {
 
     this.topicsService.createSubscription(topicId).subscribe({
-      next: (_: void) => this.router.navigate(['/topics']),})
+      next: (_: void) => {
+        this.fetchUser();
+      }
+    })
 
   }
 
+  //** Sub **//
+  private fetchUser(): void {
+    this.authService.me().subscribe(
+      (user: User) => {
+        this.user = user;
+      })
+  }
+
+  //** Sub **//
+  public isNotAlreadySubscriben(topicId: number): boolean {
+
+    // TODO : réécrire 
+    let subscriptions: Subscription[] | undefined = this.user?.subscriptions;
+
+    if (subscriptions != undefined) {
+      for (var subscription of subscriptions) {
+        if (subscription.topic.id === topicId) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return true;
+  }
 }
