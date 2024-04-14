@@ -22,12 +22,12 @@ export class AppComponent {
 
     // DONE : ajout secu front 
     public ngOnInit(): void {
-     //this.autoLog();
+     // this.autoLog();
     }
   
-    public $isLogged(): Observable<boolean> {
-      return this.sessionService.$isLogged();
-    }
+    // public $isLogged(): Observable<boolean> {
+    //   return this.sessionService.$isLogged();
+    // }
 
     // DONE : ajout secu front 
     public logout(): void {
@@ -36,14 +36,14 @@ export class AppComponent {
     }
 
     // DONE : ajout secu front 
-    public autoLog(): void {
-      this.authService.me().subscribe(
-        (user: User) => {
-          this.sessionService.logIn(user);
-        },
-        (_) => {
-          this.sessionService.logOut();
-        }
-      )
-    }
+    // public autoLog(): void {
+    //   this.authService.me().subscribe(
+    //     (user: User) => {
+    //       this.sessionService.logIn(user);
+    //     },
+    //     (_) => {
+    //       this.sessionService.logOut();
+    //     }
+    //   )
+    // }
 }

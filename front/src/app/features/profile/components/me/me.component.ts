@@ -83,6 +83,8 @@ export class MeComponent implements OnInit {
     //TODO : mettre l'user id correct 
     // this.subscriptions$ = this.subscriptionService.all("2");
 
+    console.log("is logged in mecomponent ?: " + this.sessionService.isLogged);
+
     this.authService.me().subscribe(
       (user: User) => {
         this.user = user;

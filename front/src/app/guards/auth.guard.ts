@@ -13,22 +13,31 @@ export class AuthGuard implements CanActivate {
   }
 
   public canActivate(): boolean {
-    console.log("is logged ?: " + this.sessionService.isLogged);
-
-    this.sessionService.$isLogged().subscribe(console.log);
-
-    return true;
-    // return this.sessionService.$isLogged().pipe(
-      
-    //   map((isLogged: boolean) => {
-    //   if (isLogged) {
-    //     console.log("not logged");
-    //     this.router.navigate(['auth/login']);
-    //     return false;
-    //   }
-    //   return true;
-    // })
-    // );
+    
+    if(localStorage.getItem('token') === null) {
+      return false;
+    } else {
+      return true;
+    }
 
 }
+
+//   public canActivate(): Observable<boolean> {
+//     console.log("is logged in authguard ?: " + this.sessionService.isLogged);
+
+//     // this.sessionService.$isLogged().subscribe(console.log);
+
+//     // return true;
+//     return this.sessionService.$isLogged().pipe(
+      
+//       map((isLogged: boolean) => {
+//       if (!isLogged) {
+//         console.log("not logged");
+//         this.router.navigate(['auth/login']);
+//         return false;
+//       }
+//       return true;
+//     })
+//     );
+// }
 }

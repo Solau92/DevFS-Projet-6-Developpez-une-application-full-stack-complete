@@ -20,6 +20,7 @@ export class SessionService {
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged);
 
   public $isLogged(): Observable<boolean> {
+    console.log(this.isLoggedSubject);
     return this.isLoggedSubject.asObservable();
   }
 
