@@ -5,7 +5,7 @@
 <div *ngFor="let topic of (topics$ | async)?.topics">
     <p>{{ topic.name }}</p>
     <p>{{ topic.description }}</p>
-    <button (click)="subscribeToTopic(topic.id)">
+    <button *ngIf="isNotAlreadySubscriben(topic.id)" (click)="subscribeToTopic(topic.id)">
         <span>S'abonner</span>
     </button>
 </div>
