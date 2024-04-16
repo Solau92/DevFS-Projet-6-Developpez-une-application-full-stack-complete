@@ -139,7 +139,8 @@ export class MeComponent implements OnInit {
   }
 
   private exitPage(): void {
-    this.router.navigate(['/topics']);
+    this.fetchUser();
+    // this.router.navigate(['/topics']);
   }
 
   public unSubscribeToTopic(topicId: number): void {

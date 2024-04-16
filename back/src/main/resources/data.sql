@@ -1,9 +1,9 @@
 
 INSERT INTO users (user_id, username, email, password, created_at, updated_at) VALUES 
-(1, 'user1', 'user1@email.com', 'password', '2024-03-24', '2024-03-24'),
-(2, 'user2', 'user2@email.com', 'password', '2024-03-24', '2024-03-24'),
-(3, 'user3', 'user3@email.com', 'password', '2024-03-24', '2024-03-24'),
-(4, 'user4', 'user4@email.com', 'password', '2024-03-24', '2024-03-24');
+(1, 'user1', 'user1@email.com', '$2a$10$TieTTep62PPqhhpHJbhEteM69IP3I9UnBT9ctS8t3m91uc9VOYixe', '2024-03-24', '2024-03-24'),
+(2, 'user2', 'user2@email.com', '$2a$10$ROrdgfBV3HoXcj6ARgm3COoIO.bfrYijTDrGndRwNiCo1TyNPFyIq', '2024-03-24', '2024-03-24'),
+(3, 'user3', 'user3@email.com', '$2a$10$EXM23tvhh4K4kfXp2RcRHu5DmftjIpaHw46poMKqLsfdBlqJn5B5K', '2024-03-24', '2024-03-24'),
+(4, 'user4', 'user4@email.com', '$2a$10$Dn7PVW4p7ly6yOpd9kiB7OWaUkM99tRluOfunyxGEMqAlYBKaUM3q', '2024-03-24', '2024-03-24');
 
 INSERT INTO topics (topic_id, name, description) VALUES 
 (1, 'topic 1', 'this is the 1st topic'),

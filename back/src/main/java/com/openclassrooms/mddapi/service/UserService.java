@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.LoginRegisterDto;
@@ -34,6 +35,8 @@ public class UserService implements IUserService {
 
     private JWTService jwtService;
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
     // Version SS
     // private ISubscriptionService subscriptionService;
 
@@ -47,7 +50,8 @@ public class UserService implements IUserService {
     // , ISubscriptionService subscriptionService
             , SubscriptionRepository subscriptionRepository,
             SubscriptionMapper subscriptionMapper,
-            JWTService jwtService) {
+            JWTService jwtService,
+            BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.userRegisterMapper = userRegisterMapper;
         this.userMapper = userMapper;
@@ -55,6 +59,7 @@ public class UserService implements IUserService {
         this.subscriptionRepository = subscriptionRepository;
         this.subscriptionMapper = subscriptionMapper;
         this.jwtService = jwtService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     // TODO : compléter pour vérifier que user pas déjà renseigné en bdd ??
@@ -80,6 +85,7 @@ public class UserService implements IUserService {
         User userToSave = userRegisterMapper.toEntity(userRegisterDto);
         userToSave.setCreatedAt(LocalDate.now());
         userToSave.setUpdatedAt(LocalDate.now());
+        userToSave.setPassword(this.bCryptPasswordEncoder.encode(userRegisterDto.getPassword()));
 
         return userRegisterMapper.toDto(userRepository.save(userToSave));
     }
@@ -92,7 +98,8 @@ public class UserService implements IUserService {
 
         Optional<User> optionalUser = userRepository.findByEmail(loginRegisterDto.getEmail());
 
-        if (!optionalUser.isPresent() || !(loginRegisterDto.getPassword().equals(optionalUser.get().getPassword()))) {
+        if (!optionalUser.isPresent()
+                || !this.bCryptPasswordEncoder.matches(loginRegisterDto.getPassword(), optionalUser.get().getPassword())) {
             log.error("Invalid email or password");
             throw new BadCredentialsCustomException("Invalid email or password");
         }
