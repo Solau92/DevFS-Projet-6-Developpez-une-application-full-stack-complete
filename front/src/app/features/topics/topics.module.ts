@@ -3,11 +3,14 @@ import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { TopicComponent } from "./components/topic/topic.component";
 import { TopicsRoutingModule } from "./topics-routing.module";
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatIconModule } from "@angular/material/icon";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+
 registerLocaleData(localeFr);
 
 const materialModule = [
@@ -16,6 +19,8 @@ const materialModule = [
   MatIconModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule
 ]
 
 @NgModule({
