@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
-import com.openclassrooms.mddapi.dto.LoginRegisterDto;
+import com.openclassrooms.mddapi.dto.LoginDto;
 
 public interface JWTService {
 
@@ -10,6 +10,6 @@ public interface JWTService {
      * @param userLoginDto
      * @return String corresponding to the token
      */
-    String generateToken(LoginRegisterDto userLoginDto);
+    public String generateToken(LoginDto userLoginDto);
 
 }

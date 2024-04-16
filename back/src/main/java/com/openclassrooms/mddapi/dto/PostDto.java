@@ -6,19 +6,12 @@ import java.util.List;
 public class PostDto {
 
 	private Long id;
-
 	private TopicDto topic;
-
 	private UserDto auteur;
-
 	private String title; 
-
 	private String content;
-
 	private LocalDate createdAt;
-
 	private LocalDate updatedAt;
-
 	private List<CommentDto> comments;
 
 	public PostDto() {
@@ -98,6 +91,5 @@ public class PostDto {
 	public void setComments(List<CommentDto> comments) {
 		this.comments = comments;
 	}
-
     
 }

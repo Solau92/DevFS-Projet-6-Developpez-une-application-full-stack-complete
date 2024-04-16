@@ -5,13 +5,18 @@ import com.openclassrooms.mddapi.model.User;
 
 public class SubscriptionDto {
     
-    //TODO : voir si je dois mettre des Dto ou des Entities ?
     private Long id;
-
     private UserDto user;
-
     private TopicDto topic;
 
+    public SubscriptionDto() {
+    }
+
+    public SubscriptionDto(Long id, UserDto user, TopicDto topic) {
+        this.id = id;
+        this.user = user;
+        this.topic = topic;
+    }
 
     public Long getId() {
         return this.id;
@@ -36,7 +41,6 @@ public class SubscriptionDto {
     public void setTopic(TopicDto topic) {
         this.topic = topic;
     }
-
 
     @Override
     public String toString() {

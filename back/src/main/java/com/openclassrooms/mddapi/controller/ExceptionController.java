@@ -15,7 +15,6 @@ import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.model.Post;
 
 /**
  * Exception handling class
@@ -66,4 +65,5 @@ public class ExceptionController {
         body.put(MESSAGE, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+    
 }

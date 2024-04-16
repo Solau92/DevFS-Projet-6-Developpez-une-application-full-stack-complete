@@ -21,40 +21,37 @@ import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.response.PostsResponse;
 import com.openclassrooms.mddapi.exception.PostNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.service.IPostService;
-import com.openclassrooms.mddapi.service.IUserService;
+import com.openclassrooms.mddapi.service.PostService;
+import com.openclassrooms.mddapi.service.UserService;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private IPostService postService;
+    private PostService postService;
+
+    private UserService userService;
 
     private static final Logger log = LoggerFactory.getLogger(PostController.class);
 
-    private IUserService userService;
-
-    public PostController(IPostService postService,
-    IUserService userService) {
+    public PostController(PostService postService, UserService userService) {
         this.postService = postService;
         this.userService = userService;
     }
 
+    // TODO : voir si je mets une PostResponse ?
     @GetMapping("")
 	public ResponseEntity<PostsResponse> getAllPosts() {
-		log.info("/posts : Getting the list of all posts");
+
+		log.info("(get) /posts : Getting the list of all posts");
+
 		return ResponseEntity.status(HttpStatus.OK).body(new PostsResponse(postService.getAll()));
-		
 	}
 
     @PostMapping("")
     public ResponseEntity<PostDto> create(@Valid @RequestBody PostRegisterDto postRegisterDto, Authentication authentication) throws UserNotFoundException {
-        log.info("/posts : Trying to register article with title {}", postRegisterDto.getTitle());
-
-        // TODO : pour le User : revoir si Authentication ok ou dans front ?... 
-        // Ou dans service...
-
-        log.info("Post dans controller :" + postRegisterDto.toString());
+        
+        log.info("(post) /posts : Trying to register post with title {}", postRegisterDto.getTitle());
 
         String email = authentication.getName();
         UserDto userDto = userService.findByEmail(email);
@@ -67,7 +64,7 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> get(@PathVariable Long id) throws PostNotFoundException {
 
-        log.info("/posts/{id} : Searching post with id {}", id);
+        log.info("(get) /posts/{} : Searching post with id {}", id, id);
 
         return ResponseEntity.status(HttpStatus.OK).body(postService.findById(id));
     }
@@ -76,14 +73,12 @@ public class PostController {
     @PostMapping("/{postId}/comment")
     public ResponseEntity<PostDto> createComment(@PathVariable Long postId, @RequestBody CommentRegisterDto commentRegisterDto, Authentication authentication) throws UserNotFoundException, PostNotFoundException {
 
-        log.info("/posts/{id}/comment : Trying to register comment to article with id {}", postId);
+        log.info("(post) /posts/{}/comment : Trying to register comment to article with id {}", postId, postId);
 
         String email = authentication.getName();
-
         PostDto updatedPost = postService.addComment(postId, commentRegisterDto.getContent(), email);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedPost);
     }
 
-    
 }

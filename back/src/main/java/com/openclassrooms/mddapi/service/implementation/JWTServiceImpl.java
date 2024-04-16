@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.service;
+package com.openclassrooms.mddapi.service.implementation;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -12,7 +12,8 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.mddapi.dto.LoginRegisterDto;
+import com.openclassrooms.mddapi.dto.LoginDto;
+import com.openclassrooms.mddapi.service.JWTService;
 
 
 @Service
@@ -21,7 +22,6 @@ public class JWTServiceImpl implements JWTService {
     private JwtEncoder jwtEncoder;
 
     private static final Logger log = LoggerFactory.getLogger(JWTServiceImpl.class);
-
 
     public JWTServiceImpl(JwtEncoder jwtEncoder) {
         this.jwtEncoder = jwtEncoder;
@@ -33,7 +33,9 @@ public class JWTServiceImpl implements JWTService {
      * @param userLoginDto
      * @return String corresponding to the token
      */
-    public String generateToken(LoginRegisterDto userLoginDto) {
+    public String generateToken(LoginDto userLoginDto) {
+
+        log.debug("Generating token for user with email {}", userLoginDto.getEmail());
 
         Instant now = Instant.now();
         JwtClaimsSet claims = JwtClaimsSet.builder()
@@ -47,4 +49,5 @@ public class JWTServiceImpl implements JWTService {
                 
         return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
     }
+
 }

@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class Post {
 	@JoinColumn(name = "topic_id")
 	private Topic topic;
 
-	@ManyToOne /*(cascade = CascadeType.ALL)*/
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User auteur;
 
@@ -36,7 +35,7 @@ public class Post {
 	@NotBlank
 	private String title;
 
-	@Column
+	@Column(columnDefinition="TEXT")
 	@NotBlank
 	private String content;
 
@@ -103,6 +102,5 @@ public class Post {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 }

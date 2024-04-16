@@ -1,13 +1,10 @@
 package com.openclassrooms.mddapi.configuration;
 
-import java.util.List;
-
 import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -18,8 +15,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 /**
@@ -37,10 +32,7 @@ public class SpringSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .antMatchers("/api/auth/register", "/api/auth/login", 
-                        "/swagger-ui/**", "/v3/api-docs/**", "/swagger/**"
-                        //,"/api/auth/me"
-                        )
+                        .antMatchers("/api/auth/register", "/api/auth/login")
                         .permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
@@ -62,4 +54,5 @@ public class SpringSecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
 }

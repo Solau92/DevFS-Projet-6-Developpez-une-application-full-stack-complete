@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.dto;
 
-public class LoginRegisterDto {
+public class LoginDto {
 
         private String email;
 

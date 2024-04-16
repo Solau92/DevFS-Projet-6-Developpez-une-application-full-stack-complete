@@ -9,19 +9,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.response.TopicsResponse;
-import com.openclassrooms.mddapi.service.ITopicService;
+import com.openclassrooms.mddapi.service.TopicService;
 
 @RestController
-// TODO : voir 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/topic")
 public class TopicController {
 	
-	private ITopicService topicService;
+	private TopicService topicService;
 
 	private static final Logger log = LoggerFactory.getLogger(TopicController.class);
 	
-	public TopicController(ITopicService topicService) {
+	public TopicController(TopicService topicService) {
 		this.topicService = topicService;		
 	}
 
@@ -33,9 +31,10 @@ public class TopicController {
 	 */
 	@GetMapping("")
 	public ResponseEntity<TopicsResponse> getAllTopics() {
-		log.info("/topic : Getting the list of all topics");
-		return ResponseEntity.status(HttpStatus.OK).body(new TopicsResponse(topicService.getAllTopics()));
+
+		log.info("(get) /topic : Getting the list of all topics");
 		
+		return ResponseEntity.status(HttpStatus.OK).body(new TopicsResponse(topicService.getAllTopics()));
 	}
 	
 	
