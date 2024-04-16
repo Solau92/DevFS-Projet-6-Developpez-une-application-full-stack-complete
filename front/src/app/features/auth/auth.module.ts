@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from "@angular/material/input";
 
 const materialModule = [
   MatButtonModule,
@@ -18,7 +19,8 @@ const materialModule = [
   MatIconModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatInputModule
 ]
 
 @NgModule({
