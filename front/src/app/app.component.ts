@@ -12,8 +12,12 @@ import { User } from './interfaces/user.interface';
 })
 export class AppComponent {
 
-  public isNotLogged(): boolean {
-    return !(this.router.url === '/' || this.router.url.includes('login') || this.router.url.includes('register'));
+  public isNotMainPage(): boolean {
+    return !(this.router.url === '/');
+  }
+
+  public isLogged(): boolean {
+    return !(this.router.url.includes('login') || this.router.url.includes('register'));
   }
 
   constructor(private router: Router,

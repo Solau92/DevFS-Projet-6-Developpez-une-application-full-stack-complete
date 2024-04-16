@@ -1,39 +1,57 @@
-<p>Profil utilisateur</p>
+<div fxLayout="row" fxLayoutAlign="center center">
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-card>
 
-    <input formControlName="username">
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Profil utilisateur</mat-card-title>
+        </mat-card-header>
 
-    <input formControlName="email">
+        <form [formGroup]="form" (ngSubmit)="submit()">
 
-    <input formControlName="password">
+            <input formControlName="username">
 
-    <p *ngIf="user">Created at : {{ user.createdAt }}</p>
-    <p *ngIf="user">Updated at : {{ user.updatedAt }}</p>
+            <input formControlName="email">
 
-    <button type="submit" [disabled]="form.invalid">Sauvegarder</button>
-    <span *ngIf="onError">Erreur</span>
+            <input formControlName="password">
 
-</form>
+            <p *ngIf="user">Created at : {{ user.createdAt }}</p>
+            <p *ngIf="user">Updated at : {{ user.updatedAt }}</p>
 
-<button (click)="logout()">Se déconnecter</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sauvegarder</button>
+            <span *ngIf="onError">Erreur</span>
 
-<br>
+        </form>
+
+        <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+
+        <br>
+
+    </mat-card>
+
+</div>
 _________________________
 
-<p>Abonnements</p>
-<div *ngIf="user">
-    <div *ngIf="user!.subscriptions">
-        <div *ngFor="let subscription of (user!.subscriptions)">
-            <p>{{ subscription.topic.name }}</p>
-            <p>{{ subscription.topic.description }}</p>
-            <button (click)="unSubscribeToTopic(subscription.topic.id)">
-                <span>Se désabonner</span>
-            </button>
-        </div>
-    </div>
-</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
 
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Abonnements</mat-card-title>
+        </mat-card-header>
+
+        <div *ngIf="user">
+            <div *ngIf="user!.subscriptions">
+                <div *ngFor="let subscription of (user!.subscriptions)">
+                    <p>{{ subscription.topic.name }}</p>
+                    <p>{{ subscription.topic.description }}</p>
+                    <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
+                        <span>Se désabonner</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+</div>
 <!-- <div *ngFor="let subscription of (subscriptions$ | async)?.subscriptions">
     <p>{{ subscription.topic.name }}</p>
     <p>{{ subscription.topic.description }}</p>

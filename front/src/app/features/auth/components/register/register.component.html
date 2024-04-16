@@ -1,19 +1,37 @@
-<button (click)="back()">back</button>
+<button mat-icon-button (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+</button>
 
-<p>Inscription</p>
+<div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-title>Inscription</mat-card-title>
+        </mat-card-header>
 
-    Nom d'utilisateur
-    <input formControlName="username">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <mat-card-content fxLayout="column">
 
-    Adresse email
-    <input formControlName="email">
+                <p class="mat-subheading-2">Nom d'utilisateur</p>
+                <mat-form-field fxFlex>
+                    <input formControlName="username">
+                </mat-form-field>
 
-    Mot de passe
-    <input formControlName="password">
+                <p class="mat-subheading-2">Adresse email</p>
+                <mat-form-field fxFlex>
+                    <input formControlName="email">
+                </mat-form-field>
 
-    <button type="submit" [disabled]="form.invalid">S'inscrire</button>
-    <span *ngIf="onError">Erreur</span>
+                <p class="mat-subheading-2">Mot de passe</p>
+                <mat-form-field fxFlex>
+                    <input formControlName="password">
+                </mat-form-field>
 
-</form>
+            </mat-card-content>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">S'inscrire</button>
+            <span *ngIf="onError">Erreur</span>
+
+        </form>
+    </mat-card>
+</div>

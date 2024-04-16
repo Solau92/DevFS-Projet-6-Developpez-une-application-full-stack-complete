@@ -41,5 +41,8 @@ export class NewComponent {
     })
   }
   
+  public back() {
+    window.history.back();
+  }
 
 }

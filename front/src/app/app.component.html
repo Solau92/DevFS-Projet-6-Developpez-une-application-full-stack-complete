@@ -1,14 +1,29 @@
-<!-- <app-topic></app-topic> -->
-<div>
-    ____________
+<mat-toolbar *ngIf="isNotMainPage()" class="navbar">
+
     <!-- TODO : voir comment faire mieux -->
-    <diV *ngIf="isNotLogged()"> 
-        <a href="./posts"> - Articles -</a>
-        <a href="./topics"> - Thèmes - </a>
-        <a href="./profile"> - Profil - </a>
+    <div>
+        <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
+    </div>
+    <diV *ngIf="isLogged()">
+
+        <button mat-button>
+            <a href="./posts">Articles</a>
+        </button>
+
+        <button mat-button>
+            <a href="./topics">Thèmes</a>
+        </button>
+
+        <button mat-button>
+            <a href="./profile">
+                <mat-icon color="primary">account_circle</mat-icon>
+            </a>
+        </button>
+
     </diV>
-    ____________
-</div>
+</mat-toolbar>
+
+
 <div>
     <router-outlet></router-outlet>
 </div>

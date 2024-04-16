@@ -3,32 +3,32 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 import { UnauthGuard } from "./guards/unauth.guard";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { HomePageComponent } from "./components/home-page/home-page.component";
+import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 
 const routes: Routes = [
     {
         path: 'topics',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/topics/topics.module').then(m => m.TopicsModule)
     },
     {
         path: 'profile',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
     },
     {
         //TODO : voir /me ?
         path: 'auth',
-        canActivate: [UnauthGuard],
+        // canActivate: [UnauthGuard],
         loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
     },
     {
         path: '',
-        component: HomePageComponent
+        component: LandingPageComponent
     },
     {
         path: 'posts',
-        // canActivate:  [AuthGuard],
+        canActivate:  [AuthGuard],
         loadChildren: () => import('./features/posts/posts.module').then(m => m.PostsModule)
     },
     { path: '404', component: NotFoundComponent },

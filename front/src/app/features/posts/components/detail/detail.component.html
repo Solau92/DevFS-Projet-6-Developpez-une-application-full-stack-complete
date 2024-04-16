@@ -1,23 +1,22 @@
-<button (click)="back()">back</button>
-<!-- <div *ngIf="post">{{post.title}}</div>
+<button mat-icon-button (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+</button>
 
-<p>{{post?.createdAt}}</p>
-<p>{{post?.auteur?.username}}</p>
-<p>{{post?.topic?.description}}</p>
+<mat-card>
 
-<div>{{post?.content}}</div> -->
+<mat-card-header fxLayoutAlign="center center" fxLayout="row wrap" fxLayout.lt-md="column">
+    <mat-card-title *ngIf="post$">{{(post$ | async)?.title}}</mat-card-title>
+    <mat-card-subtitle fxLayout="row">{{(post$ | async)?.createdAt}}
+        {{(post$ | async)?.auteur?.username}}
+        {{(post$ | async)?.topic?.name}}
+    </mat-card-subtitle>
+</mat-card-header>
 
-<div *ngIf="post$">{{(post$ | async)?.title}}</div>
+<mat-card-content>{{(post$ | async)?.content}}</mat-card-content>
 
-<p>{{(post$ | async)?.createdAt}}</p>
-<p>{{(post$ | async)?.auteur?.username}}</p>
-<p>{{(post$ | async)?.topic?.description}}</p>
+<hr />
 
-<div>{{(post$ | async)?.content}}</div>
-
-<hr/>
-
-<div>Commentaires</div>
+<h3>Commentaires</h3>
 
 <div *ngFor="let comment of ((post$ | async)?.comments)">
     <p>{{comment.auteur.username}}</p>
@@ -29,6 +28,9 @@
 
     <textarea formControlName="content" cols="30" rows="10" placeholder="Ecrivez ici votre commentaire"></textarea>
 
-    <button type="submit" [disabled]="form.invalid">Envoyer</button>
+    <button mat-button type="submit" [disabled]="form.invalid">                
+        <mat-icon color="primary">send</mat-icon>
+    </button>
 
 </form>
+</mat-card>
