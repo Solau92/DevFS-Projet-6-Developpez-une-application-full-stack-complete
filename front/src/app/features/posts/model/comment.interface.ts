@@ -1,4 +1,4 @@
-import { User } from "src/app/interfaces/user.interface";
+import { User } from "src/app/model/user.interface";
 
 export interface Comment {
     id: number,

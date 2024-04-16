@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterRequest } from '../../interfaces/registerRequest.interface';
+import { RegisterRequest } from '../../model/registerRequest.interface';
 import { AuthService } from '../../services/auth-service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth-service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   public onError = false;
 
@@ -47,40 +47,6 @@ export class RegisterComponent implements OnInit {
       ]
     ]
   })
-
-  ngOnInit(): void {
-    
-    console.log(this.form.invalid);
-
-    this.formBuilder.group({
-
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.min(6),
-          Validators.max(20)
-        ]
-      ]
-      ,
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.min(8),
-          Validators.pattern(this.passwordRegx)
-        ]
-      ]
-    })
-  }
-
 
   public submit(): void {
     const registerRequest = this.form.value as RegisterRequest;

@@ -1,6 +1,6 @@
-import { User } from "src/app/interfaces/user.interface";
-import { Topic } from "../../topics/interfaces/topic.interface";
-import { Comment } from '../interfaces/comment.interface';
+import { User } from "src/app/model/user.interface";
+import { Topic } from "../../topics/model/topic.interface";
+import { Comment } from './comment.interface';
 
 export interface Post {
     id: number,

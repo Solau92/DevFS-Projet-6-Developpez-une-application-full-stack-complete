@@ -1,11 +1,18 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
-import { UnauthGuard } from "./guards/unauth.guard";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { LandingPageComponent } from "./components/landing-page/landing-page.component";
 
 const routes: Routes = [
+    {
+        path: '',
+        component: LandingPageComponent
+    },
+    {
+        path: 'auth',
+        loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
+    },
     {
         path: 'topics',
         canActivate:  [AuthGuard],
@@ -15,16 +22,6 @@ const routes: Routes = [
         path: 'profile',
         canActivate:  [AuthGuard],
         loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
-    },
-    {
-        //TODO : voir /me ?
-        path: 'auth',
-        // canActivate: [UnauthGuard],
-        loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
-    },
-    {
-        path: '',
-        component: LandingPageComponent
     },
     {
         path: 'posts',

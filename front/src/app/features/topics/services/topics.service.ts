@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from "rxjs";
-import { TopicsResponse } from "../interfaces/topicsResponse.interface";
+import { TopicsResponse } from "../model/topicsResponse.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,7 @@ export class TopicsService {
 
   private pathService = 'api/topic';
 
-  constructor(private httpClient: HttpClient) { 
-    
+  constructor(private httpClient: HttpClient) {
   }
 
   public all(): Observable<TopicsResponse> {
@@ -19,7 +18,6 @@ export class TopicsService {
     return this.httpClient.get<TopicsResponse>(this.pathService);
   }
 
-  // TODO : finish when User implemented 
   public createSubscription(topicId: number): Observable<void> {
     return this.httpClient.post<void>(this.pathService + "/subscription", topicId);
   }
@@ -29,4 +27,3 @@ export class TopicsService {
   }
 
 }
- 

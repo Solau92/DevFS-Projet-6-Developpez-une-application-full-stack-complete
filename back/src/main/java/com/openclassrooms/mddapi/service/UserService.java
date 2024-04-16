@@ -99,7 +99,8 @@ public class UserService implements IUserService {
         Optional<User> optionalUser = userRepository.findByEmail(loginRegisterDto.getEmail());
 
         if (!optionalUser.isPresent()
-                || !this.bCryptPasswordEncoder.matches(loginRegisterDto.getPassword(), optionalUser.get().getPassword())) {
+                || !this.bCryptPasswordEncoder.matches(loginRegisterDto.getPassword(),
+                        optionalUser.get().getPassword())) {
             log.error("Invalid email or password");
             throw new BadCredentialsCustomException("Invalid email or password");
         }
@@ -145,6 +146,9 @@ public class UserService implements IUserService {
 
         log.info("User with id {} successfully identified", id);
 
+        // Decrypter le password ?
+        // optionalUser.get().setPassword(optionalUser.get().getPassword().bCryptPasswordEncoder.dec);
+
         UserDto userFound = userMapper.toDto(optionalUser.get());
 
         List<SubscriptionDto> subscriptions = this.getAll(optionalUser.get());
@@ -184,6 +188,13 @@ public class UserService implements IUserService {
         User userToSave = userMapper.toEntity(userDto);
         userToSave.setCreatedAt(optionalUser.get().getCreatedAt());
         userToSave.setUpdatedAt(LocalDate.now());
+
+        // Vérifier si le password a été modifié
+        if (userDto.getPassword().equals(optionalUser.get().getPassword())) {
+            userToSave.setPassword(optionalUser.get().getPassword());
+        } else {
+            userToSave.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword()));
+        }
 
         UserDto userSaved = userMapper.toDto(userRepository.save(userToSave));
 

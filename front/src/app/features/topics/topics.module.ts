@@ -32,7 +32,6 @@ const materialModule = [
     TopicsRoutingModule,
     ...materialModule
   ],
-  // DONE : added
   providers: [
     {
       provide: LOCALE_ID,

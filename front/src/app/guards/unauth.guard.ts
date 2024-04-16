@@ -5,6 +5,7 @@ import { SessionService } from "../services/session.service";
 @Injectable({providedIn: 'root'})
 export class UnauthGuard implements CanActivate {
 
+  //TODO : voir si je garde ou pas ? 
   constructor( 
     private router: Router,
     private sessionService: SessionService,

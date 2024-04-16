@@ -1,11 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { RegisterRequest } from "../interfaces/registerRequest.interface";
+import { RegisterRequest } from "../model/registerRequest.interface";
 import { Observable } from "rxjs";
-import { LoginRequest } from "../interfaces/loginRequest.interface";
-import { SessionInformation } from "src/app/interfaces/session-information.interface";
-import { User } from "src/app/interfaces/user.interface";
-import { AuthSuccess } from "../interfaces/authSuccess.interface";
+import { LoginRequest } from "../model/loginRequest.interface";
+import { User } from "src/app/model/user.interface";
+import { AuthSuccess } from "../model/authSuccess.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -20,17 +19,10 @@ import { AuthSuccess } from "../interfaces/authSuccess.interface";
       return this.httpClient.post<void>(this.pathService + "/register", registerRequest);
     }
 
-    // Version *
-    // public login(loginRequest: LoginRequest): Observable<SessionInformation> {
-    //   return this.httpClient.post<SessionInformation>(this.pathService + "/login", loginRequest);
-    // }
-
-    // Version ***
     public login(loginRequest: LoginRequest): Observable<AuthSuccess> {
       return this.httpClient.post<AuthSuccess>(this.pathService + "/login", loginRequest);
     }
 
-    // Version ***
     public me(): Observable<User> {
       return this.httpClient.get<User>(`${this.pathService}/me`);
     }

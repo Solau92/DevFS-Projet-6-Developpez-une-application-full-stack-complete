@@ -42,6 +42,8 @@ public class UserController {
     public ResponseEntity<UserDto> update(@PathVariable("id") String id, 
     @Valid @ModelAttribute("UserDto") UserDto userDto) throws UserNotFoundException {
 
+        log.info("/user/{id} : Trying to update user with id {}", id);
+
         userDto.setId(Long.valueOf(id));
         UserDto updatedUserDto = userService.update(userDto);
 

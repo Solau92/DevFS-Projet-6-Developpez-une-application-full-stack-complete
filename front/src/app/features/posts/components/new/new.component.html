@@ -1,5 +1,9 @@
 <mat-card>
 
+    <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
     <mat-card-header fxLayoutAlign="center center">
         <mat-card-title>Créer un nouvel article</mat-card-title>
     </mat-card-header>
@@ -8,16 +12,15 @@
 
         <mat-card-content fxLayout="column">
 
-            <select ngDefaultControl formControlName="topic" placeholder="Sélectionner un thème">
-                <option value="" disabled selected hidden>Sélectionner un thème</option>
-                <option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
-                    <!-- <option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic"> -->
+            <mat-select ngDefaultControl formControlName="topic" placeholder="Sélectionner un thème">
+                <mat-option value="" disabled selected hidden>Sélectionner un thème</mat-option>
+                <mat-option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
                     {{ topic.name}}
-                </option>
-            </select>
+                </mat-option>
+            </mat-select>
 
-            <mat-form-field fxFlex>
-                <input formControlName="title" placeholder="Titre de l'article">
+            <mat-form-field>
+                <input matInput formControlName="title" placeholder="Titre de l'article">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -31,48 +34,3 @@
 
     </form>
 </mat-card>
-
-<!-- <button mat-icon-button (click)="back()">
-    <mat-icon>arrow_back</mat-icon>
-</button>
-
-<div fxLayout="row" fxLayoutAlign="center center">
-    <mat-card>
-
-        <mat-card-header fxLayoutAlign="center center">
-            <mat-card-title>Créer un nouvel article</mat-card-title>
-        </mat-card-header>
-
-        <form [formGroup]="form" (ngSubmit)="submit()">
-
-            <mat-card-content fxLayout="column">
-
-                <select ngDefaultControl formControlName="topic">
-                    <option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
-                        {{ topic.name}}
-                    </option>
-                </select>
-
-               <mat-form-field appearance="outline">
-                    <mat-select required ngDefaultControl formControlName="topic">
-                        <mat-option>--- Choisir ---</mat-option>
-                        <mat-option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
-                            {{ topic.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex>
-                    <input formControlName="title" placeholder="Titre de l'article">
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" fxFlex>
-                    <textarea matInput formControlName="content" rows="10"
-                        placeholder="Contenu de l'article"></textarea>
-                </mat-form-field>
-
-            </mat-card-content>
-
-            <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Créer</button>
-
-        </form> -->

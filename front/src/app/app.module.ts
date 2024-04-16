@@ -28,20 +28,17 @@ const materialModule = [
     AppComponent,
     NotFoundComponent,
     LandingPageComponent
-    // DONE : supprimé d'ici : TopicComponent
   ],
   imports: [
     BrowserModule,
-    // DONE : added : 
     HttpClientModule,
     AppRoutingModule,
-    // TODO : supprimer 2 lignes si suppression metwo
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ...materialModule
   ],
-  providers: [ //DONE : added
+  providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

@@ -1,14 +1,12 @@
-import { Component, DoCheck, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/features/auth/services/auth-service';
 import { TopicsService } from 'src/app/features/topics/services/topics.service';
-import { Subscription } from 'src/app/interfaces/subscription.interface';
-import { SubscriptionsResponse } from 'src/app/interfaces/subscriptionsResponse.interface';
-import { User } from 'src/app/interfaces/user.interface';
+import { SubscriptionsResponse } from 'src/app/model/subscriptionsResponse.interface';
+import { User } from 'src/app/model/user.interface';
 import { SessionService } from 'src/app/services/session.service';
-import { SubscriptionService } from 'src/app/services/subscription.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,8 +24,6 @@ export class MeComponent implements OnInit {
 
   public user: User | undefined;
 
-  // TODO : Subscriptions : mais faut l'identifiant de l'utilisateur... 
-  // public subscriptions$: Observable<SubscriptionsResponse> = this.subscriptionService.all("2");
   public subscriptions$?: Observable<SubscriptionsResponse>;
 
   constructor(private formBuilder: FormBuilder,
@@ -35,8 +31,7 @@ export class MeComponent implements OnInit {
     private userService: UserService,
     private sessionService: SessionService,
     private authService: AuthService,
-    private topicService: TopicsService
-  ) {
+    private topicService: TopicsService) {
   }
 
   public form = this.formBuilder.group({
@@ -64,29 +59,12 @@ export class MeComponent implements OnInit {
     ]
   });
 
-  //Version * 
-  /// pourquoi this.sessionService.sessionInformation is undefined ??
-
-  // Version * 
-  // public ngOnInit(): void {
-  //   //TODO remove 
-  //   console.log(this.user);
-  //   this.userService
-  //     .getById(this.sessionService.sessionInformation!.id.toString())
-  //     .subscribe((user: User) => this.user = user);
-  //   //TODO remove 
-  //   console.log(this.user);
-  // }
-
-  // Version ***
+  
   public ngOnInit(): void {
-
     this.fetchUser();
-
   }
 
   private initForm(user: User): void {
-
     this.form = this.formBuilder.group({
       username: [user ? user.username : '',
       [
@@ -130,7 +108,7 @@ export class MeComponent implements OnInit {
       username: this.formMod!.get('username')?.value,
       email: this.formMod!.get('email')?.value,
       password: this.formMod!.get('password')?.value,
-      subscriptions: [] // Version SS
+      subscriptions: [] 
     };
 
     this.userService
@@ -140,14 +118,11 @@ export class MeComponent implements OnInit {
 
   private exitPage(): void {
     this.fetchUser();
-    // this.router.navigate(['/topics']);
   }
 
   public unSubscribeToTopic(topicId: number): void {
-
     this.topicService.removeSubscription(topicId)
       .subscribe((_: void) => this.fetchUser());
-
   }
 
   public logout(): void {

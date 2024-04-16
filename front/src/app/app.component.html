@@ -1,6 +1,7 @@
 <mat-toolbar *ngIf="isNotMainPage()" class="navbar">
 
-    <!-- TODO : voir comment faire mieux -->
+    <!-- TODO : routing Module plutôt que les liens ? 
+    TODO : faire un composant pour le header -->
     <div>
         <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
     </div>
@@ -22,7 +23,6 @@
 
     </diV>
 </mat-toolbar>
-
 
 <div>
     <router-outlet></router-outlet>

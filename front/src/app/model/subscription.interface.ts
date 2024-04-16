@@ -1,4 +1,4 @@
-import { Topic } from "../features/topics/interfaces/topic.interface";
+import { Topic } from "../features/topics/model/topic.interface";
 import { User } from "./user.interface";
 
 export interface Subscription {
