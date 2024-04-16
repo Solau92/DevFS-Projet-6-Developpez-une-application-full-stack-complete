@@ -8,8 +8,8 @@ export interface Post {
     topic_id: number,
     title: string;
     content: string,
-    createdAt?: Date,
-    updatedAt?: Date
+    createdAt: Date,
+    updatedAt: Date
     topic?: Topic;
     comments: Comment[];
 }

@@ -1,5 +1,8 @@
 <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
 
+<button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
+<button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
+
 <div  class="items mt2" fxLayout="row wrap" fxLayout.lt-md="column">
 
     <mat-card [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
@@ -8,6 +11,7 @@
             <mat-card-title>{{ post.title }}</mat-card-title>
             <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username }}</mat-card-subtitle>
         </mat-card-header>
+
         <mat-card-content>{{post.content}}</mat-card-content>
 
     </mat-card>
