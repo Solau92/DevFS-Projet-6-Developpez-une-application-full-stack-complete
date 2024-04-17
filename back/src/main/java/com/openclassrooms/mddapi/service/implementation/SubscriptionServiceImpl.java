@@ -12,6 +12,7 @@ import com.openclassrooms.mddapi.dto.TopicDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.mapper.SubscriptionMapper;
 import com.openclassrooms.mddapi.model.Subscription;
@@ -50,18 +51,18 @@ public class SubscriptionServiceImpl implements SubscriptionService {
      * @return SubscriptionDto
      * @throws UserNotFoundException
      * @throws SubscriptionAlreadyExistsException
+     * @throws TopicNotFoundException 
      */
     @Override
     public SubscriptionDto save(Long topicId, String email)
-            throws UserNotFoundException, SubscriptionAlreadyExistsException {
+            throws UserNotFoundException, SubscriptionAlreadyExistsException, TopicNotFoundException {
 
         log.debug("Trying to save the subscription by user with email {} to topic with id {}", email, topicId);
 
-        // Chercher le user
+        // Searching the user
         UserDto userDto = userService.findByEmail(email);
 
-        /// Chercher si la souscription existe déjà
-
+        // Searching if the subscription already exists
         Optional<Subscription> optionalSubscription = subscriptionRepository.findByUserIdAndTopicId(userDto.getId(),
                 topicId);
 
@@ -71,10 +72,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                     "Subscription by user with email " + email + " to topic with id " + topicId + " already exists");
         }
 
-        // Chercher le topic
+        // Searching the topic
         TopicDto topicDto = topicService.findById(topicId);
 
-        // Créer la subscription à saver
+        // Creating the subscription to save
         SubscriptionDto subscriptionDtoToSave = new SubscriptionDto();
         subscriptionDtoToSave.setUser(userDto);
         subscriptionDtoToSave.setTopic(topicDto);
@@ -101,9 +102,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         log.debug("Trying to delete the subscription by user with email {} to topic with id {}", email, topicId);
 
-        // Chercher le user Id
+        // Searching the user id 
         Long userId = userService.findByEmail(email).getId();
 
+        // Searching the corresponding suscription 
         Optional<Subscription> optionalSubscription = subscriptionRepository.findByUserIdAndTopicId(userId, topicId);
 
         if (!optionalSubscription.isPresent()) {

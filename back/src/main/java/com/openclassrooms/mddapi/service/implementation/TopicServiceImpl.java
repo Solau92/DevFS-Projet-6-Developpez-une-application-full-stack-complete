@@ -1,12 +1,14 @@
 package com.openclassrooms.mddapi.service.implementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.model.Topic;
 import com.openclassrooms.mddapi.repository.TopicRepository;
@@ -45,16 +47,22 @@ public class TopicServiceImpl implements TopicService {
 	 * Searches in database a topic given its id.
 	 * 
 	 * @param id
-	 * @return
+	 * @return TopicDto, the topic found 
+	 * @throws TopicNotFoundException 
 	 */
 	@Override
-	public TopicDto findById(Long id) {
-
-		// TO DO : tester si found / not ? Voir pourquoi ?
+	public TopicDto findById(Long id) throws TopicNotFoundException {
 
 		log.debug("Searching topic with id  {}", id);
 
-		return topicMapper.toDto(topicRepository.findById(id).get());
+		Optional<Topic> optionalTopic = topicRepository.findById(id);
+
+		if (!optionalTopic.isPresent()) {
+			log.error("Topic with id {} not found", id);
+			throw new TopicNotFoundException("Topic with" + id + "not found");
+		}
+
+		return topicMapper.toDto(optionalTopic.get());
 	}
 
 }

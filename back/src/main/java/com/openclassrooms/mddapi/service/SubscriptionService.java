@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service;
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 
 public interface SubscriptionService {
@@ -15,8 +16,9 @@ public interface SubscriptionService {
      * @return SubscriptionDto
      * @throws UserNotFoundException
      * @throws SubscriptionAlreadyExistsException
+     * @throws TopicNotFoundException 
      */
-    public SubscriptionDto save(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException;
+    public SubscriptionDto save(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException, TopicNotFoundException;
 
     /**
      * Deletes a subscription given the user email and the topic id.

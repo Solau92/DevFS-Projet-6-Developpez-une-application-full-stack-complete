@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
             throw new UserAlreadyExistsException("User with email " + userRegisterDto.getEmail() + " already exists ");
         }
 
-        // User doesn't already exist
+        // Saving the user if he doesn't already exist
         User userToSave = userRegisterMapper.toEntity(userRegisterDto);
         userToSave.setCreatedAt(LocalDate.now());
         userToSave.setUpdatedAt(LocalDate.now());
@@ -192,10 +192,12 @@ public class UserServiceImpl implements UserService {
         userToSave.setCreatedAt(optionalUser.get().getCreatedAt());
         userToSave.setUpdatedAt(LocalDate.now());
 
-        // Vérifier si le password a été modifié
+        // Checking if the password has beem modified 
         if (userDto.getPassword().equals(optionalUser.get().getPassword())) {
+            // Password not modified
             userToSave.setPassword(optionalUser.get().getPassword());
         } else {
+            // Password modified : new password must be encrypted
             userToSave.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword()));
         }
 
@@ -229,8 +231,8 @@ public class UserServiceImpl implements UserService {
 
         UserDto userFound = userMapper.toDto(user);
 
+        // Setting the user's subscription 
         List<SubscriptionDto> subscriptions = this.getAllSubscriptions(user);
-
         userFound.setSubscriptions(subscriptions);
 
         return userFound;

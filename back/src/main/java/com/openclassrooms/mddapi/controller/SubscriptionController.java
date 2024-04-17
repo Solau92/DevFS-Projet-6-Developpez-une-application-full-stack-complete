@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.SubscriptionService;
 
@@ -40,9 +41,10 @@ public class SubscriptionController {
      * @return ResponseEntity<SubscriptionDto>, with status created, and containing the new subscription
      * @throws UserNotFoundException
      * @throws SubscriptionAlreadyExistsException
+     * @throws TopicNotFoundException 
      */
     @PostMapping("/subscription")
-    public ResponseEntity<SubscriptionDto> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException {
+    public ResponseEntity<SubscriptionDto> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException, TopicNotFoundException {
 		
         String email = authentication.getName();
 

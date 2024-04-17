@@ -20,6 +20,7 @@ import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.response.PostsResponse;
 import com.openclassrooms.mddapi.exception.PostNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.service.PostService;
 import com.openclassrooms.mddapi.service.UserService;
@@ -61,9 +62,11 @@ public class PostController {
      * @param authentication
      * @return ResponseEntity<PostDto> with status created, and containing the saved post
      * @throws UserNotFoundException
+     * @throws TopicNotFoundException 
+     * @throws NumberFormatException 
      */
     @PostMapping("")
-    public ResponseEntity<PostDto> create(@Valid @RequestBody PostRegisterDto postRegisterDto, Authentication authentication) throws UserNotFoundException {
+    public ResponseEntity<PostDto> create(@Valid @RequestBody PostRegisterDto postRegisterDto, Authentication authentication) throws UserNotFoundException, NumberFormatException, TopicNotFoundException {
         
         log.info("(post) /posts : Trying to register post with title {}", postRegisterDto.getTitle());
 

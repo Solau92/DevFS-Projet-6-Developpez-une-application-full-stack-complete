@@ -14,6 +14,7 @@ import com.openclassrooms.mddapi.dto.PostRegisterDto;
 import com.openclassrooms.mddapi.dto.TopicDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.exception.PostNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.model.Post;
@@ -67,13 +68,14 @@ public class PostServiceImpl implements PostService {
 	 * 
 	 * @param postRegisterDto
 	 * @return PostDto, the post saved
+	 * @throws TopicNotFoundException 
+	 * @throws NumberFormatException 
 	 */
 	@Override
-	public PostDto save(PostRegisterDto postRegisterDto) {
+	public PostDto save(PostRegisterDto postRegisterDto) throws NumberFormatException, TopicNotFoundException {
 
 		log.debug("Trying to save post with title {}", postRegisterDto.getTitle());
 
-		// TODO : tester si found / not --> already exists
 		TopicDto topicDto = topicService.findById(Long.valueOf(postRegisterDto.getTopic()));
 
 		// TODO : créer mapping
@@ -112,6 +114,7 @@ public class PostServiceImpl implements PostService {
 
 		log.debug("Searching comments of post with id {}", id);
 
+		// Setting the list of comments of the post 
 		List<CommentDto> commentDtos = commentsService.getAll(postMapper.toEntity(postDtoFound));
 		postDtoFound.setComments(commentDtos);
 
@@ -135,15 +138,16 @@ public class PostServiceImpl implements PostService {
 
 		log.debug("Adding comment to post with id {} by user whith email {}", postId, userEmail);
 
-		// Récupérer l'utilisateur auteur du commentaire
+		// Getting the user, author of the comment 
 		UserDto userDto = userService.findByEmail(userEmail);
 
-		// Récupérer le post
+		// Getting the post 
 		PostDto postDto = this.findById(postId);
 
-		// Ajouter le commentaire en base de données
+		// Saving the comment in database 
 		CommentDto newComment = commentsService.save(content, userDto, postDto);
 
+		// Adding the comment to the post 
 		postDto.getComments().add(newComment);
 
 		return postDto;

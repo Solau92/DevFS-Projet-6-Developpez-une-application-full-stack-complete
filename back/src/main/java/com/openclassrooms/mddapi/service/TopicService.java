@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.service;
 import java.util.List;
 
 import com.openclassrooms.mddapi.dto.TopicDto;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 
 public interface TopicService {
 
@@ -17,8 +18,9 @@ public interface TopicService {
 	 * Searches a topic given its id.
 	 * 
 	 * @param id
-	 * @return
+	 * @return TopicDto, the topic found
+	 * @throws TopicNotFoundException 
 	 */
-	public TopicDto findById(Long id);
+	public TopicDto findById(Long id) throws TopicNotFoundException;
 
 }
