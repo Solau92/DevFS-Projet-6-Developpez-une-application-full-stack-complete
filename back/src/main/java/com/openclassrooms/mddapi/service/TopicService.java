@@ -11,8 +11,8 @@ public interface TopicService {
 	 * 
 	 * @return List<TopicDto>
 	 */
-	List<TopicDto> getAllTopics();
+	List<TopicDto> getAll();
 
-	public TopicDto getTopicById(Long id);
+	public TopicDto findById(Long id);
 
 }

@@ -50,7 +50,7 @@ public class CommentsServiceImpl implements CommentsService {
     }
 
     @Override
-    public CommentDto create(String content, UserDto auteur, PostDto post) {
+    public CommentDto save(String content, UserDto auteur, PostDto post) {
 
         Comment commentToSave = new Comment();
         commentToSave.setAuteur(userMapper.toEntity(auteur));

@@ -43,7 +43,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public SubscriptionDto create(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException {
+    public SubscriptionDto save(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException {
 
         log.debug("Trying to save the subscription by user with email {} to topic with id {}", email, topicId);
 
@@ -60,7 +60,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
 
         // Chercher le topic 
-        TopicDto topicDto = topicService.getTopicById(topicId);
+        TopicDto topicDto = topicService.findById(topicId);
 
         // Créer la subscription à saver 
         SubscriptionDto subscriptionDtoToSave = new SubscriptionDto();

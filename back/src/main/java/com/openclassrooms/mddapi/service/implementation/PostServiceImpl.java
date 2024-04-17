@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDto> getAll() {
+	public List<PostDto> findAll() {
 
 		log.debug("Searching all posts");
 
@@ -64,7 +64,7 @@ public class PostServiceImpl implements PostService {
 		log.debug("Trying to save post with title {}", postRegisterDto.getTitle());
 
 		// TODO : tester si found / not --> already exists
-		TopicDto topicDto = topicService.getTopicById(Long.valueOf(postRegisterDto.getTopic()));
+		TopicDto topicDto = topicService.findById(Long.valueOf(postRegisterDto.getTopic()));
 
 		// TODO : créer mapping 
 		PostDto postDto = new PostDto();
@@ -113,7 +113,7 @@ public class PostServiceImpl implements PostService {
         PostDto postDto = this.findById(postId);
 
 		// Ajouter le commentaire en base de données
-        CommentDto newComment = commentsService.create(content, userDto, postDto);
+        CommentDto newComment = commentsService.save(content, userDto, postDto);
 
         postDto.getComments().add(newComment);
 

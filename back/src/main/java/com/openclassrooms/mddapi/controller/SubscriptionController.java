@@ -39,7 +39,7 @@ public class SubscriptionController {
 
         log.info("(post) /topic/subscription : Saving a new subscription on topic with id {} for user with email {}", topicId, email);    
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.create(topicId, email));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.save(topicId, email));
     }
 
     @DeleteMapping("/unsubscription/{topicId}")

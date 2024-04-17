@@ -32,7 +32,7 @@ public class TopicServiceImpl implements TopicService {
 	 * @return List<TopicDto>
 	 */
 	@Override
-	public List<TopicDto> getAllTopics() {
+	public List<TopicDto> getAll() {
 
 		log.debug("Searching all topics");
 
@@ -42,7 +42,7 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public TopicDto getTopicById(Long id) {
+	public TopicDto findById(Long id) {
 
 		// TO DO : tester si found / not ? Voir pourquoi ?
 

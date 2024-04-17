@@ -9,7 +9,7 @@ import com.openclassrooms.mddapi.exception.UserNotFoundException;
 
 public interface PostService {
 
-    public List<PostDto> getAll();
+    public List<PostDto> findAll();
 
     public PostDto save(PostRegisterDto postRegisterDto);
 

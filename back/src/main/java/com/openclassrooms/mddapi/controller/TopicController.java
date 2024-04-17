@@ -30,11 +30,11 @@ public class TopicController {
 	 * @return
 	 */
 	@GetMapping("")
-	public ResponseEntity<TopicsResponse> getAllTopics() {
+	public ResponseEntity<TopicsResponse> getAll() {
 
 		log.info("(get) /topic : Getting the list of all topics");
 		
-		return ResponseEntity.status(HttpStatus.OK).body(new TopicsResponse(topicService.getAllTopics()));
+		return ResponseEntity.status(HttpStatus.OK).body(new TopicsResponse(topicService.getAll()));
 	}
 	
 	

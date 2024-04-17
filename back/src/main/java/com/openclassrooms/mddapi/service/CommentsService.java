@@ -11,6 +11,6 @@ public interface CommentsService {
     
     public List<CommentDto> getAll(Post post);
 
-    public CommentDto create(String content, UserDto auteurd, PostDto post);
+    public CommentDto save(String content, UserDto auteurd, PostDto post);
     
 }

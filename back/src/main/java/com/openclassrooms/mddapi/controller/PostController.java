@@ -41,11 +41,11 @@ public class PostController {
 
     // TODO : voir si je mets une PostResponse ?
     @GetMapping("")
-	public ResponseEntity<PostsResponse> getAllPosts() {
+	public ResponseEntity<PostsResponse> getAll() {
 
 		log.info("(get) /posts : Getting the list of all posts");
 
-		return ResponseEntity.status(HttpStatus.OK).body(new PostsResponse(postService.getAll()));
+		return ResponseEntity.status(HttpStatus.OK).body(new PostsResponse(postService.findAll()));
 	}
 
     @PostMapping("")
@@ -62,7 +62,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> get(@PathVariable Long id) throws PostNotFoundException {
+    public ResponseEntity<PostDto> getById(@PathVariable Long id) throws PostNotFoundException {
 
         log.info("(get) /posts/{} : Searching post with id {}", id, id);
 

@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(@PathVariable("id") String id) throws NumberFormatException, UserNotFoundException {
+    public ResponseEntity<UserDto> getById(@PathVariable("id") String id) throws NumberFormatException, UserNotFoundException {
         
         log.info("(get) /user/{} : Searching user with id {}", id, id);
 
