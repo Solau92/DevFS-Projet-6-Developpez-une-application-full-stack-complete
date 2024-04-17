@@ -20,14 +20,14 @@ public class TopicServiceImpl implements TopicService {
 	private TopicMapper topicMapper;
 
 	private static final Logger log = LoggerFactory.getLogger(TopicServiceImpl.class);
-	
+
 	public TopicServiceImpl(TopicRepository topicRepository, TopicMapper topicMapper) {
 		this.topicRepository = topicRepository;
 		this.topicMapper = topicMapper;
 	}
 
 	/**
-	 * Returns a list of all topics from database.
+	 * Searches all topics in database.
 	 * 
 	 * @return List<TopicDto>
 	 */
@@ -37,10 +37,16 @@ public class TopicServiceImpl implements TopicService {
 		log.debug("Searching all topics");
 
 		List<Topic> topics = topicRepository.findAll();
-		
+
 		return topicMapper.toDto(topics);
 	}
 
+	/**
+	 * Searches in database a topic given its id.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@Override
 	public TopicDto findById(Long id) {
 
@@ -50,5 +56,5 @@ public class TopicServiceImpl implements TopicService {
 
 		return topicMapper.toDto(topicRepository.findById(id).get());
 	}
-	
+
 }

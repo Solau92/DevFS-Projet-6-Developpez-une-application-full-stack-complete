@@ -59,6 +59,13 @@ public class UserServiceImpl implements UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    /**
+     * Saves the given user in database.
+     * 
+     * @param userRegisterDto
+     * @return UserRegisterDto the user saved
+     * @throws UserAlreadyExistsException
+     */
     @Override
     public UserRegisterDto save(UserRegisterDto userRegisterDto) throws UserAlreadyExistsException {
 
@@ -81,6 +88,14 @@ public class UserServiceImpl implements UserService {
         return userRegisterMapper.toDto(userRepository.save(userToSave));
     }
 
+    /**
+     * Checks in database if the user credentials are corresponding to a registered
+     * user.
+     * 
+     * @param loginRegisterDto
+     * @return a token if the user is a registered user
+     * @throws BadCredentialsCustomException if the credentials are invalid
+     */
     @Override
     public String validateCredentials(LoginDto loginRegisterDto)
             throws BadCredentialsCustomException {
@@ -103,6 +118,13 @@ public class UserServiceImpl implements UserService {
         return token;
     }
 
+    /**
+     * Searches in database a user given his id.
+     * 
+     * @param id
+     * @return UserDto, the user found
+     * @throws UserNotFoundException
+     */
     @Override
     public UserDto findById(Long id) throws UserNotFoundException {
 
@@ -126,6 +148,16 @@ public class UserServiceImpl implements UserService {
         return userFound;
     }
 
+    // TODO : UserDto plutôt ?
+
+    /**
+     * Searches in database all subscriptions of a given user.
+     * 
+     * @param user
+     * @return List<SubscriptionDto>
+     * @throws NumberFormatException
+     */
+    @Override
     public List<SubscriptionDto> getAllSubscriptions(User user) throws NumberFormatException {
 
         log.debug("Searching subscriptions of user with id {}", user.getId());
@@ -135,6 +167,13 @@ public class UserServiceImpl implements UserService {
         return subscriptionMapper.toDto(subscriptions);
     }
 
+    /**
+     * Updates in database a user.
+     * 
+     * @param userDto
+     * @return UserDto, the user updated
+     * @throws UserNotFoundException
+     */
     @Override
     public UserDto update(UserDto userDto) throws UserNotFoundException {
 
@@ -165,6 +204,13 @@ public class UserServiceImpl implements UserService {
         return userSaved;
     }
 
+    /**
+     * Searches in database a user given an email.
+     * 
+     * @param email
+     * @return UserDto, the user found
+     * @throws UserNotFoundException
+     */
     @Override
     public UserDto findByEmail(String email) throws UserNotFoundException {
 

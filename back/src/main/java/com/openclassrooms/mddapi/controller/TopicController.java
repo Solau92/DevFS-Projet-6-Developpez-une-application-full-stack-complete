@@ -24,10 +24,11 @@ public class TopicController {
 	}
 
 	// TODO : voir si je laisse TopicsResponse ou si je renvoie directement la liste ?
+
 	/**
-	 * Getting all topics. //TODO : à compléter 
+	 * Getting all the topics.
 	 * 
-	 * @return
+	 * @return ResponseEntity<TopicsResponse> with status ok, and containing all the topics
 	 */
 	@GetMapping("")
 	public ResponseEntity<TopicsResponse> getAll() {
@@ -36,6 +37,5 @@ public class TopicController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(new TopicsResponse(topicService.getAll()));
 	}
-	
-	
+		
 }

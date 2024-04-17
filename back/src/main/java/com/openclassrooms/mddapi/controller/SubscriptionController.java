@@ -32,6 +32,15 @@ public class SubscriptionController {
 
     // TODO : voir si je crée une DtoResponse ou si je renvoie directement le Dto
 
+    /**
+     * Creates a new subscription for the logged user, to to the topic which id is given. 
+     * 
+     * @param authentication
+     * @param topicId
+     * @return ResponseEntity<SubscriptionDto>, with status created, and containing the new subscription
+     * @throws UserNotFoundException
+     * @throws SubscriptionAlreadyExistsException
+     */
     @PostMapping("/subscription")
     public ResponseEntity<SubscriptionDto> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException {
 		
@@ -42,6 +51,16 @@ public class SubscriptionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.save(topicId, email));
     }
 
+    /**
+     * Deletes the subscription for the logged user, to to the topic which id is given. 
+     * 
+     * @param authentication
+     * @param topicId
+     * @return ResponseEntity<Void> with status ok 
+     * @throws UserNotFoundException
+     * @throws NumberFormatException
+     * @throws SubscriptionNotFoundException
+     */
     @DeleteMapping("/unsubscription/{topicId}")
     public ResponseEntity<Void> delete(Authentication authentication, @PathVariable("topicId") String topicId) throws UserNotFoundException, NumberFormatException, SubscriptionNotFoundException {
         

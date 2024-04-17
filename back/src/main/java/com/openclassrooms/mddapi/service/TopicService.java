@@ -7,12 +7,18 @@ import com.openclassrooms.mddapi.dto.TopicDto;
 public interface TopicService {
 
 	/**
-	 * Returns a list of all topics.
+	 * Searches all topics.
 	 * 
 	 * @return List<TopicDto>
 	 */
-	List<TopicDto> getAll();
+	public List<TopicDto> getAll();
 
+	/**
+	 * Searches a topic given its id.
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public TopicDto findById(Long id);
 
 }

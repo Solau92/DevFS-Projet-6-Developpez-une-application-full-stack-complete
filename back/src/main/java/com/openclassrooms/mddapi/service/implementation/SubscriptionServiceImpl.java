@@ -33,7 +33,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     private static final Logger log = LoggerFactory.getLogger(SubscriptionServiceImpl.class);
 
     public SubscriptionServiceImpl(SubscriptionRepository subscriptionRepository,
-            UserServiceImpl userService, 
+            UserServiceImpl userService,
             TopicService topicService,
             SubscriptionMapper subscriptionMapper) {
         this.subscriptionRepository = subscriptionRepository;
@@ -42,32 +42,45 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         this.topicService = topicService;
     }
 
+    /**
+     * Saves in database a subscription given the user email and the topic id.
+     * 
+     * @param topicId
+     * @param email
+     * @return SubscriptionDto
+     * @throws UserNotFoundException
+     * @throws SubscriptionAlreadyExistsException
+     */
     @Override
-    public SubscriptionDto save(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException {
+    public SubscriptionDto save(Long topicId, String email)
+            throws UserNotFoundException, SubscriptionAlreadyExistsException {
 
         log.debug("Trying to save the subscription by user with email {} to topic with id {}", email, topicId);
 
-        // Chercher le user 
+        // Chercher le user
         UserDto userDto = userService.findByEmail(email);
 
-        /// Chercher si la souscription existe déjà 
+        /// Chercher si la souscription existe déjà
 
-        Optional<Subscription> optionalSubscription = subscriptionRepository.findByUserIdAndTopicId(userDto.getId(), topicId);
-            
-        if(optionalSubscription.isPresent()) {
+        Optional<Subscription> optionalSubscription = subscriptionRepository.findByUserIdAndTopicId(userDto.getId(),
+                topicId);
+
+        if (optionalSubscription.isPresent()) {
             log.error("Subscription by user with email {} to topic with id {} already exists", email, topicId);
-            throw new SubscriptionAlreadyExistsException("Subscription by user with email " +  email + " to topic with id " + topicId + " already exists");
+            throw new SubscriptionAlreadyExistsException(
+                    "Subscription by user with email " + email + " to topic with id " + topicId + " already exists");
         }
 
-        // Chercher le topic 
+        // Chercher le topic
         TopicDto topicDto = topicService.findById(topicId);
 
-        // Créer la subscription à saver 
+        // Créer la subscription à saver
         SubscriptionDto subscriptionDtoToSave = new SubscriptionDto();
         subscriptionDtoToSave.setUser(userDto);
         subscriptionDtoToSave.setTopic(topicDto);
 
-        Subscription subscriptionSaved = subscriptionRepository.save(subscriptionMapper.toEntity(subscriptionDtoToSave));
+        Subscription subscriptionSaved = subscriptionRepository
+                .save(subscriptionMapper.toEntity(subscriptionDtoToSave));
 
         log.debug("Subscription by user {} to topic {} saved", subscriptionSaved.getUser().getId(),
                 subscriptionSaved.getTopic().getId());
@@ -75,7 +88,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return subscriptionMapper.toDto(subscriptionSaved);
     }
 
-
+    /**
+     * Deletes in database a subscription given the user email and the topic id.
+     * 
+     * @param topicId
+     * @param email
+     * @throws UserNotFoundException
+     * @throws SubscriptionNotFoundException
+     */
     @Override
     public void delete(Long topicId, String email) throws UserNotFoundException, SubscriptionNotFoundException {
 
@@ -88,7 +108,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         if (!optionalSubscription.isPresent()) {
             log.error("Subscription by user with email {} to topic with id {} doesn't exist", email, topicId);
-            throw new SubscriptionNotFoundException("Subscription by user with email " + email + " to topic with id " + topicId + " doesn't exist");
+            throw new SubscriptionNotFoundException(
+                    "Subscription by user with email " + email + " to topic with id " + topicId + " doesn't exist");
         }
 
         Subscription subscriptionToDelete = optionalSubscription.get();

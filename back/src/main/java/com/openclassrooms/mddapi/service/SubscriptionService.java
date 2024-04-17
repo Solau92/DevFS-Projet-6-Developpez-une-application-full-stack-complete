@@ -7,8 +7,25 @@ import com.openclassrooms.mddapi.exception.UserNotFoundException;
 
 public interface SubscriptionService {
     
+    /**
+     * Saves a subscription given the user  email and the topic id.
+     * 
+     * @param topicId
+     * @param email
+     * @return SubscriptionDto
+     * @throws UserNotFoundException
+     * @throws SubscriptionAlreadyExistsException
+     */
     public SubscriptionDto save(Long topicId, String email) throws UserNotFoundException, SubscriptionAlreadyExistsException;
 
+    /**
+     * Deletes a subscription given the user email and the topic id.
+     * 
+     * @param topicId
+     * @param email
+     * @throws UserNotFoundException
+     * @throws SubscriptionNotFoundException
+     */
     public void delete(Long topicId, String email) throws UserNotFoundException, SubscriptionNotFoundException;
 
 }

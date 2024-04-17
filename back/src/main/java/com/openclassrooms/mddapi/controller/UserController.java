@@ -29,6 +29,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    /**
+     * Gets a user given his id.
+     * 
+     * @param id
+     * @return ResponseEntity<UserDto> with status ok, and containing the user found
+     * @throws NumberFormatException
+     * @throws UserNotFoundException
+     */
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getById(@PathVariable("id") String id) throws NumberFormatException, UserNotFoundException {
         
@@ -39,6 +47,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
+    /**
+     * Updates a user given his id and an object containing the new attributes.
+     * 
+     * @param id
+     * @param userDto
+     * @return ResponseEntity<UserDto> with status created, and containing the updated user 
+     * @throws UserNotFoundException
+     */
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> update(@PathVariable("id") String id, 
     @Valid @ModelAttribute("UserDto") UserDto userDto) throws UserNotFoundException {

@@ -31,16 +31,15 @@ public class PostServiceImpl implements PostService {
 	private TopicService topicService;
 	private CommentsService commentsService;
 	private UserService userService;
- 
+
 	private PostMapper postMapper;
 
 	private static final Logger log = LoggerFactory.getLogger(PostServiceImpl.class);
 
-	
-	public PostServiceImpl(PostRepository postRepository, TopicService topicService, 
-	CommentsService commentsService,
-	UserService userService,
-	PostMapper postMapper) {
+	public PostServiceImpl(PostRepository postRepository, TopicService topicService,
+			CommentsService commentsService,
+			UserService userService,
+			PostMapper postMapper) {
 		this.postRepository = postRepository;
 		this.postMapper = postMapper;
 		this.topicService = topicService;
@@ -48,16 +47,27 @@ public class PostServiceImpl implements PostService {
 		this.userService = userService;
 	}
 
+	/**
+	 * Searches in database all the posts.
+	 * 
+	 * @return List<PostDto>
+	 */
 	@Override
 	public List<PostDto> findAll() {
 
 		log.debug("Searching all posts");
 
 		List<Post> posts = postRepository.findAll();
-		
+
 		return postMapper.toDto(posts);
 	}
 
+	/**
+	 * Saves in database a new post.
+	 * 
+	 * @param postRegisterDto
+	 * @return PostDto, the post saved
+	 */
 	@Override
 	public PostDto save(PostRegisterDto postRegisterDto) {
 
@@ -66,7 +76,7 @@ public class PostServiceImpl implements PostService {
 		// TODO : tester si found / not --> already exists
 		TopicDto topicDto = topicService.findById(Long.valueOf(postRegisterDto.getTopic()));
 
-		// TODO : créer mapping 
+		// TODO : créer mapping
 		PostDto postDto = new PostDto();
 		postDto.setAuteur(postRegisterDto.getAuteur());
 		postDto.setTitle(postRegisterDto.getTitle());
@@ -79,17 +89,24 @@ public class PostServiceImpl implements PostService {
 		return postMapper.toDto(postRepository.save(postMapper.toEntity(postDto)));
 	}
 
+	/**
+	 * Searches in database a post, given its id.
+	 * 
+	 * @param id
+	 * @return PostDto, the post found
+	 * @throws PostNotFoundException
+	 */
 	@Override
 	public PostDto findById(Long id) throws PostNotFoundException {
-		
+
 		log.debug("Searching post with id {}", id);
 
 		Optional<Post> optionalPost = postRepository.findById(id);
 
-		    if (!optionalPost.isPresent()) {
-            log.error("Post with id {} not found", id);
-            throw new PostNotFoundException("Post with" + id + "not found");
-        }
+		if (!optionalPost.isPresent()) {
+			log.error("Post with id {} not found", id);
+			throw new PostNotFoundException("Post with" + id + "not found");
+		}
 
 		PostDto postDtoFound = postMapper.toDto(optionalPost.get());
 
@@ -101,23 +118,35 @@ public class PostServiceImpl implements PostService {
 		return postDtoFound;
 	}
 
+	/**
+	 * Saves in database a comment given its content, the user email and the post
+	 * id.
+	 * 
+	 * @param postId
+	 * @param content
+	 * @param userEmail
+	 * @return PostDto, the post with the new comment
+	 * @throws UserNotFoundException
+	 * @throws PostNotFoundException
+	 */
 	@Override
-	public PostDto addComment(Long postId, String content, String userEmail) throws UserNotFoundException, PostNotFoundException {
+	public PostDto addComment(Long postId, String content, String userEmail)
+			throws UserNotFoundException, PostNotFoundException {
 
 		log.debug("Adding comment to post with id {} by user whith email {}", postId, userEmail);
 
 		// Récupérer l'utilisateur auteur du commentaire
-        UserDto userDto = userService.findByEmail(userEmail);
+		UserDto userDto = userService.findByEmail(userEmail);
 
-		// Récupérer le post 
-        PostDto postDto = this.findById(postId);
+		// Récupérer le post
+		PostDto postDto = this.findById(postId);
 
 		// Ajouter le commentaire en base de données
-        CommentDto newComment = commentsService.save(content, userDto, postDto);
+		CommentDto newComment = commentsService.save(content, userDto, postDto);
 
-        postDto.getComments().add(newComment);
+		postDto.getComments().add(newComment);
 
 		return postDto;
 	}
-	
+
 }

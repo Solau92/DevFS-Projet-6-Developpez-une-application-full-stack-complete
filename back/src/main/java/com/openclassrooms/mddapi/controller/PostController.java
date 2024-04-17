@@ -39,7 +39,13 @@ public class PostController {
         this.userService = userService;
     }
 
-    // TODO : voir si je mets une PostResponse ?
+    // TODO : voir si je laisse une PostResponse ?
+    
+    /**
+     * Gets all the posts. 
+     * 
+     * @return ResponseEntity<PostsResponse> with status ok, and containing all the posts
+     */
     @GetMapping("")
 	public ResponseEntity<PostsResponse> getAll() {
 
@@ -48,6 +54,14 @@ public class PostController {
 		return ResponseEntity.status(HttpStatus.OK).body(new PostsResponse(postService.findAll()));
 	}
 
+    /**
+     * Creates a new post.
+     * 
+     * @param postRegisterDto
+     * @param authentication
+     * @return ResponseEntity<PostDto> with status created, and containing the saved post
+     * @throws UserNotFoundException
+     */
     @PostMapping("")
     public ResponseEntity<PostDto> create(@Valid @RequestBody PostRegisterDto postRegisterDto, Authentication authentication) throws UserNotFoundException {
         
@@ -61,6 +75,13 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.save(postRegisterDto));
     }
 
+    /**
+     * Gets a post, given its id.
+     * 
+     * @param id
+     * @return ResponseEntity<PostDto> with status ok, and containing the post saved
+     * @throws PostNotFoundException
+     */
     @GetMapping("/{id}")
     public ResponseEntity<PostDto> getById(@PathVariable Long id) throws PostNotFoundException {
 
@@ -69,7 +90,16 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(postService.findById(id));
     }
 
-    
+    /**
+     * Creates a new comment related to the post which id is given and the logged user.
+     *  
+     * @param postId
+     * @param commentRegisterDto
+     * @param authentication
+     * @return ResponseEntity<PostDto> with status created, and containing the comment saved
+     * @throws UserNotFoundException
+     * @throws PostNotFoundException
+     */
     @PostMapping("/{postId}/comment")
     public ResponseEntity<PostDto> createComment(@PathVariable Long postId, @RequestBody CommentRegisterDto commentRegisterDto, Authentication authentication) throws UserNotFoundException, PostNotFoundException {
 

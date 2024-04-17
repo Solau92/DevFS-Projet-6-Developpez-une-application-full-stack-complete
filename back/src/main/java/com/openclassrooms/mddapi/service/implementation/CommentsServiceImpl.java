@@ -30,7 +30,7 @@ public class CommentsServiceImpl implements CommentsService {
     private static final Logger log = LoggerFactory.getLogger(CommentsServiceImpl.class);
 
     public CommentsServiceImpl(CommentRepository commentRepository,
-            CommentMapper commentMapper, 
+            CommentMapper commentMapper,
             UserMapper userMapper,
             PostMapper postMapper) {
         this.commentRepository = commentRepository;
@@ -39,6 +39,14 @@ public class CommentsServiceImpl implements CommentsService {
         this.postMapper = postMapper;
     }
 
+    // TODO : voir si postDTO ?
+    
+    /**
+     * Searches in database all the comments related to a given post.
+     * 
+     * @param post
+     * @return List<CommentDto>
+     */
     @Override
     public List<CommentDto> getAll(Post post) {
 
@@ -49,6 +57,15 @@ public class CommentsServiceImpl implements CommentsService {
         return commentMapper.toDto(comments);
     }
 
+    /**
+     * Saves in database a comment, given tis content, the user, and the related
+     * post.
+     * 
+     * @param content
+     * @param auteur
+     * @param post
+     * @return CommentDto
+     */
     @Override
     public CommentDto save(String content, UserDto auteur, PostDto post) {
 

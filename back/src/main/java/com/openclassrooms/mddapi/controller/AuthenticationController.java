@@ -34,6 +34,13 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
+    /**
+     * Registers the given user. 
+     * 
+     * @param userRegisterDto
+     * @return ResponseEntity<UserRegisterDto> with status created, containing the registered user
+     * @throws UserAlreadyExistsException
+     */
     @PostMapping("/register")
     public ResponseEntity<UserRegisterDto> registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto) throws UserAlreadyExistsException {
 
@@ -42,18 +49,32 @@ public class AuthenticationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userRegisterDto));
     }
 
+    /**
+     * Login method.
+     * 
+     * @param loginDto
+     * @return ResponseEntity<LoginResponse> with status ok, containing the token
+     * @throws BadCredentialsCustomException
+     */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDto loginRegisterDto) throws BadCredentialsCustomException {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDto loginDto) throws BadCredentialsCustomException {
 
-        log.info("(post) /auth/login : Trying to login user with email {}", loginRegisterDto.getEmail());
+        log.info("(post) /auth/login : Trying to login user with email {}", loginDto.getEmail());
         
-        String token = userService.validateCredentials(loginRegisterDto);
+        String token = userService.validateCredentials(loginDto);
 
         LoginResponse response = new LoginResponse(token);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    /**
+     * Gets the logged user. 
+     * 
+     * @param authentication
+     * @return ResponseEntity<UserDto> with status ok, containg the logged user
+     * @throws UserNotFoundException
+     */
     @GetMapping("me")
     public ResponseEntity<UserDto> me(Authentication authentication) throws UserNotFoundException {
 
