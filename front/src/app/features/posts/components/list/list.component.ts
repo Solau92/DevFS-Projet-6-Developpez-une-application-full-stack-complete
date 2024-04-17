@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ListComponent {
 
-  public posts$: Observable<PostsResponse> = this.postsService.all();
+  public posts$: Observable<PostsResponse> = this.postsService.getAll();
 
   public sortAscen: boolean = true;
 

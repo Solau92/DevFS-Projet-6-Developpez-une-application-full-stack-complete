@@ -16,7 +16,7 @@ import { Subscription } from "src/app/model/subscription.interface";
 })
 export class TopicComponent {
 
-  public topics$: Observable<TopicsResponse> = this.topicsService.all();
+  public topics$: Observable<TopicsResponse> = this.topicsService.getAll();
 
   public user: User | undefined;
 

@@ -24,7 +24,7 @@ import { AuthSuccess } from "../model/authSuccess.interface";
     }
 
     public me(): Observable<User> {
-      return this.httpClient.get<User>(`${this.pathService}/me`);
+      return this.httpClient.get<User>(this.pathService + "/me");
     }
   
   }

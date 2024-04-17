@@ -13,7 +13,7 @@ export class SubscriptionService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public all(id: string): Observable<SubscriptionsResponse> {
-    return this.httpClient.get<SubscriptionsResponse>(`${this.pathService}/${id}`);
+  public getAll(id: string): Observable<SubscriptionsResponse> {
+    return this.httpClient.get<SubscriptionsResponse>(this.pathService + "/id");
   }
 }

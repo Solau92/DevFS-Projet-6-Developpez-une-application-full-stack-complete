@@ -13,7 +13,7 @@ export class TopicsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public all(): Observable<TopicsResponse> {
+  public getAll(): Observable<TopicsResponse> {
     console.log(this.httpClient.get<TopicsResponse>(this.pathService));
     return this.httpClient.get<TopicsResponse>(this.pathService);
   }
@@ -22,7 +22,7 @@ export class TopicsService {
     return this.httpClient.post<void>(this.pathService + "/subscription", topicId);
   }
 
-  public removeSubscription(topicId: number): Observable<void> {
+  public deleteSubscription(topicId: number): Observable<void> {
     return this.httpClient.delete<void>(this.pathService + "/unsubscription/" + topicId);
   }
 

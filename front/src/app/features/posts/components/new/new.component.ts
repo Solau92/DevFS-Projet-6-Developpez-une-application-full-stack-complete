@@ -12,7 +12,7 @@ import { TopicsService } from 'src/app/features/topics/services/topics.service';
 })
 export class NewComponent {
 
-  public topics$ = this.topicService.all();
+  public topics$ = this.topicService.getAll();
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostsService,

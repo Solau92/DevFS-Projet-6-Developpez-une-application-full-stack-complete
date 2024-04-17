@@ -121,7 +121,7 @@ export class MeComponent implements OnInit {
   }
 
   public unSubscribeToTopic(topicId: number): void {
-    this.topicService.removeSubscription(topicId)
+    this.topicService.deleteSubscription(topicId)
       .subscribe((_: void) => this.fetchUser());
   }
 

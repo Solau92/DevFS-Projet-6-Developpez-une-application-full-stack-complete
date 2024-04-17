@@ -14,11 +14,11 @@ export class UserService {
   }
 
   public getById(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.pathService}/${id}`);
+    return this.httpClient.get<User>(this.pathService + "/" + id);
   }
 
   public update(id: number, form: FormData): Observable<void> {
-    return this.httpClient.put<void>(`${this.pathService}/${id}`, form);
+    return this.httpClient.put<void>((this.pathService + "/" + id), form);
   }
 
 }

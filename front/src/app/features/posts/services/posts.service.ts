@@ -16,7 +16,7 @@ export class PostsService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public all(): Observable<PostsResponse> {
+  public getAll(): Observable<PostsResponse> {
     console.log(this.httpClient.get<PostsResponse>(this.pathService));
     return this.httpClient.get<PostsResponse>(this.pathService);
   }
@@ -25,7 +25,7 @@ export class PostsService {
     return this.httpClient.post<void>(this.pathService, newPostRequest);
   }
 
-  public detail(id: string): Observable<Post> {
+  public getById(id: string): Observable<Post> {
     return this.httpClient.get<Post>(this.pathService + "/" + id);
   }
 

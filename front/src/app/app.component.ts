@@ -14,14 +14,6 @@ export class AppComponent {
   // TODO : nettoyer et voir ce qu'on peut enlever...
   // TODO : voir pourquoi logout ici (et pas login) ?
 
-  public isNotMainPage(): boolean {
-    return !(this.router.url === '/');
-  }
-
-  public isLogged(): boolean {
-    return !(this.router.url.includes('login') || this.router.url.includes('register'));
-  }
-
   constructor(private router: Router,
     private sessionService: SessionService,
     private authService: AuthService) {  
@@ -34,6 +26,14 @@ export class AppComponent {
   public logout(): void {
     this.sessionService.logOut();
     this.router.navigate([''])
+  }
+
+  public isNotMainPage(): boolean {
+    return !(this.router.url === '/');
+  }
+
+  public isLogged(): boolean {
+    return !(this.router.url.includes('login') || this.router.url.includes('register'));
   }
 
 }

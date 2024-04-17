@@ -29,7 +29,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')!;
-    this.post$ = this.postService.detail(this.id);
+    this.post$ = this.postService.getById(this.id);
   }
 
   public submit(): void {
