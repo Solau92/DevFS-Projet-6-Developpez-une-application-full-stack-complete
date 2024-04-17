@@ -13,6 +13,11 @@ export class SubscriptionService {
   constructor(private httpClient: HttpClient) {
   }
 
+  /**
+   * Makes a http request to get all subscriptions.
+   * @param id 
+   * @returns Observable<SubscriptionsResponse>
+   */
   public getAll(id: string): Observable<SubscriptionsResponse> {
     return this.httpClient.get<SubscriptionsResponse>(this.pathService + "/id");
   }
