@@ -12,14 +12,16 @@
 
         <mat-card-content fxLayout="column">
 
-            <mat-select ngDefaultControl formControlName="topic" placeholder="Sélectionner un thème">
-                <mat-option value="" disabled selected hidden>Sélectionner un thème</mat-option>
-                <mat-option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
-                    {{ topic.name}}
-                </mat-option>
-            </mat-select>
+            <mat-form-field appearance="outline">
+                <mat-select ngDefaultControl formControlName="topic" placeholder="Sélectionner un thème">
+                    <mat-option value="" disabled selected hidden>Sélectionner un thème</mat-option>
+                    <mat-option *ngFor="let topic of (topics$ | async)?.topics" [value]="topic.id">
+                        {{ topic.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <input matInput formControlName="title" placeholder="Titre de l'article">
             </mat-form-field>
 
@@ -30,7 +32,9 @@
 
         </mat-card-content>
 
+        <div fxLayoutAlign="center center">
         <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Créer</button>
+    </div>
 
     </form>
 </mat-card>
