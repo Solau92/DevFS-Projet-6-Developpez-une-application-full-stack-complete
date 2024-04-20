@@ -15,6 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
 
 const materialModule = [
   MatButtonModule,
@@ -22,13 +24,15 @@ const materialModule = [
   MatIconModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatSidenavModule
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,

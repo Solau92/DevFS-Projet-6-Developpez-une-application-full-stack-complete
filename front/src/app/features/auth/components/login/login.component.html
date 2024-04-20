@@ -2,8 +2,14 @@
     <mat-icon>arrow_back</mat-icon>
 </button>
 
-<div fxLayout="row" fxLayoutAlign="center center">
-    <mat-card>
+<div fxLayout="column" fxLayoutAlign="space-evenly center">
+
+    <mat-card class="mat-elevation-z0">
+
+        <mat-card-header fxHide fxShow.lt-md fxLayoutAlign="center center">
+            <!-- TODO : voir pourquoi l'image modifie l'alignement...-->
+            <img mat-card-image alt="MDD logo" src="assets/logoMDD.png">
+        </mat-card-header>
 
         <mat-card-header fxLayoutAlign="center center">
             <mat-card-title>Se connecter</mat-card-title>
@@ -13,19 +19,21 @@
             <mat-card-content fxLayout="column">
 
                 <p class="mat-subheading-2">Email</p>
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <input matInput name="email" formControlName="email">
                 </mat-form-field>
 
                 <p class="mat-subheading-2">Mot de passe</p>
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <input matInput name ="password" formControlName="password">
                 </mat-form-field>
             </mat-card-content>
 
+            <mat-card-footer fxLayoutAlign="center center">
             <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Se connecter</button>
             <span *ngIf="onError">Erreur</span>
-
+        </mat-card-footer>
+        
         </form>
     </mat-card>
 </div>

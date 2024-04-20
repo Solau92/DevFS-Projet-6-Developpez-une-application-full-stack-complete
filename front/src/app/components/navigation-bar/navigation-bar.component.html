@@ -1,0 +1,34 @@
+<!-- TODO : supprimer ou faire marcher -->
+<!-- TODO : routing Module plutôt que les liens ? -->
+
+<!-- <div fxLayout="row" fxLayoutAlign="space-between center"> -->
+
+<div fxLayoutAlign="start">
+    <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
+</div>
+
+<diV *ngIf="isLogged()">
+
+    <div fxLayoutAlign="end">
+
+        <button mat-button fxShow fxHide.lt-md>
+            <a href="./posts">Articles</a>
+        </button>
+
+        <button mat-button fxShow fxHide.lt-md>
+            <a href="./topics">Thèmes</a>
+        </button>
+
+        <button mat-button fxShow fxHide.lt-md>
+            <a href="./profile">
+                <mat-icon color="primary">account_circle</mat-icon>
+            </a>
+        </button>
+
+        <button mat-button fxHide fxShow.lt-md>
+            <mat-icon color="primary">density_medium</mat-icon>
+        </button>
+
+    </div>
+</diV>
+<!-- </div> -->

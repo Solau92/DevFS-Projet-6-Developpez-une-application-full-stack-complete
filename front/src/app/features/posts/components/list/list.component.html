@@ -1,4 +1,80 @@
-<button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
+<!-- TODO : faire mieux pour l'affichage responsive -->
+
+<mat-card fxShow fxHide.lt-md class="mat-elevation-z0" fxLayout="row" fxLayoutAlign="space-between center">
+
+    <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
+
+    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
+    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
+
+</mat-card>
+
+<mat-card fxHide fxShow.lt-md class="mat-elevation-z0" fxLayout="column" fxLayoutAlign="space-between center">
+
+    <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
+
+    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
+    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
+
+</mat-card>
+
+<div fxLayout="column" fxLayoutAlign="start none">
+
+    <!-- <mat-grid-list cols="2" rowHeight="200px">
+
+        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ post.title }}</mat-card-title>
+                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
+                        }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>{{post.content}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list> -->
+
+    <mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="200px">
+
+        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ post.title }}</mat-card-title>
+                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
+                        }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>{{post.content}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="200px">
+
+        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ post.title }}</mat-card-title>
+                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
+                        }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>{{post.content}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+</div>
+
+<!-- <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
 
 <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
 <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
@@ -16,4 +92,4 @@
 
     </mat-card>
 
-</div>
+</div> -->

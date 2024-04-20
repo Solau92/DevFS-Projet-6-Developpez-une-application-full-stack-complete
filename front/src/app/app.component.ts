@@ -32,6 +32,7 @@ export class AppComponent {
     return !(this.router.url === '/');
   }
 
+  // TODO : enlever 
   public isLogged(): boolean {
     return !(this.router.url.includes('login') || this.router.url.includes('register'));
   }
