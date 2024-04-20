@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth-service';
 })
 export class RegisterComponent {
 
+  public hide = true;
   public onError = false;
 
   private passwordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=.*[@$!%*#?&^_-])(?=\D*\d).{8,}$/;

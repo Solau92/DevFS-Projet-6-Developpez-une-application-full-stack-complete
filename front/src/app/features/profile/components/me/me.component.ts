@@ -16,6 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MeComponent implements OnInit {
 
+  public hide = true;
   public onError = false;
 
   private passwordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=.*[@$!%*#?&^_-])(?=\D*\d).{8,}$/;

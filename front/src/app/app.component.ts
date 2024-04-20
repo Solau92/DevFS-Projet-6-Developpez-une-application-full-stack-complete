@@ -32,7 +32,19 @@ export class AppComponent {
     return !(this.router.url === '/');
   }
 
-  // TODO : enlever 
+  public isPostsPage(): boolean {
+    return (this.router.url.includes('posts'));
+  }
+
+  public isTopicsPage(): boolean {
+    return (this.router.url.includes('topics'));
+  }
+
+  public isProfilePage(): boolean {
+    return (this.router.url.includes('profile'));
+  }
+
+  // TODO : enlever (si component)
   public isLogged(): boolean {
     return !(this.router.url.includes('login') || this.router.url.includes('register'));
   }

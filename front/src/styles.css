@@ -19,3 +19,9 @@ button {
     background-color: rgb(215, 215, 215) !important;
     width:90%;
 }
+
+.mat-toolbar {
+    background-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}

@@ -14,6 +14,7 @@ import { AuthSuccess } from '../../model/authSuccess.interface';
 })
 export class LoginComponent {
 
+  public hide = true;
   public onError = false;
 
   public form = this.formBuilder.group({

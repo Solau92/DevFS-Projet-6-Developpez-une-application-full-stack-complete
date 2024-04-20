@@ -5,26 +5,37 @@
 
 <!-- V2 : mat-sidenav 1  -->
 
+<!-- TODO : voir si j'arrive à faire mieux pour l'affichage conditionnel  -->
+
 <mat-sidenav-container>
 
     <mat-sidenav #sidenav position="end" mode="side" closed>
 
-        <div fxLayout="column" fxLayoutAlign="space-between start">
+        <div fxLayout="column" fxLayoutAlign="space-between center">
 
-            <button mat-button>
-                <a href="./posts">Articles</a>
+            <button *ngIf="isPostsPage()" color="primary" mat-button routerLink="posts">
+                <div>Articles</div>
             </button>
 
-            <button mat-button>
-                <a href="./topics">Thèmes</a>
+            <button *ngIf="isPostsPage() === false" mat-button routerLink="posts">
+                <div>Articles</div>
             </button>
 
-            <button mat-button>
-                <a href="./profile">
-                    <mat-icon color="primary">account_circle</mat-icon>
-                </a>
+            <button *ngIf="isTopicsPage()" color="primary" mat-button routerLink="topics">
+                <div>Thèmes</div>
             </button>
 
+            <button *ngIf="isTopicsPage() === false" mat-button routerLink="topics">
+                <div>Thèmes</div>
+            </button>
+
+            <button *ngIf="isProfilePage()" color="primary" mat-button routerLink="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+
+            <button *ngIf="isProfilePage() === false" mat-button routerLink="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
         </div>
 
     </mat-sidenav>
@@ -43,19 +54,29 @@
 
                     <div fxLayoutAlign="end center">
 
-                        <button mat-button fxShow fxHide.lt-md>
-                            <a href="./posts">Articles</a>
+                        <button *ngIf="isPostsPage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="posts">
+                            <div>Articles</div>
                         </button>
 
-                        <button mat-button fxShow fxHide.lt-md>
-                            <a href="./topics">Thèmes</a>
+                        <button *ngIf="isPostsPage() === false" mat-button fxShow fxHide.lt-md routerLink="posts">
+                            <div>Articles</div>
                         </button>
 
-                        <button mat-button fxShow fxHide.lt-md>
-                            <a href="./profile">
-                                <mat-icon color="primary">account_circle</mat-icon>
-                            </a>
+                        <button *ngIf="isTopicsPage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="topics">
+                            <div>Thèmes</div>
                         </button>
+
+                        <button *ngIf="isTopicsPage() === false"mat-button fxShow fxHide.lt-md routerLink="topics">
+                            <div>Thèmes</div>
+                        </button>
+
+                        <button *ngIf="isProfilePage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="profile">
+                                <mat-icon>account_circle</mat-icon>
+                        </button>
+
+                        <button *ngIf="isProfilePage() === false" mat-button fxShow fxHide.lt-md routerLink="profile">
+                            <mat-icon>account_circle</mat-icon>
+                    </button>
 
                         <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
                             <mat-icon>menu</mat-icon>
@@ -65,49 +86,9 @@
                 </diV>
             </mat-toolbar>
 
-
             <router-outlet></router-outlet>
         </body>
 
     </mat-sidenav-content>
+
 </mat-sidenav-container>
-
-<!-- V1 : sans aside  -->
-
-<!-- <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" *ngIf="isNotMainPage()" class="navbar">
-
-    <div fxLayoutAlign="start">
-        <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
-    </div>
-
-    <diV *ngIf="isLogged()">
-
-        <div fxLayoutAlign="end center">
-
-            <button mat-button fxShow fxHide.lt-md>
-                <a href="./posts">Articles</a>
-            </button>
-
-            <button mat-button fxShow fxHide.lt-md>
-                <a href="./topics">Thèmes</a>
-            </button>
-
-            <button mat-button fxShow fxHide.lt-md>
-                <a href="./profile">
-                    <mat-icon color="primary">account_circle</mat-icon>
-                </a>
-            </button>
-
-            <button mat-button fxHide fxShow.lt-md>
-                <a href="">
-                    <mat-icon color="primary">density_medium</mat-icon>
-                </a>
-            </button>
-
-        </div>
-    </diV>
-</mat-toolbar>
-
-<body fxLayout="column" fxLayoutAlign="center">
-    <router-outlet></router-outlet>
-</body> -->
