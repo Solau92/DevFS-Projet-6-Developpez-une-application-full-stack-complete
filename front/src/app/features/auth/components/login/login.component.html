@@ -6,12 +6,10 @@
 
     <mat-card class="mat-elevation-z0">
 
-        <mat-card-header fxHide fxShow.lt-md >
             <img mat-card-image class="auth-mat-card-image" alt="MDD logo" src="assets/logoMDD.png">
-        </mat-card-header>
 
         <mat-card-header fxLayoutAlign="center center">
-            <mat-card-title>Se connecter</mat-card-title>
+            <mat-card-title style="text-align:center">Se connecter</mat-card-title>
         </mat-card-header>
 
         <form [formGroup]="form" (ngSubmit)="submit()">

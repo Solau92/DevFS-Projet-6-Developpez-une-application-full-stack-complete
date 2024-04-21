@@ -36,3 +36,7 @@ button {
     margin: auto !important;
 }
 
+.mat-card-header-text {
+    width: 100%;
+}
+

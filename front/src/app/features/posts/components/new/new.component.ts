@@ -22,7 +22,7 @@ export class NewComponent {
 
   public form = this.formBuilder.group({    
     topic: ['', [Validators.required]],
-    title: ['', [Validators.required, Validators.minLength(5)]],
+    title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
     content: ['', [Validators.required, Validators.minLength(20)]]
   })
 
