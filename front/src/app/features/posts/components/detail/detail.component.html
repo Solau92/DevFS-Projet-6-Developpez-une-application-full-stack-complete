@@ -1,40 +1,43 @@
 <mat-card>
 
-<button mat-icon-button (click)="back()">
-    <mat-icon>arrow_back</mat-icon>
-</button>
+    <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
 
-    <mat-card-header fxLayout="column">
-        <mat-card-title fxLayoutAlign="center center" *ngIf="post$">{{(post$ | async)?.title}}</mat-card-title>
-        <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-around center">
-            <span> {{(post$ | async)?.createdAt}} </span>
-            <span> {{(post$ | async)?.auteur?.username}} </span>
-            <span>{{(post$ | async)?.topic?.name}} </span>
-        </mat-card-subtitle>
-    </mat-card-header>
+    <mat-card>
 
-    <mat-card-content>{{(post$ | async)?.content}}</mat-card-content>
+        <mat-card-header fxLayout="column">
+            <mat-card-title fxLayoutAlign="start center" *ngIf="post$">{{(post$ | async)?.title}}</mat-card-title>
+            <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between center">
+                <span> {{(post$ | async)?.createdAt}} </span>
+                <span> {{(post$ | async)?.auteur?.username}} </span>
+                <span>{{(post$ | async)?.topic?.name}} </span>
+            </mat-card-subtitle>
+        </mat-card-header>
 
-    <hr />
+        <mat-card-content>{{(post$ | async)?.content}}</mat-card-content>
 
-    <h3>Commentaires</h3>
+        <hr />
 
-    <div fxLayout="row" fxLayoutAlign="space-around center" *ngFor="let comment of ((post$ | async)?.comments)">
-        <p fxFlex="20">{{comment.auteur.username}}</p>
-        <p fxFlex="80">{{comment.content}}</p>
+        <h3>Commentaires</h3>
 
-    </div>
+        <div fxLayout="row" fxLayoutAlign="space-around start" *ngFor="let comment of ((post$ | async)?.comments)">
+            <p fxFlex="20">{{comment.auteur.username}}</p>
+            <p fxFlex="80">{{comment.content}}</p>
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
+        </div>
 
-        <mat-form-field fxFlex="90" appearance="outline">
-            <textarea matInput formControlName="content" cols="30" rows="10"
-                placeholder="Ecrivez ici votre commentaire"></textarea>
-        </mat-form-field>
+        <form [formGroup]="form" (ngSubmit)="submit()">
 
-        <button fxFlex="10" mat-button type="submit" [disabled]="form.invalid">
-            <mat-icon color="primary">send</mat-icon>
-        </button>
+            <mat-form-field fxFlex="90" appearance="outline">
+                <textarea matInput formControlName="content" cols="30" rows="10"
+                    placeholder="Ecrivez ici votre commentaire"></textarea>
+            </mat-form-field>
 
-    </form>
+            <button fxFlex="10" mat-button type="submit" [disabled]="form.invalid">
+                <mat-icon color="primary">send</mat-icon>
+            </button>
+
+        </form>
+    </mat-card>
 </mat-card>

@@ -18,10 +18,34 @@ button {
 .mat-grid-tile .mat-card {
     background-color: rgb(215, 215, 215) !important;
     width:90%;
+    height: 90%;
 }
 
 .mat-toolbar {
     background-color: white;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+}
+
+/* TODO : supprimer si pas utilisé  */
+.adjust {
+    -webkit-box-flex:5;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* TODO : supprimer si pas utilisé  */
+/* .cards {
+    background-color: rgb(83, 82, 82) !important;
+    height: 90%;
+    width: 90%;
+} */
+
+.mat-card-header-text {
+    width: 100%;
+}
+
+.text-error {
+    color:rgb(228, 28, 28) !important;
 }

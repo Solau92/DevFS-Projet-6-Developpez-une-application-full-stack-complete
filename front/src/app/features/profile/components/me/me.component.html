@@ -40,57 +40,66 @@
 
 <hr />
 
-    <mat-card-header fxLayoutAlign="center center">
-        <mat-card-title>Abonnements</mat-card-title>
-    </mat-card-header>
+<mat-card-header fxLayoutAlign="center center">
+    <mat-card-title>Abonnements</mat-card-title>
+</mat-card-header>
 
-    <mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="200px">
+<mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="200px">
 
-        <div *ngIf="user">
-            <div *ngIf="user!.subscriptions">
-                <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
-                    <mat-card>
+    <div *ngIf="user">
+        <div *ngIf="user!.subscriptions">
+            <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
 
-                        <mat-card-header>
-                            <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
-                        </mat-card-header>
+                <mat-card fxLayout="column">
 
-                        <mat-card-content>
+                    <mat-card-header>
+                        <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
                         <p>{{ subscription.topic.description }}</p>
-                        </mat-card-content>
-                        
+                    </mat-card-content>
+
+                    <div fxLayoutAlign="center center">
                         <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
                             <span>Se désabonner</span>
                         </button>
-                    </mat-card>
-                </mat-grid-tile>
-            </div>
+                    </div>
+
+                </mat-card>
+            </mat-grid-tile>
         </div>
-    </mat-grid-list>
+    </div>
+</mat-grid-list>
 
-        <mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="200px">
+<mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="150px">
 
-            <div *ngIf="user">
-                <div *ngIf="user!.subscriptions">
-                    <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
-                        <mat-card>
-    
-                            <mat-card-header>
-                                <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
-                            </mat-card-header>
-    
-                            <mat-card-content>
-                            <p>{{ subscription.topic.description }}</p>
-                            </mat-card-content>
-                            
-                            <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
-                                <span>Se désabonner</span>
-                            </button>
-                        </mat-card>
-                    </mat-grid-tile>
-                </div>
-            </div>
-        </mat-grid-list>
+    <div *ngIf="user">
+        <div *ngIf="user!.subscriptions">
+            <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
+                <mat-card fxLayout="column">
+
+                    <mat-card-header>
+                        <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p>{{ subscription.topic.description }}</p>
+                    </mat-card-content>
+
+                    <div fxLayoutAlign="center center">
+                        <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
+                            <span>Se désabonner</span>
+                        </button>
+                    </div>
+
+                </mat-card>
+            </mat-grid-tile>
+        </div>
+    </div>
+</mat-grid-list>
+
+
 
 <!-- <div fxLayout="row" fxLayoutAlign="center center">
     <mat-card>

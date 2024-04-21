@@ -9,10 +9,14 @@
 
 <mat-sidenav-container>
 
-    <mat-sidenav #sidenav position="end" mode="side" closed>
+    <mat-sidenav #sidenav position="end" mode="over" closed>
 
         <div fxLayout="column" fxLayoutAlign="space-between center">
 
+            <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            
             <button *ngIf="isPostsPage()" color="primary" mat-button routerLink="posts">
                 <div>Articles</div>
             </button>

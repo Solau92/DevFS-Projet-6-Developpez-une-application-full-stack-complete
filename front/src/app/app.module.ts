@@ -18,6 +18,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 
+import { CommonModule, registerLocaleData } from "@angular/common";
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from "@angular/core";
+registerLocaleData(localeFr);
+
 const materialModule = [
   MatButtonModule,
   MatCardModule,
@@ -46,6 +51,7 @@ const materialModule = [
   ],
   providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
   bootstrap: [AppComponent]
 })

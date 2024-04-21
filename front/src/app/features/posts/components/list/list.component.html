@@ -18,78 +18,47 @@
 
 </mat-card>
 
-<div fxLayout="column" fxLayoutAlign="start none">
+<mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="200px">
 
-    <!-- <mat-grid-list cols="2" rowHeight="200px">
+    <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
 
-        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
+        <mat-card fxLayout="column" fxLayoutAlign="start stretch">
 
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{ post.title }}</mat-card-title>
-                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
-                        }}</mat-card-subtitle>
-                </mat-card-header>
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+                <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>{{ post.createdAt | date:'mediumDate'}}</div>
+                    <div>{{ post.auteur.username }} </div>
+                </mat-card-subtitle>
+            </mat-card-header>
 
-                <mat-card-content>{{post.content}}</mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+            <mat-card-content>
+                {{(post.content.length > 300) ? (post.content | slice:0:300 ) + '...' : (post.content)}}
+             </mat-card-content>
 
-    </mat-grid-list> -->
+        </mat-card>
+    </mat-grid-tile>
 
-    <mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="200px">
+</mat-grid-list>
 
-        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
+<mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="150px">
 
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{ post.title }}</mat-card-title>
-                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
-                        }}</mat-card-subtitle>
-                </mat-card-header>
+    <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
 
-                <mat-card-content>{{post.content}}</mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
+        <mat-card fxLayout="column" fxLayoutAlign="start stretch">
+            <mat-card-header>
+                <mat-card-title>{{ post.title }}</mat-card-title>
+                <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>{{ post.createdAt | date:'mediumDate'}}</div>
+                    <div>{{ post.auteur.username }} </div>
+                </mat-card-subtitle>
+            </mat-card-header>
 
-    </mat-grid-list>
+            <mat-card-content>
+                {{(post.content.length > 200) ? (post.content | slice:0:200 ) + '...' : (post.content)}}
+             </mat-card-content>
 
-    <mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="200px">
+        </mat-card>
+    </mat-grid-tile>
 
-        <mat-grid-tile [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
-
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{ post.title }}</mat-card-title>
-                    <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username
-                        }}</mat-card-subtitle>
-                </mat-card-header>
-
-                <mat-card-content>{{post.content}}</mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
-
-    </mat-grid-list>
-
-
-</div>
-
-<!-- <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
-
-<button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
-<button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
-
-<div  class="items mt2" fxLayout="row wrap" fxLayout.lt-md="column">
-
-    <mat-card [routerLink]="['detail',post.id]" *ngFor="let post of (posts$ | async)?.posts" fxFlex>
-
-        <mat-card-header>
-            <mat-card-title>{{ post.title }}</mat-card-title>
-            <mat-card-subtitle fxLayout="row">{{ post.createdAt }} {{ post.auteur.username }}</mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content>{{post.content}}</mat-card-content>
-
-    </mat-card>
-
-</div> -->
+</mat-grid-list>
