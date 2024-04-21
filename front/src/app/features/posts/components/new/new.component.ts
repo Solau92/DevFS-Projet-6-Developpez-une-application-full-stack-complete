@@ -21,10 +21,9 @@ export class NewComponent {
   }
 
   public form = this.formBuilder.group({    
-    // TODO si le temps : voir pourquoi validators de longueur ne marchent pas...
     topic: ['', [Validators.required]],
-    title: ['', [Validators.required, Validators.min(5)]],
-    content: ['', [Validators.required, Validators.min(20)]]
+    title: ['', [Validators.required, Validators.minLength(5)]],
+    content: ['', [Validators.required, Validators.minLength(20)]]
   })
 
   public submit(): void {

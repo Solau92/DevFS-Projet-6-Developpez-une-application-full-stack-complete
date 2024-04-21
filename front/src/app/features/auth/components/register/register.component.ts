@@ -27,8 +27,8 @@ export class RegisterComponent {
       '',
       [
         Validators.required,
-        Validators.min(6),
-        Validators.max(20)
+        Validators.minLength(5),
+        Validators.maxLength(20)
       ]
     ]
     ,
@@ -43,7 +43,6 @@ export class RegisterComponent {
       '',
       [
         Validators.required,
-        Validators.min(8),
         Validators.pattern(this.passwordRegx)
       ]
     ]

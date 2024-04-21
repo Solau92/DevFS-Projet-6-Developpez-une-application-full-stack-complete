@@ -27,25 +27,12 @@ button {
     border-bottom-width: 1px;
 }
 
-/* TODO : supprimer si pas utilisé  */
-.adjust {
-    -webkit-box-flex:5;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* TODO : supprimer si pas utilisé  */
-/* .cards {
-    background-color: rgb(83, 82, 82) !important;
-    height: 90%;
-    width: 90%;
-} */
-
-.mat-card-header-text {
-    width: 100%;
-}
-
 .text-error {
     color:rgb(228, 28, 28) !important;
 }
+
+.auth-mat-card-image {
+    width:250px !important;
+    margin: auto !important;
+}
+

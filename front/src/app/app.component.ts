@@ -11,9 +11,6 @@ import { AuthService } from './features/auth/services/auth-service';
 })
 export class AppComponent {
 
-  // TODO : nettoyer et voir ce qu'on peut enlever...
-  // TODO : voir pourquoi logout ici (et pas login) ?
-
   constructor(private router: Router,
     private sessionService: SessionService,
     private authService: AuthService) {  

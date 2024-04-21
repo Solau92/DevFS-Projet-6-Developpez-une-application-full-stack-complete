@@ -128,7 +128,7 @@ export class MeComponent implements OnInit {
 
   public logout(): void {
     this.sessionService.logOut();
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/'])
   }
 
   private fetchUser(): void {

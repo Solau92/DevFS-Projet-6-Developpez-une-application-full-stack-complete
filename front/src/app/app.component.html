@@ -16,7 +16,7 @@
             <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
-            
+
             <button *ngIf="isPostsPage()" color="primary" mat-button routerLink="posts">
                 <div>Articles</div>
             </button>
@@ -46,7 +46,7 @@
 
     <mat-sidenav-content>
 
-        <body fxLayout="column" fxLayoutAlign="center">
+        <div class="mybody" fxLayout="column" fxLayoutAlign="center">
 
             <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" *ngIf="isNotMainPage()" class="navbar">
 
@@ -66,21 +66,23 @@
                             <div>Articles</div>
                         </button>
 
-                        <button *ngIf="isTopicsPage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="topics">
+                        <button *ngIf="isTopicsPage()" color="primary" mat-button fxShow fxHide.lt-md
+                            routerLink="topics">
                             <div>Thèmes</div>
                         </button>
 
-                        <button *ngIf="isTopicsPage() === false"mat-button fxShow fxHide.lt-md routerLink="topics">
+                        <button *ngIf="isTopicsPage() === false" mat-button fxShow fxHide.lt-md routerLink="topics">
                             <div>Thèmes</div>
                         </button>
 
-                        <button *ngIf="isProfilePage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="profile">
-                                <mat-icon>account_circle</mat-icon>
+                        <button *ngIf="isProfilePage()" color="primary" mat-button fxShow fxHide.lt-md
+                            routerLink="profile">
+                            <mat-icon>account_circle</mat-icon>
                         </button>
 
                         <button *ngIf="isProfilePage() === false" mat-button fxShow fxHide.lt-md routerLink="profile">
                             <mat-icon>account_circle</mat-icon>
-                    </button>
+                        </button>
 
                         <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
                             <mat-icon>menu</mat-icon>
@@ -90,8 +92,8 @@
                 </diV>
             </mat-toolbar>
 
-            <router-outlet></router-outlet>
-        </body>
+                <router-outlet></router-outlet>
+        </div>
 
     </mat-sidenav-content>
 

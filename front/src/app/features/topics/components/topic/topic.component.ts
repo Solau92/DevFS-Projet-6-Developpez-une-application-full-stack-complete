@@ -49,17 +49,18 @@ export class TopicComponent {
 
   public isNotAlreadySubscriben(topicId: number): boolean {
 
-    // TODO : réécrire 
     let subscriptions: Subscription[] | undefined = this.user?.subscriptions;
 
-    if (subscriptions != undefined) {
-      for (var subscription of subscriptions) {
-        if (subscription.topic.id === topicId) {
-          return false;
+      if (subscriptions != undefined) {
+        for (var subscription of subscriptions) {
+          if (subscription.topic.id === topicId) {
+            return false;
+          }
         }
+        return true;
       }
       return true;
-    }
-    return true;
+
   }
+
 }

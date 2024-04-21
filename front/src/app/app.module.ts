@@ -15,7 +15,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav'; 
 
 import { CommonModule, registerLocaleData } from "@angular/common";
@@ -36,8 +35,7 @@ const materialModule = [
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LandingPageComponent,
-    NavigationBarComponent
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
