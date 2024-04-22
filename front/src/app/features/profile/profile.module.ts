@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { MeComponent } from "./components/me/me.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 import { CommonModule } from "@angular/common";
 import { ProfileRoutingModule } from "./profile-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -29,7 +29,7 @@ const materialModule = [
 
 @NgModule({
   declarations: [
-    MeComponent
+    ProfileComponent
   ],
   imports: [
     CommonModule,

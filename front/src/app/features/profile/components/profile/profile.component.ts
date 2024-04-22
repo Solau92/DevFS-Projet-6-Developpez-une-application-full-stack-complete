@@ -10,11 +10,11 @@ import { SessionService } from 'src/app/services/session.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-me',
-  templateUrl: './me.component.html',
-  styleUrls: ['./me.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class MeComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   public hide = true;
   public onError = false;
@@ -54,7 +54,6 @@ export class MeComponent implements OnInit {
     password: ['',
       [
         Validators.required,
-        Validators.min(8),
         Validators.pattern(this.passwordRegx)
       ]
     ]
