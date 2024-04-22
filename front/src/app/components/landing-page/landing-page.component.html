@@ -1,9 +1,14 @@
-<div>
-    <img src="assets/logoMDD.png" width="50%">
-</div>
+<div fxLayout="column" fxLayoutAlign="center" class="landing-fx">
 
-<div>
-    <button mat-stroked-button color="basic" routerLink="auth/login">Se connecter</button>
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <img alt="MDD logo" src="assets/logoMDD.png" width="50%">
+        </div>
 
-    <button mat-stroked-button color="basic" routerLink="auth/register">S'inscrire</button>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+           
+            <button mat-stroked-button color="basic" routerLink="auth/login">Se connecter</button>
+        
+            <button mat-stroked-button color="basic" routerLink="auth/register">S'inscrire</button>
+        </div>
+
 </div>

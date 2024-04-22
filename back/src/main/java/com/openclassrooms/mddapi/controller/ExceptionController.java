@@ -13,9 +13,9 @@ import com.openclassrooms.mddapi.exception.BadCredentialsCustomException;
 import com.openclassrooms.mddapi.exception.PostNotFoundException;
 import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.model.Post;
 
 /**
  * Exception handling class
@@ -43,21 +43,21 @@ public class ExceptionController {
     public ResponseEntity<Object> exceptionHandler(UserNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(MESSAGE, ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(PostNotFoundException.class)
     public ResponseEntity<Object> exceptionHandler(PostNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(MESSAGE, ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(SubscriptionNotFoundException.class)
     public ResponseEntity<Object> exceptionHandler(SubscriptionNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(MESSAGE, ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
     
     @ExceptionHandler(SubscriptionAlreadyExistsException.class)
@@ -66,4 +66,12 @@ public class ExceptionController {
         body.put(MESSAGE, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(TopicNotFoundException.class)
+    public ResponseEntity<Object> exceptionHandler(TopicNotFoundException ex, WebRequest request) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(MESSAGE, ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+    
 }

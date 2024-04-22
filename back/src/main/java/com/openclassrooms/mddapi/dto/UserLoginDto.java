@@ -1,12 +1,11 @@
 package com.openclassrooms.mddapi.dto;
 
-public class LoginRegisterDto {
+public class UserLoginDto {
 
-        private String email;
-
+    private String email;
     private String password;
 
-     public String getEmail() {
+    public String getEmail() {
         return this.email;
     }
 
@@ -22,5 +21,4 @@ public class LoginRegisterDto {
         this.password = password;
     }
 
-    
 }

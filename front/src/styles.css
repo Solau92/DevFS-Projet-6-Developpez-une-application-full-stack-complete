@@ -10,3 +10,33 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+button {
+    margin: 10px !important;
+}
+
+.mat-grid-tile .mat-card {
+    background-color: rgb(215, 215, 215) !important;
+    width:90%;
+    height: 90%;
+}
+
+.mat-toolbar {
+    background-color: white;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.text-error {
+    color:rgb(228, 28, 28) !important;
+}
+
+.auth-mat-card-image {
+    width:250px !important;
+    margin: auto !important;
+}
+
+.mat-card-header-text {
+    width: 100%;
+}
+

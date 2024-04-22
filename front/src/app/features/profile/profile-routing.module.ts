@@ -3,7 +3,7 @@ import { MeComponent } from "./components/me/me.component";
 import { NgModule } from "@angular/core";
 
 const routes: Routes = [
-    { path: '', title: 'Profile', component: MeComponent }
+    { title: 'Profile', path: '', component: MeComponent }
   ];
   
   @NgModule({

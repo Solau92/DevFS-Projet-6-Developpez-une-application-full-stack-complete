@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
 import { Router } from '@angular/router';
-import { LoginRequest } from '../../interfaces/loginRequest.interface';
-import { SessionInformation } from 'src/app/interfaces/session-information.interface';
+import { LoginRequest } from '../../model/loginRequest.interface';
 import { SessionService } from 'src/app/services/session.service';
-import { User } from 'src/app/interfaces/user.interface';
-import { AuthSuccess } from '../../interfaces/authSuccess.interface';
+import { User } from 'src/app/model/user.interface';
+import { AuthSuccess } from '../../model/authSuccess.interface';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +14,7 @@ import { AuthSuccess } from '../../interfaces/authSuccess.interface';
 })
 export class LoginComponent {
 
+  public hide = true;
   public onError = false;
 
   public form = this.formBuilder.group({
@@ -40,40 +40,6 @@ export class LoginComponent {
     private sessionService: SessionService) {
   }
 
-  // public submit(): void {
-  //   const loginRequest = this.form.value as LoginRequest;
-  //   this.authService.login(loginRequest).subscribe({
-  //     next: (_: void) => this.router.navigate(['/topics']),
-  //     error: _ => this.onError = true,
-  //   }
-  //   );
-  // }
-
-  // public submit(): void {
-  //   const loginRequest = this.form.value as LoginRequest;
-  //   this.authService.login(loginRequest).subscribe({
-  //     next: (sessionInformation: SessionInformation) => {
-  //       this.sessionService.logIn(sessionInformation);
-  //       this.router.navigate(['/topics']);
-  //     },
-  //     error: error => this.onError = true,
-  //   });
-  // }
-
-  // Version * 
-  // public submit(): void {
-  //   const loginRequest = this.form.value as LoginRequest;
-
-  //   this.authService.login(loginRequest).subscribe({
-  //     next: (sessionInformation: SessionInformation) => {
-  //       this.sessionService.logIn(sessionInformation);
-  //       this.router.navigate(['/topics']);
-  //     },
-  //     error: error => this.onError = true,
-  //   });
-  // }
-
-  // Version ***
   public submit(): void {
     const loginRequest = this.form.value as LoginRequest;
 

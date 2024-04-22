@@ -3,9 +3,7 @@ package com.openclassrooms.mddapi.dto;
 public class UserRegisterDto {
 
     private String username;
-
     private String email;
-
     private String password;
 
     public String getUsername() {
@@ -31,6 +29,5 @@ public class UserRegisterDto {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    
+   
 }

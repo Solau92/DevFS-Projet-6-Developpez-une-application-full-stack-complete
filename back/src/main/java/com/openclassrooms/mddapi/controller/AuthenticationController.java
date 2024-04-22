@@ -13,78 +13,78 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.dto.LoginRegisterDto;
+import com.openclassrooms.mddapi.dto.UserLoginDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.UserRegisterDto;
 import com.openclassrooms.mddapi.dto.response.LoginResponse;
 import com.openclassrooms.mddapi.exception.BadCredentialsCustomException;
 import com.openclassrooms.mddapi.exception.UserAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.service.IUserService;
+import com.openclassrooms.mddapi.service.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
-    private IUserService userService;
+    private UserService userService;
 
     private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
-    public AuthenticationController(IUserService userService) {
+    public AuthenticationController(UserService userService) {
         this.userService = userService;
     }
 
-    // A transformer ensuite pour que renvoie Register / Login Response : pour token 
-    // ... pas forcément : si renvoie vers Login et pas directement logué 
+    /**
+     * Registers the given user. 
+     * 
+     * @param userRegisterDto
+     * @return ResponseEntity<UserRegisterDto> with status created, containing the registered user
+     * @throws UserAlreadyExistsException
+     */
     @PostMapping("/register")
     public ResponseEntity<UserRegisterDto> registerUser(@Valid @RequestBody UserRegisterDto userRegisterDto) throws UserAlreadyExistsException {
 
-        log.info("/auth/register : Trying to register user with email {}", userRegisterDto.getEmail());
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userRegisterDto));
+        log.info("(post) /auth/register : Trying to register user with email {}", userRegisterDto.getEmail());
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userRegisterDto));
     }
 
-    // A modifier avec Spring Security 
+    /**
+     * Login method.
+     * 
+     * @param loginDto
+     * @return ResponseEntity<LoginResponse> with status ok, containing the token
+     * @throws BadCredentialsCustomException
+     */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRegisterDto loginRegisterDto) throws BadCredentialsCustomException {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody UserLoginDto loginDto) throws BadCredentialsCustomException {
 
-        log.info("/auth/login : Trying to login user with email {}", loginRegisterDto.getEmail());
+        log.info("(post) /auth/login : Trying to login user with email {}", loginDto.getEmail());
         
-        String token = userService.validateCredentials(loginRegisterDto);
+        String token = userService.validateCredentials(loginDto);
 
         LoginResponse response = new LoginResponse(token);
 
-        // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // log.info("token : " + token + " - authentication in login : " + authentication);
-
         return ResponseEntity.status(HttpStatus.OK).body(response);
-
     }
 
-    // // Version ***
-    // // A modifier avec Spring Security : 
+    /**
+     * Gets the logged user. 
+     * 
+     * @param authentication
+     * @return ResponseEntity<UserDto> with status ok, containg the logged user
+     * @throws UserNotFoundException
+     */
     @GetMapping("me")
     public ResponseEntity<UserDto> me(Authentication authentication) throws UserNotFoundException {
 
-        log.info("authentication : " + authentication);
-
         String email = authentication.getName();
 
-        // Authentication authentication2 = SecurityContextHolder.getContext().getAuthentication();
-        // log.info("authentication : " + authentication2);
-        // String email = authentication2.getName();
-
-        log.info("api/auth/me : getting information from user with email {}", email);
+        log.info("(get) api/auth/me : getting information from user with email {}", email);
 
         UserDto userDto = userService.findByEmail(email);
 
-        // TODO !!! : récupérer utilisateur authenticated 
-        // UserDto userDto = userService.findById(Long.valueOf(2));
-
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
-
     }
-
      
 }

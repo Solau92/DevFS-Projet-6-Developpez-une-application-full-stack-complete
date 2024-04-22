@@ -1,14 +1,11 @@
 package com.openclassrooms.mddapi.controller;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,55 +15,61 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.exception.SubscriptionAlreadyExistsException;
 import com.openclassrooms.mddapi.exception.SubscriptionNotFoundException;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 import com.openclassrooms.mddapi.exception.UserNotFoundException;
-import com.openclassrooms.mddapi.service.ISubscriptionService;
+import com.openclassrooms.mddapi.service.SubscriptionService;
 
 @RestController
-@RequestMapping("/api") // TODO : voir si ok
+@RequestMapping("/api/topic")
 public class SubscriptionController {
 
-    private ISubscriptionService subscriptionService;
+    private SubscriptionService subscriptionService;
 
     private static final Logger log = LoggerFactory.getLogger(SubscriptionController.class);
 
-    public SubscriptionController(ISubscriptionService subscriptionService) {
+    public SubscriptionController(SubscriptionService subscriptionService) {
         this.subscriptionService = subscriptionService;
     }
 
-    // TODO : voir si je crée une DtoResponse ou si je renvoie directement le Dto
+    /**
+     * Creates a new subscription for the logged user, to to the topic which id is given. 
+     * 
+     * @param authentication
+     * @param topicId
+     * @return ResponseEntity<SubscriptionDto>, with status created, and containing the new subscription
+     * @throws UserNotFoundException
+     * @throws SubscriptionAlreadyExistsException
+     * @throws TopicNotFoundException 
+     */
+    @PostMapping("/subscription")
+    public ResponseEntity<SubscriptionDto> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException, TopicNotFoundException {
+		
+        String email = authentication.getName();
+
+        log.info("(post) /topic/subscription : Saving a new subscription on topic with id {} for user with email {}", topicId, email);    
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.save(topicId, email));
+    }
 
     /**
-     * TODO : à compléter 
-     * @param subscriptionDto
-     * @return
-     * @throws UserNotFoundException 
-     * @throws SubscriptionAlreadyExistsException 
+     * Deletes the subscription for the logged user, to to the topic which id is given. 
+     * 
+     * @param authentication
+     * @param topicId
+     * @return ResponseEntity<Void> with status ok 
+     * @throws UserNotFoundException
+     * @throws NumberFormatException
+     * @throws SubscriptionNotFoundException
      */
-    // @PostMapping("/topic/subscription")
-    // public ResponseEntity<?> save(@Valid @RequestBody SubscriptionDto subscriptionDto) {
-	// 	log.info("/topic/subscription, post : Saving a new subscription");
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.create(subscriptionDto));
-    // }
-
-    @PostMapping("/topic/subscription")
-    public ResponseEntity<?> save(Authentication authentication, @RequestBody Long topicId) throws UserNotFoundException, SubscriptionAlreadyExistsException {
-		log.info("/topic/subscription, post : Saving a new subscription on topic with id {}", topicId);
+    @DeleteMapping("/unsubscription/{topicId}")
+    public ResponseEntity<Void> delete(Authentication authentication, @PathVariable("topicId") String topicId) throws UserNotFoundException, NumberFormatException, SubscriptionNotFoundException {
+        
         String email = authentication.getName();
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.subscriptionService.create(topicId, email));
-    }
-
-    @GetMapping("/subscription/{id}")
-    public ResponseEntity<?> all(@PathVariable("id") String id) throws NumberFormatException, UserNotFoundException {
-        log.info("/subscription, get : Getting all the subscriptions of user with id : {}", id);
-
-        return ResponseEntity.status(HttpStatus.OK).body(this.subscriptionService.getAll(id));
-    }
-
-    @DeleteMapping("/topic/unsubscription/{topicId}")
-    public ResponseEntity<?> delete(Authentication authentication, @PathVariable("topicId") String topicId) throws UserNotFoundException, NumberFormatException, SubscriptionNotFoundException {
-        String email = authentication.getName();
-        log.info("/topic/subscription, post : Removing a subscription on topic with id {} for user with email {}", topicId, email);
+        
+        log.info("(post) /topic/subscription : Removing a subscription on topic with id {} for user with email {}", topicId, email);
+        
         subscriptionService.delete(Long.valueOf(topicId), email);
+        
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

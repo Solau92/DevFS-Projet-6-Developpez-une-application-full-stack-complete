@@ -5,9 +5,9 @@ import { NewComponent } from './components/new/new.component';
 import { DetailComponent } from './components/detail/detail.component';
 
 const routes: Routes = [
-  { path: '', title: 'Posts', component: ListComponent },
-  { path: 'new', title: 'New', component: NewComponent },
-  { path: 'detail/:id', title: 'Detail', component: DetailComponent },
+  { title: 'Posts', path: '', component: ListComponent },
+  { title: 'New', path: 'new', component: NewComponent },
+  { title: 'Detail', path: 'detail/:id', component: DetailComponent },
 ];
 
 @NgModule({

@@ -1,37 +1,107 @@
-<div fxLayout="row" fxLayoutAlign="center center">
+<mat-card>
 
-    <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+        <mat-card-title>Profil utilisateur</mat-card-title>
+    </mat-card-header>
 
-        <mat-card-header fxLayoutAlign="center center">
-            <mat-card-title>Profil utilisateur</mat-card-title>
-        </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="submit()">
 
-        <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-card-content fxLayout="column">
 
-            <input formControlName="username">
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="username">
+            </mat-form-field>
 
-            <input formControlName="email">
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="email">
+            </mat-form-field>
 
-            <input formControlName="password">
+            <mat-form-field appearance="outline">
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
 
-            <p *ngIf="user">Created at : {{ user.createdAt }}</p>
-            <p *ngIf="user">Updated at : {{ user.updatedAt }}</p>
+        </mat-card-content>
 
+        <div fxLayout="column" fxLayoutAlign="center center">
             <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sauvegarder</button>
             <span *ngIf="onError">Erreur</span>
+            <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+        </div>
 
-        </form>
+    </form>
 
-        <button mat-button color="warn" (click)="logout()">Se déconnecter</button>
+    <br>
 
-        <br>
+</mat-card>
 
-    </mat-card>
+<hr />
 
-</div>
-_________________________
+<mat-card-header fxLayoutAlign="center center">
+    <mat-card-title>Abonnements</mat-card-title>
+</mat-card-header>
 
-<div fxLayout="row" fxLayoutAlign="center center">
+<mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="180px">
+
+    <div *ngIf="user">
+        <div *ngIf="user!.subscriptions">
+            <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
+
+                <mat-card fxLayout="column">
+
+                    <mat-card-header>
+                        <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p>{{ subscription.topic.description }}</p>
+                    </mat-card-content>
+
+                    <div fxLayoutAlign="center center">
+                        <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
+                            <span>Se désabonner</span>
+                        </button>
+                    </div>
+
+                </mat-card>
+            </mat-grid-tile>
+        </div>
+    </div>
+</mat-grid-list>
+
+<mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="180px">
+
+    <div *ngIf="user">
+        <div *ngIf="user!.subscriptions">
+            <mat-grid-tile *ngFor="let subscription of (user!.subscriptions)">
+                <mat-card fxLayout="column">
+
+                    <mat-card-header>
+                        <mat-card-title>{{ subscription.topic.name }}</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <p>{{ subscription.topic.description }}</p>
+                    </mat-card-content>
+
+                    <div fxLayoutAlign="center center">
+                        <button mat-flat-button color="primary" (click)="unSubscribeToTopic(subscription.topic.id)">
+                            <span>Se désabonner</span>
+                        </button>
+                    </div>
+
+                </mat-card>
+            </mat-grid-tile>
+        </div>
+    </div>
+</mat-grid-list>
+
+
+
+<!-- <div fxLayout="row" fxLayoutAlign="center center">
     <mat-card>
 
         <mat-card-header fxLayoutAlign="center center">
@@ -51,11 +121,4 @@ _________________________
         </div>
 
     </mat-card>
-</div>
-<!-- <div *ngFor="let subscription of (subscriptions$ | async)?.subscriptions">
-    <p>{{ subscription.topic.name }}</p>
-    <p>{{ subscription.topic.description }}</p>
-    <button (click)="unSubscribeToTopic()">
-        <span>Se désabonner</span>
-    </button>
 </div> -->

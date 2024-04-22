@@ -2,53 +2,25 @@ package com.openclassrooms.mddapi.service;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 import com.openclassrooms.mddapi.dto.TopicDto;
-import com.openclassrooms.mddapi.mapper.TopicMapper;
-import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.repository.TopicRepository;
+import com.openclassrooms.mddapi.exception.TopicNotFoundException;
 
-@Service
-public class TopicService implements ITopicService {
-
-	private TopicRepository topicRepository;
-
-	private TopicMapper topicMapper;
-
-	private static final Logger log = LoggerFactory.getLogger(TopicService.class);
-
-	
-	public TopicService(TopicRepository topicRepository, TopicMapper topicMapper) {
-		this.topicRepository = topicRepository;
-		this.topicMapper = topicMapper;
-	}
+public interface TopicService {
 
 	/**
-	 * Returns a list of all topics from database.
+	 * Searches all topics.
 	 * 
 	 * @return List<TopicDto>
 	 */
-	@Override
-	public List<TopicDto> getAllTopics() {
+	public List<TopicDto> getAll();
 
-		log.debug("Searching all topics");
+	/**
+	 * Searches a topic given its id.
+	 * 
+	 * @param id
+	 * @return TopicDto, the topic found
+	 * @throws TopicNotFoundException 
+	 */
+	public TopicDto findById(Long id) throws TopicNotFoundException;
 
-		List<Topic> topics = topicRepository.findAll();
-		
-		return topicMapper.toDto(topics);
-	}
-
-	@Override
-	public TopicDto getTopicById(Long id) {
-
-		// TO DO : tester si found / not 
-
-		log.debug("Searching topic with id  {}", id);
-
-		return topicMapper.toDto(topicRepository.findById(id).get());
-	}
-	
 }

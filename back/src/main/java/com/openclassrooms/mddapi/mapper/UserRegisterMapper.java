@@ -16,4 +16,5 @@ public interface UserRegisterMapper extends EntityMapper<UserRegisterDto, User>{
     @Mapping(target = "updatedAt", ignore = true)
     @Override
     public User toEntity(UserRegisterDto dto);
+    
 }

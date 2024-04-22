@@ -14,6 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatSidenavModule} from '@angular/material/sidenav'; 
+
+import { CommonModule, registerLocaleData } from "@angular/common";
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from "@angular/core";
+registerLocaleData(localeFr);
 
 const materialModule = [
   MatButtonModule,
@@ -21,6 +28,7 @@ const materialModule = [
   MatIconModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatSidenavModule
 ]
 
 @NgModule({
@@ -28,21 +36,20 @@ const materialModule = [
     AppComponent,
     NotFoundComponent,
     LandingPageComponent
-    // DONE : supprimé d'ici : TopicComponent
   ],
   imports: [
     BrowserModule,
-    // DONE : added : 
     HttpClientModule,
     AppRoutingModule,
-    // TODO : supprimer 2 lignes si suppression metwo
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     ...materialModule
   ],
-  providers: [ //DONE : added
+  providers: [ 
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   ],
   bootstrap: [AppComponent]
 })

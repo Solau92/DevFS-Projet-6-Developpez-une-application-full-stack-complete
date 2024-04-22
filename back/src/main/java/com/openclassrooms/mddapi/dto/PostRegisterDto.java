@@ -3,13 +3,9 @@ package com.openclassrooms.mddapi.dto;
 public class PostRegisterDto {
     
     private String topic;
-
     private String title;
-
     private String content;
-
     private UserDto auteur;
-
 
     public String getTopic() {
         return this.topic;
@@ -44,7 +40,6 @@ public class PostRegisterDto {
         this.auteur = auteur;
     }
 
-
     @Override
     public String toString() {
         return "{" +
@@ -54,6 +49,5 @@ public class PostRegisterDto {
             ", auteur='" + getAuteur() + "'" +
             "}";
     }
-
 
 }

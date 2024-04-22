@@ -1,7 +1,52 @@
-<div  class="items mt2" fxLayout="row wrap" fxLayout.lt-md="column">
+<br>
 
+<mat-grid-list fxShow fxHide.lt-md cols="2" rowHeight="180px">
 
-<mat-card *ngFor="let topic of (topics$ | async)?.topics">
+    <mat-grid-tile *ngFor="let topic of (topics$ | async)?.topics">
+
+        <mat-card fxLayout="column">
+
+            <mat-card-header>
+                <mat-card-title>{{ topic.name }}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>{{ topic.description }}</mat-card-content>
+
+            <div fxLayoutAlign="center center">
+                <button *ngIf="isNotAlreadySubscriben(topic.id)" mat-flat-button color="primary"
+                    (click)="subscribeToTopic(topic.id)">
+                    <span>S'abonner</span>
+                </button>
+            </div>
+
+        </mat-card>
+    </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-grid-list fxHide fxShow.lt-md cols="1" rowHeight="180px">
+
+    <mat-grid-tile *ngFor="let topic of (topics$ | async)?.topics">
+
+        <mat-card fxLayout="column">
+            <mat-card-header>
+                <mat-card-title>{{ topic.name }}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>{{ topic.description }}</mat-card-content>
+
+            <div fxLayoutAlign="center center">
+                <button *ngIf="isNotAlreadySubscriben(topic.id)" mat-flat-button color="primary"
+                    (click)="subscribeToTopic(topic.id)">
+                    <span>S'abonner</span>
+                </button>
+            </div>
+
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+
+<!-- <mat-card *ngFor="let topic of (topics$ | async)?.topics">
 
     <mat-card-header>
             <mat-card-title>{{ topic.name }}</mat-card-title>
@@ -13,6 +58,4 @@
         <span>S'abonner</span>
     </button>
 
-</mat-card>
-
-
+</mat-card> -->

@@ -50,7 +50,6 @@ public class Subscription {
         this.topic = topic;
     }
 
-
     @Override
     public String toString() {
         return "{" +
@@ -59,6 +58,5 @@ public class Subscription {
             ", topic='" + getTopic() + "'" +
             "}";
     }
-
 
 }

@@ -7,6 +7,5 @@ export interface User {
     password: string;
     createdAt?: Date;
     updatedAt?: Date;
-    // Version SS
     subscriptions: Subscription[];
 }

@@ -10,6 +10,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import {MatGridListModule} from '@angular/material/grid-list'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 registerLocaleData(localeFr);
 
@@ -20,7 +22,8 @@ const materialModule = [
   MatSnackBarModule,
   MatToolbarModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatGridListModule
 ]
 
 @NgModule({
@@ -30,9 +33,9 @@ const materialModule = [
   imports: [
     CommonModule,
     TopicsRoutingModule,
+    FlexLayoutModule,
     ...materialModule
   ],
-  // DONE : added
   providers: [
     {
       provide: LOCALE_ID,

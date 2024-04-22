@@ -1,29 +1,91 @@
-<mat-toolbar *ngIf="isNotMainPage()" class="navbar">
+<mat-sidenav-container>
 
-    <!-- TODO : voir comment faire mieux -->
-    <div>
-        <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
-    </div>
-    <diV *ngIf="isLogged()">
+    <mat-sidenav #sidenav position="end" mode="over" closed>
 
-        <button mat-button>
-            <a href="./posts">Articles</a>
-        </button>
+        <div fxLayout="column" fxLayoutAlign="space-between center">
 
-        <button mat-button>
-            <a href="./topics">Thèmes</a>
-        </button>
+            <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
 
-        <button mat-button>
-            <a href="./profile">
-                <mat-icon color="primary">account_circle</mat-icon>
-            </a>
-        </button>
+            <button *ngIf="isPostsPage()" color="primary" mat-button routerLink="posts">
+                <div>Articles</div>
+            </button>
 
-    </diV>
-</mat-toolbar>
+            <button *ngIf="isPostsPage() === false" mat-button routerLink="posts">
+                <div>Articles</div>
+            </button>
 
+            <button *ngIf="isTopicsPage()" color="primary" mat-button routerLink="topics">
+                <div>Thèmes</div>
+            </button>
 
-<div>
-    <router-outlet></router-outlet>
-</div>
+            <button *ngIf="isTopicsPage() === false" mat-button routerLink="topics">
+                <div>Thèmes</div>
+            </button>
+
+            <button *ngIf="isProfilePage()" color="primary" mat-button routerLink="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+
+            <button *ngIf="isProfilePage() === false" mat-button routerLink="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <div class="mybody" fxLayout="column" fxLayoutAlign="center">
+
+            <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" *ngIf="isNotMainPage()" class="navbar">
+
+                <div fxLayoutAlign="start">
+                    <img src="assets/logoMDD.png" alt="Logo site MDD" width="100" height="50">
+                </div>
+
+                <diV *ngIf="isLogged()">
+
+                    <div fxLayoutAlign="end center">
+
+                        <button *ngIf="isPostsPage()" color="primary" mat-button fxShow fxHide.lt-md routerLink="posts">
+                            <div>Articles</div>
+                        </button>
+
+                        <button *ngIf="isPostsPage() === false" mat-button fxShow fxHide.lt-md routerLink="posts">
+                            <div>Articles</div>
+                        </button>
+
+                        <button *ngIf="isTopicsPage()" color="primary" mat-button fxShow fxHide.lt-md
+                            routerLink="topics">
+                            <div>Thèmes</div>
+                        </button>
+
+                        <button *ngIf="isTopicsPage() === false" mat-button fxShow fxHide.lt-md routerLink="topics">
+                            <div>Thèmes</div>
+                        </button>
+
+                        <button *ngIf="isProfilePage()" color="primary" mat-button fxShow fxHide.lt-md
+                            routerLink="profile">
+                            <mat-icon>account_circle</mat-icon>
+                        </button>
+
+                        <button *ngIf="isProfilePage() === false" mat-button fxShow fxHide.lt-md routerLink="profile">
+                            <mat-icon>account_circle</mat-icon>
+                        </button>
+
+                        <button mat-button fxHide fxShow.lt-md (click)="sidenav.toggle()">
+                            <mat-icon>menu</mat-icon>
+                        </button>
+
+                    </div>
+                </diV>
+            </mat-toolbar>
+
+                <router-outlet></router-outlet>
+        </div>
+
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

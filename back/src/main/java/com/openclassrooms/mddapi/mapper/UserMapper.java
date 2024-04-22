@@ -12,12 +12,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UserMapper extends EntityMapper<UserDto, User> {
 
-    // Version SS
     @Mapping(target = "subscriptions", ignore = true)
     @Override
     public UserDto toDto(User user);
-
-
-
-    
+   
 }

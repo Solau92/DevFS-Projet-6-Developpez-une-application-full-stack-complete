@@ -6,20 +6,12 @@ import java.util.List;
 public class UserDto {
 
     private Long id;
-
     private String username;
-
     private String email;
-
     private String password;
-
     private LocalDate createdAt;
-    
     private LocalDate updatedAt;
-
-    // Version SS
     private List<SubscriptionDto> subscriptions;
-    
 
     public Long getId() {
         return this.id;
