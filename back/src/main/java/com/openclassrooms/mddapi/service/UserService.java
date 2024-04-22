@@ -2,7 +2,7 @@ package com.openclassrooms.mddapi.service;
 
 import java.util.List;
 
-import com.openclassrooms.mddapi.dto.LoginDto;
+import com.openclassrooms.mddapi.dto.UserLoginDto;
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.UserRegisterDto;
@@ -29,7 +29,7 @@ public interface UserService {
          * @return a token if the user is a registered user
          * @throws BadCredentialsCustomException if the credentials are invalid
          */
-        public String validateCredentials(LoginDto loginRegisterDto) throws BadCredentialsCustomException;
+        public String validateCredentials(UserLoginDto loginRegisterDto) throws BadCredentialsCustomException;
 
         /**
          * Searches a user given his id. 

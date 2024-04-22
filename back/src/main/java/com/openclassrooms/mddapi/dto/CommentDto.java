@@ -5,17 +5,11 @@ import java.time.LocalDate;
 public class CommentDto {
     
   	private Long id;
-
 	private UserDto auteur;
-
 	private PostDto post;
-
 	private String content;
-	
 	private LocalDate createdAt;
-
 	private LocalDate updatedAt;
-
 
     public CommentDto() {
     }

@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.mddapi.dto.LoginDto;
+import com.openclassrooms.mddapi.dto.UserLoginDto;
 import com.openclassrooms.mddapi.service.JWTService;
 
 
@@ -33,7 +33,7 @@ public class JWTServiceImpl implements JWTService {
      * @param userLoginDto
      * @return String corresponding to the token
      */
-    public String generateToken(LoginDto userLoginDto) {
+    public String generateToken(UserLoginDto userLoginDto) {
 
         log.debug("Generating token for user with email {}", userLoginDto.getEmail());
 

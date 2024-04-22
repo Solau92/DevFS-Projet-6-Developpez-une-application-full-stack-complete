@@ -41,7 +41,6 @@ export class AppComponent {
     return (this.router.url.includes('profile'));
   }
 
-  // TODO : enlever (si component)
   public isLogged(): boolean {
     return !(this.router.url.includes('login') || this.router.url.includes('register'));
   }

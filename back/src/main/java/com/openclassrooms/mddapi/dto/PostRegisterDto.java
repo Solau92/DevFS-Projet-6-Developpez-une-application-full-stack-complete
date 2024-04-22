@@ -40,7 +40,6 @@ public class PostRegisterDto {
         this.auteur = auteur;
     }
 
-
     @Override
     public String toString() {
         return "{" +

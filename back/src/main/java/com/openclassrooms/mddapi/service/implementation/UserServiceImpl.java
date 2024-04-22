@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.mddapi.dto.LoginDto;
+import com.openclassrooms.mddapi.dto.UserLoginDto;
 import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.UserRegisterDto;
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
      * @throws BadCredentialsCustomException if the credentials are invalid
      */
     @Override
-    public String validateCredentials(LoginDto loginRegisterDto)
+    public String validateCredentials(UserLoginDto loginRegisterDto)
             throws BadCredentialsCustomException {
 
         log.debug("Trying to validate credential of user with email {}", loginRegisterDto.getEmail());
@@ -147,8 +147,6 @@ public class UserServiceImpl implements UserService {
 
         return userFound;
     }
-
-    // TODO : UserDto plutôt ?
 
     /**
      * Searches in database all subscriptions of a given user.

@@ -31,8 +31,6 @@ public class SubscriptionController {
         this.subscriptionService = subscriptionService;
     }
 
-    // TODO : voir si je crée une DtoResponse ou si je renvoie directement le Dto
-
     /**
      * Creates a new subscription for the logged user, to to the topic which id is given. 
      * 

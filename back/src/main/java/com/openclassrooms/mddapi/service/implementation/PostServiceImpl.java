@@ -78,7 +78,6 @@ public class PostServiceImpl implements PostService {
 
 		TopicDto topicDto = topicService.findById(Long.valueOf(postRegisterDto.getTopic()));
 
-		// TODO : créer mapping
 		PostDto postDto = new PostDto();
 		postDto.setAuteur(postRegisterDto.getAuteur());
 		postDto.setTitle(postRegisterDto.getTitle());

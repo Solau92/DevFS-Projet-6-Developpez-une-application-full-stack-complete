@@ -38,8 +38,6 @@ public class CommentsServiceImpl implements CommentsService {
         this.userMapper = userMapper;
         this.postMapper = postMapper;
     }
-
-    // TODO : voir si postDTO ?
     
     /**
      * Searches in database all the comments related to a given post.

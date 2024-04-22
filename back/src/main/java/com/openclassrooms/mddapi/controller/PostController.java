@@ -39,9 +39,7 @@ public class PostController {
         this.postService = postService;
         this.userService = userService;
     }
-
-    // TODO : voir si je laisse une PostResponse ?
-    
+   
     /**
      * Gets all the posts. 
      * 

@@ -1,8 +1,5 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.model.User;
-
 public class SubscriptionDto {
     
     private Long id;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.dto.LoginDto;
+import com.openclassrooms.mddapi.dto.UserLoginDto;
 import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.dto.UserRegisterDto;
 import com.openclassrooms.mddapi.dto.response.LoginResponse;
@@ -57,7 +57,7 @@ public class AuthenticationController {
      * @throws BadCredentialsCustomException
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDto loginDto) throws BadCredentialsCustomException {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody UserLoginDto loginDto) throws BadCredentialsCustomException {
 
         log.info("(post) /auth/login : Trying to login user with email {}", loginDto.getEmail());
         
