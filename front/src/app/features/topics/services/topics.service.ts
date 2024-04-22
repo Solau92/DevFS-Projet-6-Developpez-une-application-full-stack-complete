@@ -18,7 +18,6 @@ export class TopicsService {
    * @returns Observable<TopicsResponse>
    */
   public getAll(): Observable<TopicsResponse> {
-    console.log(this.httpClient.get<TopicsResponse>(this.pathService));
     return this.httpClient.get<TopicsResponse>(this.pathService);
   }
 
