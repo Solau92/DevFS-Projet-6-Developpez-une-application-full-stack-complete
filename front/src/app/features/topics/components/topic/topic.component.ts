@@ -3,8 +3,6 @@ import { TopicsService } from "../../services/topics.service";
 import { TopicsResponse } from "../../model/topicsResponse.interface";
 import { Observable } from "rxjs";
 import { User } from "src/app/model/user.interface";
-import { UserService } from "src/app/services/user.service";
-import { SessionService } from "src/app/services/session.service";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/features/auth/services/auth-service";
 import { Subscription } from "src/app/model/subscription.interface";

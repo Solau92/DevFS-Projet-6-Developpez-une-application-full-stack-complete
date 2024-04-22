@@ -3,6 +3,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { PostsResponse } from '../../model/postsResponse.interface';
 import { PostsService } from '../../services/posts.service';
 import { BehaviorSubject } from 'rxjs';
+import { User } from 'src/app/model/user.interface';
+import { AuthService } from 'src/app/features/auth/services/auth-service';
+import { Subscription } from 'src/app/model/subscription.interface';
 
 @Component({
   selector: 'app-list',
@@ -15,7 +18,17 @@ export class ListComponent {
 
   public sortAscen: boolean = true;
 
-  constructor(private postsService: PostsService) {
+  public user: User | undefined;
+
+  public subscriptions: Subscription[] | undefined;
+
+  public ngOnInit(): void {
+    this.fetchUserAndPosts();
+  }
+
+  constructor(private postsService: PostsService,
+    private authService: AuthService
+  ) {
   }
 
   public sortDesc(): void {
@@ -46,4 +59,31 @@ export class ListComponent {
     );
   }
 
+  private fetchUserAndPosts(): void {
+
+    this.authService.me().subscribe(
+      (user: User) => {
+        this.user = user;
+        this.subscriptions = this.user?.subscriptions;
+      });
+
+    let allPosts: PostsResponse;
+
+    this.posts$.subscribe((postResponse: PostsResponse) => {
+      allPosts = postResponse;  
+      let selectedPosts: PostsResponse = {posts: []};
+      for (let post of allPosts.posts) {
+        if (this.subscriptions) {
+          for (let sub of this.subscriptions) {
+            if (post.topic.id === sub.topic.id) {
+              selectedPosts.posts.push(post);
+            }
+          }
+        }
+      }
+      this.posts$ = new BehaviorSubject(selectedPosts);
+    });
+  }
+ 
 }
+
