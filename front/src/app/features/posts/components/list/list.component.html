@@ -2,8 +2,13 @@
 
     <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
 
-    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
-    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
+    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date
+        <mat-icon>north</mat-icon>
+    </button>
+
+    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date
+        <mat-icon>south</mat-icon>
+    </button>
 
 </mat-card>
 
@@ -11,8 +16,13 @@
 
     <button mat-flat-button color="primary" [routerLink]="['new']"> Créer un article </button>
 
-    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date ↑</button>
-    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date ↓</button>
+    <button mat-button *ngIf="!sortAscen" (click)="sortAsc()"> Trier par date
+        <mat-icon>north</mat-icon>
+    </button>
+
+    <button mat-button *ngIf="sortAscen" (click)="sortDesc()"> Trier par date
+        <mat-icon>south</mat-icon>
+    </button>
 
 </mat-card>
 
@@ -32,7 +42,7 @@
 
             <mat-card-content>
                 {{(post.content.length > 300) ? (post.content | slice:0:300 ) + '...' : (post.content)}}
-             </mat-card-content>
+            </mat-card-content>
 
         </mat-card>
     </mat-grid-tile>
@@ -54,7 +64,7 @@
 
             <mat-card-content>
                 {{(post.content.length > 100) ? (post.content | slice:0:100 ) + '...' : (post.content)}}
-             </mat-card-content>
+            </mat-card-content>
 
         </mat-card>
     </mat-grid-tile>
