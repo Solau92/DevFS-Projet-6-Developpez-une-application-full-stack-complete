@@ -21,7 +21,6 @@ export class PostsService {
    * @returns Observable<PostsResponse>
    */
   public getAll(): Observable<PostsResponse> {
-    console.log(this.httpClient.get<PostsResponse>(this.pathService));
     return this.httpClient.get<PostsResponse>(this.pathService);
   }
 
